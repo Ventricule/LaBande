@@ -327,6 +327,7 @@ li {
 .teaser li {
 	margin-bottom: 1.5em;
 	list-style: none;
+	max-width: 100%;
 }
 @media screen and (min-width: 50em) {
 	.teaser li {
