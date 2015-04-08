@@ -7,5 +7,6 @@ password: >
 language: fr
 role: admin
 history:
+  - null
   - projects/project-a
 token: 34714157b39214cde715e3349f59dcea186578de
