@@ -1,13 +1,13 @@
 
 <?php snippet('header') ?>
 <body>
+	<?php snippet('menu') ?>
 	<main class="main" role="main">
 
 	<header class="header cf" role="banner">
 		<a class="logo" href="<?php echo url() ?>">
 			<h1>La Bande</h1>
 		</a>
-		<!--<?php snippet('menu') ?>-->
 	</header>
 		<div class="content">
 			<div class="text">

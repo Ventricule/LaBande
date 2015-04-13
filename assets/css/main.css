@@ -7,7 +7,10 @@ URL:    http://getkirby.com
 Email:  support@getkirby.com
 
 */
-
+.ui-draggable-handle {
+	-ms-touch-action: none;
+	touch-action: none;
+}
 
 /* Source Sans Pro
 -------------------------------------------------- */
@@ -143,56 +146,71 @@ p {
 
 /* Navigation
 -------------------------------------------------- */
-.menu a {
-	display: block;
-	color: #222;
-}
-.menu a:hover {
-	text-decoration: none;
-}
-.menu .active {
-}
-.menu li {
-	list-style: none;
-}
-.menu > li {
-	position: relative;
-}
-.menu > li > a {
-	padding: .35em 0;
-	font-weight: 600;
+nav{
+	width: 320px;
+	height: 80px;
+	z-index: 99999999;
+	position: fixed;
 }
 
-.submenu {
-	position: absolute;
-	z-index: 1;
-	display: none;
-	left: 1em;
+#bande1, #bande2{
+	height: auto;
+	width: 320px;
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+	overflow: visible;
 }
-.submenu:before {
-	position: absolute;
-	z-index: -1;
-	content: '';
-	top: -.5em;
-	left: 0;
-	border-top: .5em solid transparent;
-	border-bottom: .5em solid transparent;
-	border-left: .5em solid #222;
+#bande2 {
+	top: 40px;
 }
-.submenu li {
-	border-bottom: 1px solid #444;
+
+ /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+#bande1:active, #bande2:active { 
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
-.submenu a {
-	padding: .5em 1.5em;
-	font-size: .9em;
-	font-weight: 300;
-	color: #fff;
-	background: #222;
-	white-space: nowrap;
+
+nav li {
 }
-.submenu a:hover {
-	background: #333;
-	color: #fff;
+
+#menu {
+	background: red;
+}
+#submenu {
+	background: yellow;
+}
+#menu, #submenu{
+	width: 100000px;
+	clear: both;
+	overflow: hidden;
+}
+#menu .active {
+}
+#menu li, #submenu li {
+	list-style: none;
+	float: left;
+	position: relative;
+	padding: .6rem 1em;
+	border: 0;
+	text-align: center;
+	width: 320px;
+}
+
+#submenu {
+
+}
+#submenu:before {
+
+}
+#submenu li {
+}
+#submenu a {
+}
+#submenu a:hover {
+
 }
 
 @media screen and (min-width: 40em) {
@@ -200,18 +218,13 @@ p {
 	}
 	.logo {
 	}
-	.menu {
-		float: right;
-		margin-right: -1em;
+	#menu {
 	}
-	.menu > li {
-		float: left;
+	#menu > li {
 	}
-	.menu > li > a {
-		padding: .35em 1em;
-		border: 0;
+	#menu > li > a {
 	}
-	.menu > li:hover .submenu {
+	#menu > li:hover #submenu {
 		display: block;
 	}
 }
