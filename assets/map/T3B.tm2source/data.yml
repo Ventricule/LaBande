@@ -1,0 +1,32 @@
+_prefs: 
+  disabled: []
+  inspector: false
+  mapid: pierrepierrepierre.b07f12b6
+  rev: s-3981eab1
+  saveCenter: true
+attribution: ''
+center: 
+  - 2.4268
+  - 48.868
+  - 0
+description: ''
+Layer: 
+  - id: T3B
+    Datasource: 
+      file: /wamp/www/LaBande/assets/map/T3B.json
+      layer: OGRGeoJSON
+      type: ogr
+    description: ''
+    fields: 
+      id: String
+      description: String
+      stroke: String
+      "stroke-opacity": Number
+      "stroke-width": Number
+      title: String
+    properties: 
+      "buffer-size": 8
+    srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
+maxzoom: 16
+minzoom: 0
+name: T3B
