@@ -20,7 +20,7 @@
 			speed: mySpeed,
 			resistanceRatio : 1,
 			loop: true,
-			loopedSlides: 5,
+			loopedSlides: listLength*2,
 		});
 		swiper.on("onSlideChangeStart", function(swiper, translate){
 			transVal = 0;
