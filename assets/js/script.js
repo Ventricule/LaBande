@@ -21,12 +21,9 @@
 				mousewheelControl: true,
 				hashnav: true,
 				speed: mySpeed,
-				resistanceRatio : 1,
+				resistanceRatio : 0.85,
 				loop: true,
 				loopedSlides: listLength*2,
-				onSlideChangeStart: function(name){
-					transVal = 0;		
-				},
 				onSetTranslate: function(name, translate){
 					if (name.translate % 320 == 0){
 						if (name.translate < oldVal){
@@ -37,16 +34,21 @@
 						oldVal = name.translate;
 					}
 				},
-				onSlideChangeEnd: function(name, translate){
+				onClick: function(){
+					setTimeout(function() {
 						if (direction == 'right'){
 							var toMove = name.clickedIndex-listLength;
-							console.log(toMove);
 							parent.find('li').slice(0, toMove).appendTo(parent);
 							name.slideTo(listLength, 0, false);
 						} else if (direction == 'left'){
-							// pass
+							var toMove = name.clickedIndex-listLength;
+							var total = parent.find('li').length;
+							parent.find('li:last-child').prependTo(parent);
+							name.slideTo(listLength, 0, false);
 						}
+					}, mySpeed-300);
 				}
+
 			});	
 		}
 
