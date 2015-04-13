@@ -22,5 +22,5 @@
 	<div class="timeline"></div>
 
 	</main>
-
-<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20993.92075722715!2d2.406530984484439!3d48.872699369491045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66d0aaf939ccb%3A0xedbd441dc1afe1c7!2sKhiasma!5e0!3m2!1sfr!2sfr!4v1428143410290" frameborder="0" style="border:0"></iframe>
+	
+<iframe id="map" frameBorder="0" src="https://a.tiles.mapbox.com/v4/pierrepierrepierre.301b5f73.html?access_token=pk.eyJ1IjoicGllcnJlcGllcnJlcGllcnJlIiwiYSI6IkdXdE5CRFEifQ.3zLbKVYfHituW8BVU-bl5g"></iframe>
