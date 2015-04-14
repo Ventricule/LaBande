@@ -9,7 +9,7 @@
 
 		function colors() { 
 			var color = '#'; 
-			var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','FFFFFF']; //Set your colors here
+			var letters = ['000000','FF0000','16C038','0000FF','FF82A2','FFFF00']; //Set your colors here
 			color += letters[Math.floor(Math.random() * letters.length)];
 			return color
 		};
