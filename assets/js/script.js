@@ -7,15 +7,26 @@
 
 	$(document).ready(function(){
 
+		function colors() { 
+			var color = '#'; 
+			var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','FFFFFF']; //Set your colors here
+			color += letters[Math.floor(Math.random() * letters.length)];
+			return color
+		};
+
 		var newSwiper = function(name, container){
 
 			var parent = container.find('ul'), childs = container.find('ul > li'), listLength = childs.length;
-			childs.clone().appendTo(parent).clone().prependTo(parent);
 			var oldVal, clicked, direction;
-
 			var mySpeed = 500;
 
 			var name = new Swiper(container, {
+				onInit: function(){
+					$('nav').find('li').each(function(){
+						$(this).css('background-color', colors);
+					});
+					childs.clone().appendTo(parent).clone().prependTo(parent);
+				},
 				slidesPerView: 'auto',
 				slideToClickedSlide: true,
 				mousewheelControl: true,
@@ -68,19 +79,13 @@
 	newSwiper('S1', $('#bande1') );
 	newSwiper('S2', $('#bande2') );
 
-	function colors() { 
-		var color = '#'; 
-		var letters = ['000000','FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF','FFFFFF']; //Set your colors here
-		color += letters[Math.floor(Math.random() * letters.length)];
-		return color
-	}
+
 	$('nav').find('li').each(function(){
 		$(this).css('background-color', colors);
-		if ($(this).css('background-color') == 'rgb(0, 0, 0)' || $(this).css('background-color') == 'rgb(0, 0, 255)' ){
+		if ($(this).css('background-color') === 'rgb(0, 0, 0)' || $(this).css('background-color') === 'rgb(0, 0, 255)' ){
 			$(this).css('color', '#FFFFFF');
 		}
-	})
-
+	});
 
 
 });
