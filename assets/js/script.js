@@ -14,13 +14,14 @@
 			return color
 		};
 
-		var newSwiper = function(name, container){
 
+
+		function Bande(container, item) {
+			this.container = container;
 			var parent = container.find('ul'), childs = container.find('ul > li'), listLength = childs.length;
-			var oldVal, clicked, direction;
-			var mySpeed = 500;
+			var oldVal, clicked, direction, mySpeed = 500;
 
-			var name = new Swiper(container, {
+			this.item = new Swiper(container, {
 				onInit: function(){
 					$('nav').find('li').each(function(){
 						$(this).css('background-color', colors);
@@ -35,37 +36,37 @@
 				resistanceRatio : 0.9,
 				loop: true,
 				loopedSlides: listLength*2,
-				// nextButton: container,
 				onSlideChangeStart: function(){
-					if (name.activeIndex == name.clickedIndex){
+					if (item.activeIndex == item.clickedIndex){
 						clicked = true;
 					} else {
 						clicked = false;
 					}
 				},
-				onSetTranslate: function(name, translate){
-					clicked = name.clickedIndex;
-					if (name.translate % 320 == 0){
-						if (name.translate < oldVal){
+				onSetTranslate: function(item, translate){
+					clicked = item.clickedIndex;
+					if (item.translate % 320 == 0){
+						if (item.translate < oldVal){
 							direction = 'right';
-						} else if (name.translate > oldVal) {
+						} else if (item.translate > oldVal) {
 							direction = 'left';
 						} 
-						oldVal = name.translate;
+						console.log(direction);
+						oldVal = item.translate;
 					}
 				},
-				onClick: function(name){
+				onClick: function(item){
 					if (clicked = true) {
 						setTimeout(function() {
 							if (direction == 'right'){
-								var toMove = name.clickedIndex-listLength;
+								var toMove = item.clickedIndex-listLength;
 								parent.find('li').slice(0, toMove).appendTo(parent);
-								name.slideTo(listLength, 0, false);
+								item.slideTo(listLength, 0, false);
 							} else if (direction == 'left'){
-								var toMove = name.clickedIndex-listLength;
+								var toMove = item.clickedIndex-listLength;
 								var total = parent.find('li').length;
 								parent.find('li:last-child').prependTo(parent);
-								name.slideTo(listLength, 0, false);
+								item.slideTo(listLength, 0, false);
 							}
 						}, mySpeed-300);
 					}
@@ -73,22 +74,17 @@
 				onSlideChangeEnd: function(){
 					clicked = false;
 				}
-			});	
-			name.on("slideChangeStart",function(){
-				var clicked = name.clickedSlide.getAttribute("data-id")
-				if(name.wrapper.is('#menu')){
-					console.log(clicked);
-					//$('#bande2').slideTo(10, 1000, true);
-					//$('#submenu').find("[data-parent='" + clicked + "']").first().click();
-					//console.log($('#submenu').find('li').index($('[data-parent='+clicked+']').first()));
-					//$('#submenu').find('li').first().click();
-
-				}
 			});
-		}
+		};
+	
+		var menu = new Bande($('#bande1'), 'menu' );
+		var submenu = new Bande($('#bande2'), 'submenu' );
 
-	newSwiper('S1', $('#bande1') );
-	newSwiper('S2', $('#bande2') );
+		menu.item.on("slideChangeStart",function(){
+			var clicked = menu.item.clickedSlide.getAttribute("data-id")
+			console.log(clicked);
+			submenu.item.slideTo($('#submenu').find('li').index($('[data-parent='+clicked+']').first()), 1000, true);
+		}); 
 
 
 	$('nav').find('li').each(function(){
