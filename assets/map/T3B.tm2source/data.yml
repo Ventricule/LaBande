@@ -2,7 +2,7 @@ _prefs:
   disabled: []
   inspector: false
   mapid: pierrepierrepierre.b07f12b6
-  rev: s-3981eab1
+  rev: s-f25a100e
   saveCenter: true
 attribution: ''
 center: 
@@ -29,4 +29,4 @@ Layer:
     srs: +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs
 maxzoom: 16
 minzoom: 0
-name: T3B
+name: La Bande

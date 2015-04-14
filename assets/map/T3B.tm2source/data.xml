@@ -8,7 +8,7 @@
   <Parameter name="json"><![CDATA[{"vector_layers":[{"id":"T3B","description":"","fields":{"description":"String","id":"String","stroke":"String","stroke-opacity":"Number","stroke-width":"Number","title":"String"}}]}]]></Parameter>
   <Parameter name="maxzoom">16</Parameter>
   <Parameter name="minzoom">0</Parameter>
-  <Parameter name="name"><![CDATA[T3B]]></Parameter>
+  <Parameter name="name"><![CDATA[La Bande]]></Parameter>
 </Parameters>
 
 
