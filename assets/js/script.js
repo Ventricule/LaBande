@@ -9,7 +9,7 @@
 
 		function colors() { 
 			var color = '#'; 
-			var letters = ['000000','FF0000','16C038','0000FF','FF82A2','FFFF00']; //Set your colors here
+			var letters = ['422222','FF0000','16C038','0000FF','FF82A2','FFFF00']; //Set your colors here
 			color += letters[Math.floor(Math.random() * letters.length)];
 			return color
 		};
@@ -54,7 +54,7 @@
 						oldVal = name.translate;
 					}
 				},
-				onClick: function(){$
+				onClick: function(name){
 					if (clicked = true) {
 						setTimeout(function() {
 							if (direction == 'right'){
@@ -74,6 +74,18 @@
 					clicked = false;
 				}
 			});	
+			name.on("slideChangeStart",function(){
+				var clicked = name.clickedSlide.getAttribute("data-id")
+				if(name.wrapper.is('#menu')){
+					console.log(clicked);
+				    name.swipeTo( $('#cflho6').index(),1000,false );
+					//$('#bande2').slideTo(10, 1000, true);
+					//$('#submenu').find("[data-parent='" + clicked + "']").first().click();
+					//console.log($('#submenu').find('li').index($('[data-parent='+clicked+']').first()));
+					//$('#submenu').find('li').first().click();
+
+				}
+			});
 		}
 
 	newSwiper('S1', $('#bande1') );
@@ -81,8 +93,7 @@
 
 
 	$('nav').find('li').each(function(){
-		$(this).css('background-color', colors);
-		if ($(this).css('background-color') === 'rgb(0, 0, 0)' || $(this).css('background-color') === 'rgb(0, 0, 255)' ){
+		if ($(this).css('background-color') === 'rgb(66, 34, 34)' || $(this).css('background-color') === 'rgb(0, 0, 255)' ){
 			$(this).css('color', '#FFFFFF');
 		}
 	});

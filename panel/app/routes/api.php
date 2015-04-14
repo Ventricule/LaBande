@@ -3,13 +3,6 @@
 // register all available routes
 return array(
 
-  // Authentication
-  array(
-    'pattern' => 'api/auth/login',
-    'action'  => 'api/AuthController::login',
-    'method'  => 'POST',
-  ),
-
   // Pages
   array(
     'pattern' => 'api/pages/create/(:all?)',
@@ -32,12 +25,18 @@ return array(
   array(
     'pattern' => 'api/pages/sort/(:all?)',
     'action'  => 'api/PagesController::sort',
-    'method'  => 'POST',
+    'method'  => 'GET|POST',
     'filter'  => 'auth',
   ),
   array(
     'pattern' => 'api/pages/hide/(:all)',
     'action'  => 'api/PagesController::hide',
+    'method'  => 'POST',
+    'filter'  => 'auth',
+  ),
+  array(
+    'pattern' => 'api/pages/publish/(:all)',
+    'action'  => 'api/PagesController::publish',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
@@ -50,37 +49,37 @@ return array(
 
   // Files
   array(
-    'pattern' => 'api/files/upload/(:all)',
+    'pattern' => 'api/files/upload/(:all?)',
     'action'  => 'api/FilesController::upload',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
   array(
-    'pattern' => 'api/files/replace/(:all)',
+    'pattern' => 'api/files/replace/(:all?)',
     'action'  => 'api/FilesController::replace',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
   array(
-    'pattern' => 'api/files/update/(:all)',
+    'pattern' => 'api/files/update/(:all?)',
     'action'  => 'api/FilesController::update',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
   array(
-    'pattern' => 'api/files/rename/(:all)',
+    'pattern' => 'api/files/rename/(:all?)',
     'action'  => 'api/FilesController::rename',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
   array(
-    'pattern' => 'api/files/sort/(:all)',
+    'pattern' => 'api/files/sort/(:all?)',
     'action'  => 'api/FilesController::sort',
     'method'  => 'POST',
     'filter'  => 'auth',
   ),
   array(
-    'pattern' => 'api/files/delete/(:all)',
+    'pattern' => 'api/files/delete/(:all?)',
     'action'  => 'api/FilesController::delete',
     'method'  => 'POST',
     'filter'  => 'auth',

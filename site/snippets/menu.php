@@ -4,7 +4,7 @@
 
 		<ul id="menu" class="swiper-wrapper">
 			<?php foreach($pages->visible() as $p): ?>
-			<li class="swiper-slide">
+			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-id="<?php echo $p->id() ?>">
 				<?php echo $p->title()->html() ?>
 			</li>
 			<?php endforeach ?>
@@ -16,7 +16,7 @@
 			<?php foreach($pages->visible() as $p): ?>
 				<?php if($p->hasVisibleChildren()): ?>
 					<?php foreach($p->children()->visible() as $p): ?>
-					<li class="swiper-slide">
+					<li id="<?php echo $p->hash() ?>" class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-parent="<?php echo $p->parent() ?>">
 						<?php echo $p->title()->html() ?>
 					</li>
 					<?php endforeach ?>

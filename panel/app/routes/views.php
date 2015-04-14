@@ -15,6 +15,7 @@ return array(
     'pattern' => 'login/(:any?)',
     'action'  => 'views/AuthController::login',
     'filter'  => 'isInstalled',
+    'method'  => 'GET|POST'
   ),
   array(
     'pattern' => 'logout',
@@ -126,32 +127,32 @@ return array(
 
   // Files
   array(
-    'pattern' => 'views/files/index/(:all)',
+    'pattern' => 'views/files/index/(:all?)',
     'action'  => 'views/FilesController::index',
     'filter'  => 'auth'
   ),
   array(
-    'pattern' => 'views/files/show/(:all)',
+    'pattern' => 'views/files/show/(:all?)',
     'action'  => 'views/FilesController::show',
     'filter'  => 'auth',
     'method'  => 'POST|GET',
   ),
   array(
-    'pattern' => 'views/files/replace/(:all)',
+    'pattern' => 'views/files/replace/(:all?)',
     'action'  => 'views/FilesController::replace',
     'filter'  => 'auth',
     'method'  => 'POST|GET',
     'modal'   => true,
   ),
   array(
-    'pattern' => 'views/files/delete/(:all)',
+    'pattern' => 'views/files/delete/(:all?)',
     'action'  => 'views/FilesController::delete',
     'filter'  => 'auth',
     'method'  => 'POST|GET',
     'modal'   => true,
   ),
   array(
-    'pattern' => 'views/files/upload/(:all)',
+    'pattern' => 'views/files/upload/(:all?)',
     'action'  => 'views/FilesController::upload',
     'filter'  => 'auth',
     'method'  => 'POST|GET',

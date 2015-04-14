@@ -2,7 +2,7 @@
 
 class Panel {
 
-  static public $version = '2.0.6';
+  static public $version = '2.0.7';
   static public $instance;
 
   public $kirby;
@@ -110,6 +110,7 @@ class Panel {
       'history'      => $this->roots->lib . DS . 'history.php',
       'installation' => $this->roots->lib . DS . 'installation.php',
       'pagedata'     => $this->roots->lib . DS . 'pagedata.php',
+      'subpages'     => $this->roots->lib . DS . 'subpages.php',
 
       // blueprint stuff
       'blueprint'         => $this->roots->lib . DS . 'blueprint.php',

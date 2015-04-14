@@ -19,8 +19,8 @@ class Url {
 
   static public function scheme($url = null) {
     if(is_null($url)) {      
-      if(
-        (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') or
+      if(    
+        (isset($_SERVER['HTTPS']) and !empty($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') or
         server::get('SERVER_PORT')            == '443' or 
         server::get('HTTP_X_FORWARDED_PORT')  == '443' or 
         server::get('HTTP_X_FORWARDED_PROTO') == 'https'
@@ -122,6 +122,14 @@ class Url {
     if(is_null($url)) $url = static::current();
     parse_str(parse_url($url, PHP_URL_QUERY), $array);
     return $array;
+  }
+
+  /**
+   * Checks if the url contains a query string
+   */
+  static public function hasQuery($url = null) {
+    if(is_null($url)) $url = static::current();
+    return str::contains($url, '?');
   }
 
   /**

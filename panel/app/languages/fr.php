@@ -70,6 +70,8 @@ return array(
     'pages.show.settings' => 'Options de la page',
     'pages.show.preview' => 'Prévisualiser',
     'pages.show.changeurl' => 'Modifier l’URL',
+    'pages.show.invisible' => 'Status: invisible',
+    'pages.show.visible' => 'Status: visible',
     'pages.show.delete' => 'Supprimer cette page',
     'pages.show.subpages.title' => 'Pages',
     'pages.show.subpages.edit' => 'Modifier',
@@ -82,6 +84,9 @@ return array(
     'pages.show.error.permissions.title' => 'La page n’est pas accessible en écriture',
     'pages.show.error.permissions.text'  => 'Merci de vérifier les permissions pour le répertoire "/content" et ses fichiers.',
     'pages.show.error.permissions.retry'  => 'Essayer de nouveau',
+    'pages.show.error.notitle.title' => 'Le blueprint n\'a pas de champ "Titre"',
+    'pages.show.error.notitle.text' => 'Merci d\'ajouter un titre et d\'essayer à nouveau',
+    'pages.show.error.notitle.retry' => 'Essayer de nouveau',
     'pages.show.error.form'  => 'Merci de remplir correctement l’ensemble des champs',
 
     'pages.add.title.label' => 'Ajouter une nouvelle page',
