@@ -78,7 +78,6 @@
 				var clicked = name.clickedSlide.getAttribute("data-id")
 				if(name.wrapper.is('#menu')){
 					console.log(clicked);
-				    name.swipeTo( $('#cflho6').index(),1000,false );
 					//$('#bande2').slideTo(10, 1000, true);
 					//$('#submenu').find("[data-parent='" + clicked + "']").first().click();
 					//console.log($('#submenu').find('li').index($('[data-parent='+clicked+']').first()));
