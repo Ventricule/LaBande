@@ -87,6 +87,13 @@
 		}
 	});
 
+	$(document).scroll(function(){
+		if (document.documentElement.clientHeight + $(window).scrollTop() >= $(document).height()) {
+			$(document).scrollTop(0)
+		} else if ($(window).scrollTop() < 0) {
+			$(document).scrollTop($(document).height())
+		}
+	});
 
 });
 
