@@ -142,7 +142,7 @@ $(document).ready(function(){
       map.panTo(e.layer.getLatLng());
   });
   
-  map.featureLayer.loadURL('http://localhost/LaBande/api');
+  map.featureLayer.loadURL('/LaBande/api');
 
 });
 
