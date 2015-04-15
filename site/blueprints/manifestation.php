@@ -1,6 +1,6 @@
 <?php if(!defined('KIRBY')) exit ?>
 
-title: Project
+title: Manifestation
 pages: false
 files:
   sortable: true
@@ -17,3 +17,9 @@ fields:
   tags:
     label: Tags
     type:  tags
+  lieu:
+    label: Nom du lieu
+    type:  text
+  location:
+    label: Coordonnées géographique
+    type: geolocation

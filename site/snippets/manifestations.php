@@ -1,4 +1,4 @@
-<h2>Latest projects</h2>
+<h2>Manifestations</h2>
 
 <ul class="teaser cf">
   <?php foreach($pages->children()/*->visible()->limit(3)*/ as $project): ?>

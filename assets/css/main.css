@@ -275,12 +275,6 @@ h1 a, h2 a, h3 a, h4 a {
 
 /* Main
 -------------------------------------------------- */
-#map{
-	height: 150%;
-	width: 110%;
-	position: fixed;
-	top: -30%;
-}
 
 .main {
 	padding-bottom: 1em;
@@ -376,6 +370,10 @@ li {
 .nextprev .next {
 	float: right;
 }
+
+/* Map
+-------------------------------------------------- */
+#map { position:fixed; top:0; bottom:0; width:100%; }
 
 
 /* Footer

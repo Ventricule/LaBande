@@ -6,4 +6,8 @@ password: >
   $2a$10$3eHliB.b2mPl7XJZRbmGjuqNwxs3QT3qSdzAcqACk1BdTxi9qb8fa
 language: fr
 role: admin
-token: 2e1ff4cc9d33cc48765c6a4817d0511a282e8974
+token: b1374928feb161711beb61857128e46c847b3337
+history:
+  - manifestations/project-c
+  - manifestations/project-b
+  - manifestations/project-a

@@ -10,11 +10,11 @@
 			</div>
 		</div>
 		<div class="content">
-			<?php snippet('projects') ?>
+			<?php snippet('manifestations') ?>
 		</div>
 	<?php snippet('footer') ?>
 	<div class="timeline"></div>
 
 	</main>
 	
-<iframe id="map" frameBorder="0" src="https://a.tiles.mapbox.com/v4/pierrepierrepierre.301b5f73.html?access_token=pk.eyJ1IjoicGllcnJlcGllcnJlcGllcnJlIiwiYSI6IkdXdE5CRFEifQ.3zLbKVYfHituW8BVU-bl5g"></iframe>
+  <div id='map'></div>
