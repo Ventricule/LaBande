@@ -16,7 +16,7 @@
 			<?php foreach($pages->visible() as $p): ?>
 				<?php if($p->hasVisibleChildren()): ?>
 					<?php foreach($p->children()->visible() as $p): ?>
-					<li id="<?php echo $p->hash() ?>" class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-parent="<?php echo $p->parent() ?>">
+					<li id="<?php echo $p->hash() ?>" class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-parent="<?php echo $p->parent() ?>" data-num="<?php echo $p->num() ?>">
 						<?php echo $p->title()->html() ?>
 					</li>
 					<?php endforeach ?>
