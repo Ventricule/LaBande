@@ -141,6 +141,8 @@ $(document).ready(function(){
   map.featureLayer.on('click', function(e) {
       map.panTo(e.layer.getLatLng());
   });
+  
+  map.featureLayer.loadURL('http://localhost/LaBande/api');
 
 });
 
