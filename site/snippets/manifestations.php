@@ -3,8 +3,7 @@
 <ul class="teaser cf">
   <?php foreach($pages->children() as $project): ?>
   <li>
-    <h3><a href="<?php echo $project->url() ?>"><?php echo $project->title()->html() ?></a></h3>
-    <p>Location : <?php echo $project->location() ?></p>
+    <h3 id="<?php echo $project->hash() ?>" class="item" ><a href="<?php echo $project->url() ?>"><?php echo $project->title()->html() ?></a></h3>
     <p><?php echo $project->text()->excerpt(80) ?> <a href="<?php echo $project->url() ?>">read&nbsp;more&nbsp;→</a></p>
     <?php if($image = $project->images()->sortBy('sort', 'asc')->first()): ?>
     <a href="<?php echo $project->url() ?>">

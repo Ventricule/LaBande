@@ -275,6 +275,16 @@ h1 a, h2 a, h3 a, h4 a {
 
 /* Main
 -------------------------------------------------- */
+<<<<<<< Updated upstream
+=======
+#map{
+	height: 150%;
+	width: 110%;
+	position: fixed;
+	top: -30%;
+	display: none;
+}
+>>>>>>> Stashed changes
 
 .main {
 	padding-bottom: 1em;
