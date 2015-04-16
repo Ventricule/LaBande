@@ -49,14 +49,7 @@
 				loop: true,
 				loopedSlides: listLength*2,
 				slideActiveClass: 'active',
-				onSlideChangeStart: function(swiper){
-				},
-				onSetTranslate: function(swiper, translate){
-				},
-				onClick: function(swiper){
-				},
 				onSlideChangeEnd: function(swiper){
-					clicked = false;
           
           var hash = $(swiper.wrapper).find('.active').attr('data-hash');
           var parentHash = $(swiper.wrapper).find('.active').attr('data-p-hash');
