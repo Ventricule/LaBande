@@ -149,7 +149,7 @@
 				nextHash = $('#submenu').find('.active').next();//.nextAll('[data-hasf='+topId+']');
 				console.log(nextHash);
 				console.log(nextHash.index());
-				submenu.item.slideTo(nextHash.index(), 1000, true);
+				submenu.item.slideTo(nextHash.index(), 1000, false);
 				//slideMenu(submenu.item, menu.item, anchor2);
 			}
 		});
