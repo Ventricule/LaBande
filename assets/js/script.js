@@ -131,7 +131,7 @@
 		var scrollContent = function(hash) {	
 			anchor = $("#"+hash);
 			if(hash !== "undefined" ){
-				$('html,body').animate({scrollTop: anchor.offset().top -140},800);
+				$('html,body').animate({scrollTop: anchor.offset().top -140},400);
 			};
 		};
 		var oldId = $('#submenu').find('.active').attr('data-hash');
@@ -145,9 +145,11 @@
 				}
 			});
 			if (topId != oldId){
-				console.log(topId+ " old : "+ oldId)
 				oldId = topId;
-				anchor2 = topId;
+				nextHash = $('#submenu').find('.active').next();//.nextAll('[data-hasf='+topId+']');
+				console.log(nextHash);
+				console.log(nextHash.index());
+				submenu.item.slideTo(nextHash.index(), 1000, true);
 				//slideMenu(submenu.item, menu.item, anchor2);
 			}
 		});
