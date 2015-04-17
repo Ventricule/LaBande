@@ -91,26 +91,22 @@
 
 				if( activeSlide.attr('data-id') !== activeChild.attr('data-id') ){
 					if (parentHash && menu) {
-						console.log('menu');
 						if(newParent.hasClass('duplicate')){
 							menu.swiper.slideTo(newParent.index(), 1000, false);
 							menu.swiper.update();
 							setTimeout(function() {
 								menu.swiper.slideTo(parseInt($(menu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+menu.listLength, 0, false);
-								menu.swiper.update();
 						}, 1000);
 						} else {
 							menu.swiper.slideTo(newParent.index(), 1000, false);
 						}
 						menu.swiper.update();
 					} else if (submenu) {
-						console.log('kaboom');
 						if(newChild.hasClass('duplicate')){
 							submenu.swiper.slideTo(newChild.index(), 1000, false);
 							submenu.swiper.update();
 							setTimeout(function() {
 								submenu.swiper.slideTo(parseInt($(submenu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+submenu.listLength, 0, false);
-								submenu.swiper.update();
 							}, 1000);
 						} else {
 							submenu.swiper.slideTo(newChild.index(), 1000, false);
