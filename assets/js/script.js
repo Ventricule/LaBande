@@ -26,7 +26,10 @@
 			var oldVal, clicked, direction, mySpeed = 500;
 
 			this.swiper = new Swiper(container, {
-				onInit: function(){
+				onInit: function(swiper){
+          var etiquetteOriginale = swiper.container.find('li[data-swiper-slide-index="0"]');
+          console.log(etiquetteOriginale);
+          $('nav').css('background-color', colors);
 					$('nav').find('li').each(function(){
 						$(this).css('background-color', colors);
 					});
@@ -39,6 +42,7 @@
 				resistanceRatio : 0.9,
 				loop: true,
 				loopedSlides: listLength,
+        centeredSlides: true,
 				slideActiveClass: 'active',
 				onSlideChangeStart: function(swiper){
 					clicked = swiper.clickedIndex;
@@ -49,11 +53,11 @@
 					oldVal = swiper.translate;
 				},
 				onSetTransition: function(swiper){
-          console.log('onSetTransition');
+
 				},
 				onSlideChangeEnd: function(swiper){
           var activeSlide = $(swiper.wrapper).find('.active');
-          swiper.slideTo( activeSlide.attr('data-swiper-slide-index'), 0, false);
+          swiper.slideTo( parseInt(activeSlide.attr('data-swiper-slide-index'))+listLength, 0, false);
 					var hash = activeSlide.attr('data-hash');
 					var parentHash = activeSlide.attr('data-p-hash');
 					slideMenu(swiper, hash, parentHash);  
