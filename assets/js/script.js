@@ -43,7 +43,7 @@
 				mousewheelControl: true,
 				hashnav: true,
 				speed: mySpeed,
-				resistanceRatio : 0.9,
+				resistanceRatio : 0.85,
 				loop: true,
 				loopedSlides: listLength,
 				slideActiveClass: 'active',
