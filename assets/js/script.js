@@ -85,14 +85,11 @@
 
 				if( ! parentHash ){ 
 					activeChild = activeSlide, activeSlide = oldChild;
-					//console.log('menu');
 				} else { 
 					activeChild = activeSlide, activeSlide = oldParent;
-					//console.log('submenu');
 				};
-				console.log(activeSlide.attr('data-id')+" "+activeChild.attr('data-id'));
 
-				if( activeSlide.attr('data-id') != activeChild.attr('data-id') ){
+				if( activeSlide.attr('data-id') !== activeChild.attr('data-id') ){
 					if (parentHash && menu) {
 						console.log('menu');
 						if(newParent.hasClass('duplicate')){
