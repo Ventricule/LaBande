@@ -5,19 +5,28 @@ $data = $pages->find('manifestations')->children()->visible()->flip()->paginate(
 $json = array();
 
 foreach($data as $article) {
+  
+  $coordinates;
+  $lieu = (string)$article->lieu();
+  $emplacement = (string)$article->location();
+  if ( $lieu ) {
+    $coordinates = (string)$pages->index()->findBy('uid', $lieu)->location();
+  } else {
+    $coordinates = $emplacement;
+  }
 
   $json[] = array(
     'type'   => "Feature",
     'geometry' => array(
       'type' => 'Point',
-      'coordinates' => array_reverse( explode( ',', (string)$article->location() ) )
+      'coordinates' => array_reverse( explode( ',', $coordinates ) )
     ),
     'properties' => array(
       "title" => (string)$article->title(),
       "description" => (string)$article->text(),
+      "lieu-uid" => $lieu,
       "marker-color" => "#fc4353",
-      "marker-size" => "large",
-      "marker-symbol" => "monument"
+      "marker-size" => "small",
     )
   );
 

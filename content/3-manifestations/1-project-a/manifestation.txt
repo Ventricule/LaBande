@@ -18,4 +18,8 @@ Location: 48.8754004,2.41429549999998
 
 ----
 
-Lieu: Espace Khiasma
+Lieu: khiasma
+
+----
+
+Location-name: 

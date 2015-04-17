@@ -14,8 +14,12 @@ Text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo l
 
 ----
 
-Lieu: Le 116
+Lieu: autre-lieu-1
 
 ----
 
 Location: 48.8575259,2.4272000999999364
+
+----
+
+Location-name: 

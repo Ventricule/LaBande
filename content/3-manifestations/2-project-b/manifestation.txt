@@ -14,8 +14,12 @@ Text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo l
 
 ----
 
-Lieu: Médiathèque Marguerite Duras
+Lieu: autre-lieu-2
 
 ----
 
 Location: 48.8601599,2.4028654999999617
+
+----
+
+Location-name: 
