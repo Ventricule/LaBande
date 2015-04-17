@@ -29,8 +29,9 @@
 		function Bande(container) {
 			this.container = container;
 			var parent = container.find('ul'), childs = container.find('ul > li'), listLength = childs.length;
-			var oldVal, direction, mySpeed = 500;
+			var activeSlide, activeChild, direction, mySpeed = 500;
 
+			this.listLength = listLength;
 			this.swiper = new Swiper(container, {
 				onInit: function(){
 					if (listLength <= 5){
@@ -49,14 +50,20 @@
 				slideDuplicateClass: 'duplicate',
 				runCallbacksOnInit: false,
 				onSlideChangeStart: function(swiper){
+					var old = $(swiper.wrapper).find('.active');
 					swiper.update();
-					var activeSlide = $(swiper.wrapper).find('.active');
+					activeSlide = $(swiper.wrapper).find('.active');
+
+					if (old.index() < activeSlide.index() ) { 
+						direction = 'next';
+					} else if (old.index() > activeSlide.index() ) { 
+						direction = 'prev';
+					} else { 
+						direction = 'null';
+					};
+
+					swiper.update();
 					slideMenu(swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));  
-				},
-				onSetTranslate: function(swiper, translate){
-					// check direction on translate
-					if (swiper.translate < oldVal){ direction = 'right'; } else if (swiper.translate > oldVal) { direction = 'left'; } 
-					oldVal = swiper.translate;
 				},
 				onTransitionEnd: function(swiper){
 					var activeSlide = $(swiper.wrapper).find('.active');
@@ -66,12 +73,53 @@
 			});
 
 			function slideMenu(swiper, hash, parentHash) {
-				if(parentHash && menu) {
-					var parent = menu.container.find('li[data-hash='+parentHash+']:not(.duplicate)');
-					menu.swiper.slideTo(parent.index(), 1000, false);
-				} else if (submenu) {
-					var firstChild = submenu.container.find('li[data-p-hash='+hash+']:not(.duplicate)').first();
-					submenu.swiper.slideTo(firstChild.index(), 1000, false);
+				var oldParent = $('#menu').find('li.active');	
+				var oldChild = $('#submenu').find('li.active');
+				if( direction == 'next' ){
+					var newParent = $('#menu').find('li.active').nextAll('li[data-hash='+parentHash+']').first()
+					var newChild = $('#submenu').find('li.active').nextAll('li[data-p-hash='+hash+']').first();
+				} else if (direction == 'prev'){	
+					var newParent = oldParent.prevAll('li[data-hash='+parentHash+']').first()
+					var newChild = oldChild.prevAll('li[data-p-hash='+hash+'][data-num=1]').first();
+				};
+
+				if( ! parentHash ){ 
+					activeChild = activeSlide, activeSlide = oldChild;
+					//console.log('menu');
+				} else { 
+					activeChild = activeSlide, activeSlide = oldParent;
+					//console.log('submenu');
+				};
+				console.log(activeSlide.attr('data-id')+" "+activeChild.attr('data-id'));
+
+				if( activeSlide.attr('data-id') != activeChild.attr('data-id') ){
+					if (parentHash && menu) {
+						console.log('menu');
+						if(newParent.hasClass('duplicate')){
+							menu.swiper.slideTo(newParent.index(), 1000, false);
+							menu.swiper.update();
+							setTimeout(function() {
+								menu.swiper.slideTo(parseInt($(menu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+menu.listLength, 0, false);
+								menu.swiper.update();
+						}, 1000);
+						} else {
+							menu.swiper.slideTo(newParent.index(), 1000, false);
+						}
+						menu.swiper.update();
+					} else if (submenu) {
+						console.log('kaboom');
+						if(newChild.hasClass('duplicate')){
+							submenu.swiper.slideTo(newChild.index(), 1000, false);
+							submenu.swiper.update();
+							setTimeout(function() {
+								submenu.swiper.slideTo(parseInt($(submenu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+submenu.listLength, 0, false);
+								submenu.swiper.update();
+							}, 1000);
+						} else {
+							submenu.swiper.slideTo(newChild.index(), 1000, false);
+						}
+					}
+					submenu.swiper.update();
 				}
 			}
 		};
