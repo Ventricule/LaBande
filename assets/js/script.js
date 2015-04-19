@@ -151,7 +151,7 @@
 					clearTimeout($.data(this, 'scrollTimer'));
 					$.data(this, 'scrollTimer', setTimeout(function() {
 						scrolling = false;
-					}, 250));
+					}, 750));
 
 					var cutoff = $(window).scrollTop();
 					topId = $('.top').attr('id');
@@ -171,15 +171,18 @@
 						direction = "prev";
 					}
 					if (topId != menuId && topId != oldId){
-						if(direction === "next"){
-							nextHash = $('#submenu').find('.active').next();
+						activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)'); //:not(.duplicate)
+						/*if(direction === "next"){
+							nextHash = activeSlide;
 						} else if (direction === "prev"){
-							nextHash = $('#submenu').find('.active').prev();
-						}
+							nextHash = activeSlide;
+						}*/
 						oldId = topId;
-						activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)');
-						submenu.swiper.slideTo(nextHash.index(), 1000, false);
-						slideMenu(menu.swiper, nextHash.attr('data-hash'), nextHash.attr('data-p-hash'));
+						submenu.swiper.slideTo(activeSlide.index(), 1000, false);
+						// loop mode : update !
+
+						//slideMenu(submenu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
+						slideMenu(menu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 						lastScrollTop = st;
 					}
 				}
