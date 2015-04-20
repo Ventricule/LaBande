@@ -214,6 +214,13 @@
 			point.reverse(); 
 		});
 		
+		
+		map.featureLayer.on('layeradd', function(e) {
+			var marker = e.layer,
+					feature = marker.feature;
+			marker.setIcon(L.icon(feature.properties.icon));
+		});
+		
 		map.featureLayer.loadURL('/LaBande/api');
 		
 		var colors = ['#000', '#00F', '#FF0', '#F00', '#FFF'];
@@ -241,6 +248,8 @@
 			}).addTo(map);
 			polyline.push(line);
 		});
+		
+		
 
 		
 
