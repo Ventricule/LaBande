@@ -25,6 +25,7 @@
 
 		var menu = new Bande($('#bande1'));
 		var submenu = new Bande($('#bande2'));
+		var activebox = new Bande($('#bande3'));
     
 
 		function Bande(container) {
@@ -104,19 +105,7 @@
 						} else {
 							menu.swiper.slideTo(newParent.index(), 1000, false);
 						}
-
-
-						if (scrolling === true) {
-							//submenu.swiper.slideTo(oldChild.index(), 1000, false);
-						}
-						console.log(newParent.index());
-						console.log(newChild.index());
-						console.log(oldChild);
-						submenu.swiper.update();
 						menu.swiper.update();
-
-
-
 					} else if (submenu) {
 						if(newChild.hasClass('duplicate')){
 							submenu.swiper.slideTo(newChild.index(), 1000, false);
@@ -162,7 +151,6 @@
 						}
 					});
 
-					// move menu
 					var st = $(this).scrollTop();
 					var menuId = $('#submenu').find('.active').attr('data-hash');
 					if (st > lastScrollTop){
@@ -172,15 +160,10 @@
 					}
 					if (topId != menuId && topId != oldId){
 						activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)'); //:not(.duplicate)
-						/*if(direction === "next"){
-							nextHash = activeSlide;
-						} else if (direction === "prev"){
-							nextHash = activeSlide;
-						}*/
 						oldId = topId;
 						submenu.swiper.slideTo(activeSlide.index(), 1000, false);
+						console.log('bang');
 						// loop mode : update !
-
 						//slideMenu(submenu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 						slideMenu(menu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 						lastScrollTop = st;
