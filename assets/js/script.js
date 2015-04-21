@@ -8,17 +8,29 @@
 	$(document).ready(function(){
 
 		var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
-
-		function colors() { 
-			var color = '#'; 
-			var letters = ['422222','FF0000','16C038','0000FF','FF82A2','FFFF00']; //Set your colors here
-			color += letters[Math.floor(Math.random() * letters.length)];
+		
+		var bg = true, it = 0;;
+		function colors(id) { 
+			if (id=="menu") {
+				var colors = ['#FFA113','#35C555','#FF3838','#403DAB']; //Set your colors here
+				color = colors[it % colors.length];
+				color = false;
+				it++;
+			} else {
+				if (bg) {
+					bg=false;
+					color = "#ffffcc";
+				} else {
+					bg=true;
+					color = "#422222";
+				}
+			}
 			return color
 		};
 
 		$('nav').find('li').each(function(){
-			$(this).css('background-color', colors);
-			if ($(this).css('background-color') === 'rgb(66, 34, 34)' || $(this).css('background-color') === 'rgb(0, 0, 255)' ){
+			$(this).css('background-color', colors( $(this).parent().attr('id') ));
+			if ($(this).brightness() == 'dark'){
 				$(this).css('color', '#FFFFFF');
 			}
 		});
@@ -126,9 +138,9 @@
 
 			function slideColumn (hash) {
 				anchor = $("#"+hash);
-				if(hash !== "undefined" ){
+				if(anchor.length){
 					swiping = true;
-					$('html,body').animate({scrollTop: anchor.offset().top -140},750, function() {
+					$('html,body').animate({scrollTop: anchor.offset().top - 80},750, function() {
 						swiping = false;
 					});
 				};
@@ -231,11 +243,27 @@
 			}).addTo(map);
 			polyline.push(line);
 		});
-		
-		
-
-		
-
 
 	});
 
+jQuery.fn.brightness = function() {
+  var bg_color, rgba, y;
+  bg_color = this.css('background-color');
+  if ((bg_color != null) && bg_color.length) {
+    rgba = bg_color.match(/^rgb(?:a)?\(([0-9]{1,3}),\s([0-9]{1,3}),\s([0-9]{1,3})(?:,\s)?([0-9]{1,3})?\)$/);
+    if (rgba != null) {
+      if (rgba[4] === '0') {
+        if (this.parent().length) return this.parent().brightness();
+      } else {
+        y = 2.99 * rgba[1] + 5.87 * rgba[2] + 1.14 * rgba[3];
+        if (y >= 1275) {
+          return 'light';
+        } else {
+          return 'dark';
+        }
+      }
+    }
+  } else {
+    if (this.parent().length) return this.parent().brightness();
+  }
+};

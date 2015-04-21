@@ -187,9 +187,6 @@ nav li {
 #menu {
 	background: red;
 }
-#submenu {
-	background: yellow;
-}
 #menu, #submenu{
 	width: 100000px;
 	clear: both;
@@ -206,9 +203,15 @@ nav li {
 	text-align: center;
 	width: 320px;
 }
-
-#submenu {
-
+#submenu li {
+	/*width: 160px;*/
+	padding: .4rem;
+	border: 5px solid;
+}
+#menu li {
+	/*height: 41px;
+	padding: .3rem;
+	border: 5px solid;*/
 }
 #submenu:before {
 
@@ -281,9 +284,8 @@ h1 a, h2 a, h3 a, h4 a {
 
 .main {
 	padding-bottom: 1em;
-	margin: 0 0 0 40px;
-	padding: 1.5em;
-	max-width: 320px;
+	margin: 82px 0 0 40px;
+	width: 320px;
 	background: #fff;
 	position: absolute;
 	top: 0;
@@ -320,77 +322,25 @@ li {
 	top: 0;
 	z-index: -1;
 }
-.content{
-	margin-left: 5px;
-}
-/* Project meta
+
+/* Colonne
 -------------------------------------------------- */
-.meta {
-	margin-bottom: 1.5em;
+.rubrique-container {
+	padding: 1.5rem 0;
 }
-.meta li {
-	float: left;
-	list-style: none;
-	margin-right: 2em;
-}
-.meta li b {
-	font-weight: 400;
-	padding-right: .25em;
-}
-
-
-/* Project teaser
--------------------------------------------------- */
-.teaser {
-	list-style: none;
-}
-.teaser li {
-	margin-bottom: 1.5em;
-	list-style: none;
-	max-width: 100%;
-}
-@media screen and (min-width: 50em) {
-	.teaser li {
-		float: left;
-	}
-	.teaser li:first-child {
-		margin-left: 0;
-	}
+.rubrique-title {
+	font-size: 15px;
+	line-height: 31px;
+	font-weight: 300;
+	margin-bottom: 41px;
+	border: 5px solid;
+	height: 41px;
+	text-align: center;
+	background: #FFc;
 }
 
-
-/* Next/Prev nav
--------------------------------------------------- */
-.nextprev {
-	padding: 1em 0;
-}
-.nextprev a {
-	border: 0;
-}
-.nextprev .prev {
-	float: left;
-}
-.nextprev .next {
-	float: right;
-}
 
 /* Map
 -------------------------------------------------- */
 #map { position:fixed; top:0; bottom:0; width:100%; }
 
-
-/* Footer
--------------------------------------------------- */
-.footer {
-	padding: 1em 0 6em;
-	font-size: .8em;
-}
-.copyright {
-	float: left;
-}
-.colophon {
-	float: right;
-}
-.colophon a b {
-	padding-left: .25em;
-}
