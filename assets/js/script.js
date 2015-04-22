@@ -195,8 +195,8 @@
 
 		/* Map
 		---------------------------------------------- */
-		L.mapbox.accessToken = 'pk.eyJ1IjoicGllcnJlcGllcnJlcGllcnJlIiwiYSI6IkdXdE5CRFEifQ.3zLbKVYfHituW8BVU-bl5g';
-		var map = L.mapbox.map('map', 'pierrepierrepierre.022ca165', { zoomControl: false, attributionControl: false });
+		L.mapbox.accessToken = 'pk.eyJ1Ijoic2FtdWVscm0iLCJhIjoicVJuNV9YMCJ9.7Bol-cHVhp6d_l-lVhPpew';
+		var map = L.mapbox.map('map', 'samuelrm.3e35d3f6', { zoomControl: false, attributionControl: false });
 		new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 		map.setView([48.8707,2.3130], 12);
 
