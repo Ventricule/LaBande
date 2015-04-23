@@ -204,9 +204,9 @@ nav li {
 	width: 320px;
 }
 #submenu li {
-	/*width: 160px;*/
-	padding: .4rem;
-	border: 5px solid;
+	width: 160px;
+	/*padding: .4rem;
+	border: 5px solid;*/
 }
 #menu li {
 	/*height: 41px;

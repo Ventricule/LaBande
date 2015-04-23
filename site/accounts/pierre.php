@@ -6,10 +6,10 @@ password: >
   $2a$10$3eHliB.b2mPl7XJZRbmGjuqNwxs3QT3qSdzAcqACk1BdTxi9qb8fa
 language: fr
 role: admin
-token: c0980ec7f8e15ebd418b72da4dc569be691e3635
+token: ffde6f36324443b978de2d8b44f44f191886321a
 history:
+  - lieux/khiasma
+  - manifestations/manifestation-1
   - manifestations
   - lieux
   - parcours
-  - labande
-  - manifestations/exposition-de-frondes
