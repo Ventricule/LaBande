@@ -27,14 +27,14 @@
 			}
 			return color
 		};
-
+/*
 		$('nav').find('li').each(function(){
 			$(this).css('background-color', colors( $(this).parent().attr('id') ));
 			if ($(this).brightness() == 'dark'){
 				$(this).css('color', '#FFFFFF');
 			}
-		});
-
+		}); 
+*/
 		var menu = new Bande($('#bande1'));
 		var submenu = new Bande($('#bande2'));
 		var activebox = new Bande($('#bande3'));
@@ -56,6 +56,7 @@
 				slideToClickedSlide: true,
 				mousewheelControl: true,
 				//hashnav: true,
+				direction: 'vertical',
 				speed: mySpeed,
 				resistanceRatio : 0.8,
 				loop: true,
@@ -140,7 +141,7 @@
 				anchor = $("#"+hash);
 				if(anchor.length){
 					swiping = true;
-					$('html,body').animate({scrollTop: anchor.offset().top - 80},750, function() {
+					$('html,body').animate({scrollTop: anchor.offset().top - 10},750, function() {
 						swiping = false;
 					});
 				};

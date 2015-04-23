@@ -147,31 +147,28 @@ p {
 /* Navigation
 -------------------------------------------------- */
 nav{
-	width: 320px;
-	height: 80px;
+	width: 70px;
+	height: 100%;
 	z-index: 99999999;
 	position: fixed;
-	left: 40px;
 }
-#shadow{
-	position: fixed;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-	height: 80px;
-	width: 100%;
-	z-index: 9999;
-}
-
 #bande1, #bande2{
-	height: auto;
-	width: 320px;
+	width: 35px;
+	height: 320px;
     cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
 	overflow: visible;
+	line-height: 35px;
+	font-size: 16px;
+	margin: 0;
+	position: absolute;
+}
+#bande1 {
 }
 #bande2 {
-	top: 40px;
+	left: 35px
 }
 
  /* (Optional) Apply a "closed-hand" cursor during drag operation. */
@@ -185,28 +182,34 @@ nav li {
 }
 
 #menu {
-	background: red;
+	background: white;
 }
 #menu, #submenu{
-	width: 100000px;
 	clear: both;
 	overflow: hidden;
+	top: -120px;
+	width: 35px;
+	height: auto;
 }
 #menu .active {
 }
 #menu li, #submenu li {
 	list-style: none;
-	float: left;
 	position: relative;
-	padding: .6rem 1em;
 	border: 0;
-	text-align: center;
+	text-align: right;
+	height: 35px;
 	width: 320px;
+	-ms-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	margin-top: 280px;
+	margin-left: -144px;
+}
+#submenu {
+	background: white;
 }
 #submenu li {
-	width: 160px;
-	/*padding: .4rem;
-	border: 5px solid;*/
 }
 #menu li {
 	/*height: 41px;
@@ -223,7 +226,13 @@ nav li {
 #submenu a:hover {
 
 }
-
+#shadow {
+	position: fixed;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+	height: 42px;
+	width: 100%;
+	z-index: 999;
+}
 @media screen and (min-width: 40em) {
 	body {
 	}
@@ -284,13 +293,14 @@ h1 a, h2 a, h3 a, h4 a {
 
 .main {
 	padding-bottom: 1em;
-	margin: 82px 0 0 40px;
+	margin: 0 0 0 70px;
 	width: 320px;
 	background: #fff;
 	position: absolute;
 	top: 0;
 	z-index: 999;
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+	padding-left: 10px;
 }
 .main hr {
 	margin: 3em 0;
