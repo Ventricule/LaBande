@@ -1,4 +1,4 @@
-Title: Manifestation #1
+Title: Manifestation #4
 
 ----
 
@@ -6,7 +6,7 @@ Text:
 
 ----
 
-Lieu: 
+Lieu: khiasma
 
 ----
 
@@ -18,8 +18,8 @@ Location-name:
 
 ----
 
-Date: 
+Date: 2015-04-18
 
 ----
 
-Time: 10:00
+Time: 13:00

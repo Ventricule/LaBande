@@ -15,6 +15,7 @@ fields:
 	time:
 		label: Heure
 		type: time
+		interval: 15
 		width: 1/2
 	text:
 		label: Text
@@ -32,9 +33,9 @@ fields:
 		type:  select
 		default: khiasma
 		options: query
-			query:
-				page: lieux
-				fetch: children
+		query:
+			page: lieux
+			fetch: children
 	ou:
 		label: ou
 		type: info

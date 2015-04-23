@@ -8,8 +8,8 @@ language: fr
 role: admin
 token: ffde6f36324443b978de2d8b44f44f191886321a
 history:
-  - lieux/khiasma
+  - manifestations/manifestation-4
+  - manifestations/manifestation-3
+  - manifestations/manifestation-2
   - manifestations/manifestation-1
-  - manifestations
-  - lieux
-  - parcours
+  - lieux/khiasma
