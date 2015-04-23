@@ -1,5 +1,5 @@
 <?php foreach($pages->visible() as $p): ?>
-	<div class="rubrique-container" data-hash="<?php echo $p->hash() ?>" data-id="<?php echo $p->id() ?>" > <!-- style="background-color:<?php echo $p->color() ?>" -->
+	<div class="rubrique-container" data-hash="<?php echo $p->hash() ?>" data-id="<?php echo $p->id() ?>"  > <!-- style="background-color:<?php echo $p->color() ?>" -->
 		<h2><?php echo $p->title()->html() ?></h2>
 		<ul>
 			<?php foreach($p->children() as $child): ?>

@@ -6,4 +6,4 @@ Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod te
 
 ----
 
-Color: #403dab
+Color: #8abbff
