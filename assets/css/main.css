@@ -150,9 +150,9 @@ nav{
 	height: 100%;
 	z-index: 99999999;
 	position: fixed;
+	background-color: white;
 }
 #bande1, #bande2{
-	width: 35px;
 	height: 320px;
     cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
@@ -180,15 +180,11 @@ nav{
 nav li {
 }
 
-#menu {
-	background: white;
-}
 #menu, #submenu{
 	clear: both;
 	overflow: hidden;
-	top: -120px;
-	width: 35px;
 	height: auto;
+	white-space: nowrap;
 }
 #menu .active {
 }
@@ -196,18 +192,25 @@ nav li {
 	list-style: none;
 	position: relative;
 	border: 0;
-	text-align: right;
-	height: 35px;
-	width: 320px;
-	-ms-transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
+}
+
+.box{
+	position: relative;
+	width: auto;
+	display: inline-block;
+}
+.box:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+.box span {
 	transform: rotate(-90deg);
-	margin-top: 280px;
-	margin-left: -144px;
+	display: block;
+	transform-origin: 0 0;
+	padding: 0 20px;
 }
-#submenu {
-	background: white;
-}
+
 #submenu li {
 }
 #menu li {
