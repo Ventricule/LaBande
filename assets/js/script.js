@@ -27,6 +27,9 @@
 			}
 			return color
 		};
+		
+		var window_h = $(window).height();  
+		$('#menu li').width(window_h/4);
 
 		$('nav').find('li').each(function(){
 			$(this).css('background-color', colors( $(this).parent().attr('id') ));
@@ -35,12 +38,12 @@
 			}
 		});
 
-		var menu = new Bande($('#bande1'));
-		var submenu = new Bande($('#bande2'));
+		var menu = new Bande($('#bande1'), 'horizontal');
+		var submenu = new Bande($('#bande2'), 'vertical');
 		var activebox = new Bande($('#bande3'));
     
 
-		function Bande(container) {
+		function Bande(container, direction) {
 			this.container = container;
 			var parent = container.find('ul'), childs = container.find('ul > li'), listLength = childs.length;
 			var activeSlide, activeChild, direction, mySpeed = 500;
@@ -52,6 +55,7 @@
 						childs.clone().appendTo(parent);
 					};
 				},
+				direction: direction,
 				slidesPerView: 'auto',
 				slideToClickedSlide: true,
 				mousewheelControl: true,

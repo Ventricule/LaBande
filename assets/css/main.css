@@ -147,11 +147,7 @@ p {
 /* Navigation
 -------------------------------------------------- */
 nav{
-	width: 320px;
-	height: 80px;
-	z-index: 99999999;
-	position: fixed;
-	left: 40px;
+
 }
 #shadow{
 	position: fixed;
@@ -170,8 +166,17 @@ nav{
     cursor: -webkit-grab;
 	overflow: visible;
 }
+#bande1 {
+	position: fixed;
+	z-index: 99999;
+	transform: rotate(-90deg);
+	transform-origin: 0 0;
+}
 #bande2 {
-	top: 40px;
+	top: 0;
+	left: 40px;
+	position: fixed;
+	z-index: 9999;
 }
 
  /* (Optional) Apply a "closed-hand" cursor during drag operation. */
@@ -188,7 +193,6 @@ nav li {
 	background: red;
 }
 #menu, #submenu{
-	width: 100000px;
 	clear: both;
 	overflow: hidden;
 }
@@ -284,7 +288,7 @@ h1 a, h2 a, h3 a, h4 a {
 
 .main {
 	padding-bottom: 1em;
-	margin: 82px 0 0 40px;
+	margin: 0px 0 0 200px;
 	width: 320px;
 	background: #fff;
 	position: absolute;

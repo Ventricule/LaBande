@@ -38,4 +38,3 @@
 		</ul>
 	</div> -->
 </nav> 
-<div id="shadow"></div>
