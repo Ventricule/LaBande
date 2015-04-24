@@ -88,7 +88,7 @@ img {
 -------------------------------------------------- */
 a {
 	text-decoration: none;
-	transition: color .3s, background .3s, border .3s;
+	transition: color ..5s, background ..5s, border ..5s;
 }
 a:hover {
 }
@@ -196,13 +196,22 @@ nav li {
 	height: auto;
 	white-space: nowrap;
 }
-#menu .active, #submenu .active {
+#menu li.active, #submenu li.active {
 	background: white;
+	-webkit-transition: background .3s ease-in-out;
+	-moz-transition: background .3s ease-in-out;
+	-o-transition: background .3s ease-in-out;
+	transition: background .3s ease-in-out;
 }
 #menu li, #submenu li {
 	list-style: none;
 	position: relative;
 	border: 0;
+	background: #eee;
+	-webkit-transition: background .3s ease-in-out;
+	-moz-transition: background .3s ease-in-out;
+	-o-transition: background .3s ease-in-out;
+	transition: background .3s ease-in-out;
 }
 
 .box{
