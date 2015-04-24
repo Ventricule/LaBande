@@ -19,7 +19,11 @@ fields:
 		type:  textarea
 	manifestations:
 		label: Manifestations
-		type:  select
-		options: query
-			query:
-				page: manifestations
+		type: structure
+		entry: {{manifestation}}
+		fields:
+			manifestation:
+				type: select
+				options: query
+				query:
+					page: manifestations
