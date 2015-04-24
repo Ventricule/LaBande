@@ -192,6 +192,14 @@
 		function goTo (ref) {
 			// body...
 		}
+		
+		
+		/* Manifestations
+		---------------------------------------------- */
+		$('.manifestations .full').hide();
+		$('.manifestations .synth').click(function() {
+			$(this).siblings('.full').slideToggle('fast');
+		});
 
 
 		/* Map

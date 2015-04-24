@@ -42,6 +42,6 @@ fields:
 	location:
 		label: Emplacement
 		type: geolocation
-	location-name:
+	locationName:
 		label: Nom de l'emplacement
 		type: text
