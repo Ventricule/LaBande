@@ -11,7 +11,7 @@ Email:  support@getkirby.com
 	-ms-touch-action: none;
 	touch-action: none;
 }
-/* Source Sans Pro
+/* FONTS
 -------------------------------------------------- */
 @font-face {
 	font-family: 'Source Sans Pro';
@@ -60,6 +60,10 @@ Email:  support@getkirby.com
 		font-style: normal;
 
 }
+@font-face {
+		font-family: 'try';
+		src: local("Karla-Regular")
+}
 /* Reset
 -------------------------------------------------- */
 *, *:before, *:after {
@@ -74,6 +78,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, main, nav, section, summary {
 	display: block;
 }
+li, ul, ol {
+	list-style-type: none;
+}
 
 
 /* Pix
@@ -81,16 +88,6 @@ footer, header, hgroup, main, nav, section, summary {
 img {
 	display: block;
 	max-width: 100%;
-}
-
-
-/* Links
--------------------------------------------------- */
-a {
-	text-decoration: none;
-	transition: color ..5s, background ..5s, border ..5s;
-}
-a:hover {
 }
 
 
@@ -121,6 +118,7 @@ body, a {
 p {
  color: #422222;
 }
+
 /* Header
 -------------------------------------------------- */
 .header {
@@ -138,7 +136,52 @@ p {
 	position: absolute;
 	left: -20px;
 	top: 90px;
+}
 
+/* Links
+-------------------------------------------------- */
+a {
+	text-decoration: none;
+	transition: color ..5s, background ..5s, border ..5s;
+}
+a:hover {
+}
+
+/* Headings
+-------------------------------------------------- */
+h1 {
+	font-size: 2rem;
+	line-height: 1.5rem;
+	font-weight: 400;
+	margin-bottom: .5rem;
+}
+h2 {
+	font-size: 2rem;
+	line-height: 1.5rem;
+	font-weight: 300;
+	margin-bottom: .5rem;
+}
+h3 {
+	font-size: 1.4rem;
+	line-height: 1.5rem;
+	font-weight: 400;
+	margin: 1.5em 0;
+}
+h4 {
+	font-size: 1.125rem;
+	font-weight: 400;
+	line-height: 1.5rem;
+	margin-bottom: .5em;
+}
+h5 {
+	font-size: .9rem;
+	font-weight: 400;
+	line-height: 1.5em;
+	margin-bottom: .5em;
+}
+h1 a, h2 a, h3 a, h4 a {
+	color: inherit;
+	border: 0 !important;
 }
 
 
@@ -146,73 +189,61 @@ p {
 /* Navigation
 -------------------------------------------------- */
 nav{
-	width: 70px;
-	height: 100%;
-	z-index: 99999999;
 	position: fixed;
-	background-color: #eee;
-	/*background-color: white;*/
-}
-img#arrow {
-  position: fixed;
-  left: -19px;
-  top: 10px;
-  z-index: 99999999999999;
 }
 #bande1, #bande2{
 	height: 100%;
 	width: 35px;
-    cursor: move; /* fallback if grab cursor is unsupported */
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
+	cursor: move;
+	cursor: ns-resize;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 	overflow: visible;
 	line-height: 35px;
 	font-size: 16px;
 	margin: 0;
 	position: absolute;
-	border-right: 1px solid;
+	/*border-right: 1px solid;*/
 	top: -1px;
+	white-space: nowrap;
 }
 #bande1 {
 }
 #bande2 {
-	left: 35px
+	left: 35px;
 }
-
- /* (Optional) Apply a "closed-hand" cursor during drag operation. */
 #bande1:active, #bande2:active { 
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
 
-nav li {
+#menu, #submenu{
+	height: auto;
+}
+#submenu li {
+	background-color: #3C1E1E;
+	color: #fff;
+}
+#submenu li.active {
+	background-color: white;
+	color: #000;
+	border: 0;
 }
 
-#menu, #submenu{
-	clear: both;
-	overflow: hidden;
-	height: auto;
-	white-space: nowrap;
-}
-#menu li.active, #submenu li.active {
-	background: white;
-	-webkit-transition: background .3s ease-in-out;
-	-moz-transition: background .3s ease-in-out;
-	-o-transition: background .3s ease-in-out;
-	transition: background .3s ease-in-out;
-}
 #menu li, #submenu li {
 	list-style: none;
 	position: relative;
 	border: 0;
-	background: #eee;
 	-webkit-transition: background .3s ease-in-out;
 	-moz-transition: background .3s ease-in-out;
 	-o-transition: background .3s ease-in-out;
 	transition: background .3s ease-in-out;
+	/* Y'a une ligne d'1px sous le premier bouton du menu. Je comprend pas d'où ça vient */
+	margin-bottom: -1px;
 }
+
 
 .box{
 	position: relative;
@@ -229,33 +260,9 @@ nav li {
 	display: block;
 	transform-origin: 0 0;
 	padding-right: 32px;
-	border-right: 1px solid black;
+	/*border-right: 1px solid black;*/
 }
 
-#submenu li {
-}
-#menu li {
-	/*height: 41px;
-	padding: .3rem;
-	border: 5px solid;*/
-}
-#submenu:before {
-
-}
-#submenu li {
-}
-#submenu a {
-}
-#submenu a:hover {
-
-}
-#shadow {
-	position: fixed;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-	height: 42px;
-	width: 100%;
-	z-index: 999;
-}
 @media screen and (min-width: 40em) {
 	body {
 	}
@@ -273,150 +280,137 @@ nav li {
 }
 
 
-/* Headings
--------------------------------------------------- */
-h1 {
-	font-size: 2rem;
-	line-height: 1.25em;
-	font-weight: 400;
-	margin-bottom: .5em;
-}
-h2 {
-	font-size: 2rem;
-	line-height: 1.25em;
-	font-weight: 300;
-	margin-bottom: .5em;
-}
-h3 {
-	font-size: 1.4rem;
-	line-height: 1.5em;
-	font-weight: 400;
-	margin-bottom: .5em;
-}
-h4 {
-	font-size: 1.125rem;
-	font-weight: 400;
-	line-height: 1.5em;
-	margin-bottom: .5em;
-}
-h1 a, h2 a, h3 a, h4 a {
-	color: inherit;
-	border: 0 !important;
-}
-
-
-
 /* Main
 -------------------------------------------------- */
-#map{
-	height: 100%;
-	width: 100%;
-	position: fixed;
-}
 
-.main {
-	padding-bottom: 1em;
-	margin: 0 0 0 70px;
+/* placement */
+main {
 	width: 28%;
 	min-width: 320px;
 	background: #fff;
 	position: absolute;
 	top: 0;
+	left: 70px;
 	z-index: 999;
 	border-right: 1px solid black;
 	/*box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);*/
 }
-.main p,
-.main h1,
-.main h2,
-.main h4,
-.main h3 {
-	padding-left: .5rem;
+main hr {
+	margin-bottom: 3rem;
+	height: 1px;
+	background-color: rgba(0,0,0,0.2);
 }
-.main hr {
-	margin: 3rem 0;
-	height: 2px;
-	background: #ddd;
-}
-.main p,
-.main figure,
-.main ul,
-.main ol {
+
+/* contenu */
+main p,
+main h1,
+main h2,
+main h3,
+main h4,
+main figure,
+main ul,
+main ol {
 	margin: 1.5rem 0;
 }
-.main a {
+main a {
 }
-.main a:hover {
+main a:hover {
 }
-.rubrique > li {
+main .content > ul {
+	margin: 0;
+}
+main .content > ul > li {
 	margin:0;
 	padding:0;
+	padding-bottom: 3rem;
 }
-.manifestations .full {
-	margin: 1.5rem 0;
-}
-.main figure.head {
-	margin: 0 0 1.5rem 0;
+main .content > ul > li:first-child {
+	padding-top: 1.5rem;
 }
 
-/* Text blocks */
-.text ul,
-.text ol {
+/* Images */
+main figure.head {
+	margin: 0;
 }
-li {
-	list-style: none;
-}
-.timeline{
-	width: 40px;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	z-index: -1;
-}
-
-/* Colonne
--------------------------------------------------- */
-.rubrique-container img {
+main figure.head img {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	filter: gray;
 	filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
 }
-.rubrique-container {
+
+/* Texte */
+.entry-content {
+	margin: 0 1rem;
 	padding: 1.5rem 0;
+	position: relative;
 }
-.rubrique-title {
-	font-size: 15px;
-	line-height: 31px;
-	font-weight: 300;
-	margin-bottom: 41px;
-	border: 5px solid;
-	height: 41px;
-	text-align: center;
-	background: #FFc;
+.entry-title {
+	margin: 0;
+}
+/* Text blocks */
+.text ul,
+.text ol,
+.text li {
+	list-style: none;
 }
 
-.manifestations {
-	padding: .5rem;
-	margin: 0;
-	border-top: 1px solid;
-}
-.manifestations .synth {
-	cursor: ns-resize;
-	margin: 0;
-}
+/* pictogrammes */
 main .circle {
-	display: inline-block;
-	width: 1rem;
-	height: 1rem;
+	position: absolute;
+	top: 1.5rem;
+	margin-top: 6px;
+	right: 0;
+	width: 20px;
+	height: 20px;
 	background-color: #FF8C00;
 	border-radius: 1rem;
-	margin-right: 2rem;
 }
-main
+
+/* Liste de manifestations */
+.manifestations-summary>h4 {
+	margin-bottom: .5rem;
+}
+.manifestations-summary>li {
+	padding: .5rem 1rem;
+	margin: 0 -1rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.manifestations-summary>li:last-child {
+	/*border-bottom: 1px solid;*/
+}
+.manifestations-summary>li .synth {
+	cursor: ns-resize;
+	margin: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.manifestations-summary>li .full-text {
+	margin: 1.5rem 0;
+}
+.manifestations-summary .past-entries {
+	color: rgba(0, 0, 0, 0.4);
+}
+.manifestations-summary .past-entries .icon {
+	font-size: 20px;
+	line-height: 0;
+	vertical-align: middle;
+}
+
+
 
 /* Utils
 -------------------------------------------------- */
+.collapse {
+	margin: 0 !important;
+}
+.foldable {
+	cursor: ew-resize;
+}
+.hidden {
+	display: none;
+}
 .cross {
   width: 1rem;
 	height: 1rem;
@@ -452,5 +446,5 @@ main
 
 /* Map
 -------------------------------------------------- */
-#map { position:fixed; top:0; bottom:0; width:100%; }
-
+#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; }
+.mapbox-logo {	display: none !important; }

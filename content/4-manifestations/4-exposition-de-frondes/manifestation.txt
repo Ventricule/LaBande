@@ -2,15 +2,7 @@ Title: Exposition de frondes
 
 ----
 
-Year: 
-
-----
-
 Text: 
-
-----
-
-Tags: 
 
 ----
 
@@ -22,4 +14,12 @@ Location: 48.875725845020156,2.395247745849474
 
 ----
 
-Location-name: Rue de Belleville
+Date: 2015-08-15
+
+----
+
+Time: 20:45
+
+----
+
+Locationname: 

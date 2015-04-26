@@ -14,6 +14,9 @@ fields:
 	end_date:
 		label: Date de fin
 		type: date
+	color:
+		label: Couleur
+		type: color
 	text:
 		label: Présentation
 		type:  textarea

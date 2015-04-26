@@ -6,10 +6,10 @@ password: >
   $2a$10$3eHliB.b2mPl7XJZRbmGjuqNwxs3QT3qSdzAcqACk1BdTxi9qb8fa
 language: fr
 role: admin
-token: 11eb9b53928752fb736778058dfbba26d04c7ab5
+token: 2f16303c7bcbdc6e76d2a27e024123b81123085d
 history:
-  - manifestations/manifestation-1
-  - manifestations/manifestation-4
-  - manifestations/manifestation-2
-  - manifestations/manifestation-3
+  - lieux/autre-lieu-2
   - lieux/khiasma
+  - lieux/autre-lieu-1
+  - manifestations/exposition-de-frondes
+  - manifestations/project-c

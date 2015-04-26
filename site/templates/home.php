@@ -4,7 +4,7 @@
 	<?php snippet('menu') ?>
 	<main class="main" role="main">
 		<div class="content">
-			<?php snippet('manifestations') ?>
+			<?php snippet('content') ?>
 		</div>
 	<?php snippet('footer') ?>
 	<div class="timeline"></div>

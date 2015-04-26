@@ -12,6 +12,7 @@
 
 	<?php echo css(array(
 		'assets/css/main.css',
+		'assets/css/entypo.css',
 		'assets/swiper/css/swiper.min.css',
     'https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css'
 	)) ?>

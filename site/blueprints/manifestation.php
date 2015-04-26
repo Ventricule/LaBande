@@ -20,6 +20,14 @@ fields:
 	text:
 		label: Text
 		type:  textarea
+	price:
+		label: Tarif (ou Entrée libre)
+		type: text
+		width: 1/2
+	transport:
+		label: Transports
+		type: text
+		width: 1/2
 	emplacement:
 		label: Géographie
 		type: headline

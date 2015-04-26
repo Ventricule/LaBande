@@ -2,14 +2,6 @@ Title: La vie, la vraie
 
 ----
 
-Year: 2012
-
-----
-
-Tags: stuff
-
-----
-
 Text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
 
 ----
@@ -22,4 +14,12 @@ Location: 48.8575259,2.4272000999999364
 
 ----
 
-Location-name: 
+Date: 2015-07-18
+
+----
+
+Time: 16:30
+
+----
+
+Locationname: 
