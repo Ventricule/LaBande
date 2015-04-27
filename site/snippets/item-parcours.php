@@ -1,6 +1,6 @@
 <h3 class="entry-title" ><a href="<?php echo $entry->url() ?>"><?php echo $entry->title()->html() ?></a></h3>
 
-<div class="circle" style="background-color:<?php echo $entry->color() ?>"></div>
+<div class="circle icon-right-open-big" style="background-color:<?php echo $entry->color() ?>"></div>
 
 <h5>
 <?php 

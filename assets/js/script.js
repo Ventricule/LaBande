@@ -136,7 +136,6 @@ $(document).ready(function(){
 				topId = $('.top').attr('id');
 				$('.item').removeClass('top').each(function() {
 					if ( $(this).offset().top > cutoff - parseInt($(this).height()) ) {
-						console.log($(this).offset().top);
 						$(this).addClass('top');
 						return false; // stops the iteration after the first one on screen
 					}
@@ -150,10 +149,9 @@ $(document).ready(function(){
 					direction = "prev";
 				}
 				if (topId != menuId && topId != oldId){
-					activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)'); //:not(.duplicate)
+					activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)');
 					oldId = topId;
 					submenu.swiper.slideTo(activeSlide.index(), 1000, false);
-					console.log('bang');
 					// loop mode : update !
 					//slideMenu(submenu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 					slideMenu(menu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
@@ -172,9 +170,14 @@ $(document).ready(function(){
 
 	/* Manifestations
 	---------------------------------------------- */
-	$('.manifestations-summary .full-text').hide();
+	$('.manifestations-summary .full-text').slideUp(0);
 	$('.manifestations-summary .synth').click(function() {
-		$(this).siblings('.full-text').slideToggle('fast');
+		if ($(this).hasClass('open')){
+			$(this).removeClass('open').siblings('.full-text').slideUp('fast');
+		} else {
+			$('.manifestations-summary .synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
+			$(this).addClass('open').siblings('.full-text').slideDown('fast');
+		}
 	});
 
 

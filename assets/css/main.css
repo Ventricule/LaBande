@@ -362,12 +362,20 @@ main figure.head img {
 main .circle {
 	position: absolute;
 	top: 1.5rem;
-	margin-top: 6px;
+	margin-top: -5px;
 	right: 0;
-	width: 20px;
-	height: 20px;
+	width: 35px;
+	height: 35px;
 	background-color: #FF8C00;
-	border-radius: 1rem;
+	border-radius: 35px;
+	text-align: center;
+}
+main .circle:before {
+	color: white;
+	font-size: 22px;
+	line-height: 34px;
+	margin: 0;
+	padding-left: 1px;
 }
 
 /* Liste de manifestations */
@@ -390,7 +398,6 @@ main .circle {
 	overflow: hidden;
 }
 .manifestations-summary>li .full-text {
-	margin: 1.5rem 0;
 }
 .manifestations-summary .past-entries {
 	color: rgba(0, 0, 0, 0.4);
