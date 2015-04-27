@@ -8,7 +8,7 @@
 $(document).ready(function(){
 	
 	var wh = $(window).height();
-	$("#menu>li").height( wh / 4 );
+	//$("#menu>li").height( wh / 5 );
 
 	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
 
