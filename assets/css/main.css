@@ -192,7 +192,7 @@ nav{
 	position: fixed;
 	width: 70px;
 	height: 100%;
-	z-index: 99999999;
+	z-index: 999;
 
 }
 #bande1, #bande2{
@@ -296,7 +296,6 @@ main {
 	top: 0;
 	left: 70px;
 	z-index: 999;
-	border-right: 1px solid black;
 	/*box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);*/
 }
 main hr {
