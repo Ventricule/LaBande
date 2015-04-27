@@ -5,8 +5,11 @@ pages: true
 files: false
 fields:
   title:
-    label: Title
+    label: Titre
     type:  text
   text:
-    label: Text
+    label: Texte
     type:  textarea
+	color:
+		label: Couleur
+		type: color
