@@ -6,7 +6,7 @@ password: >
   $2a$10$3eHliB.b2mPl7XJZRbmGjuqNwxs3QT3qSdzAcqACk1BdTxi9qb8fa
 language: fr
 role: admin
-token: 2f16303c7bcbdc6e76d2a27e024123b81123085d
+token: b63f076693c6f2fbaf6aee57360c1a66d6820ac6
 history:
   - lieux/autre-lieu-2
   - lieux/khiasma
