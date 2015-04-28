@@ -1,7 +1,6 @@
 
 <nav  role="navigation">
 	<div id="bande1" class="swiper-container">
-
 		<ul id="menu" class="swiper-wrapper">
 			<?php foreach($pages->visible() as $p): ?>
 			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-id="<?php echo $p->id() ?>" style="background-color:<?php echo $p->color() ?>">
@@ -28,4 +27,5 @@
 			<?php endforeach ?>
 		</ul>
 	</div>
+	<div id="prev"></div>
 </nav> 

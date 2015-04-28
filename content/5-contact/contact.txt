@@ -2,7 +2,7 @@ Title: Contact
 
 ----
 
-Text:
+Text: 
 
 ## Get in touch
 
@@ -17,3 +17,6 @@ Text:
 - Follow Bastian on Twitter (twitter: @bastianallgeier)
 - Follow Sascha on Twitter (twitter: @sashtown)
 
+----
+
+Color: #ededed

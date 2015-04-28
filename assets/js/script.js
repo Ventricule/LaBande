@@ -7,11 +7,17 @@
 
 $(document).ready(function(){
 	
-	var wh = $(window).height();
-	//$("#menu>li").height( wh / 5 );
+	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
+
+	$('#menu').find('li').each( function(){
+		oldH += $(this).height();
+	});
+	var pad = Math.ceil((winH - oldH)/(menuL*2));
+	if (pad > 0){
+		$("#menu>li").css('padding-top', pad).css('padding-bottom', pad)
+	};
 
 	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
-
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 	var activebox = new Bande($('#bande3'));
@@ -27,7 +33,9 @@ $(document).ready(function(){
 			onInit: function(){
 				if (listLength <= 5){
 					childs.clone().appendTo(parent);
+					console.log('init');
 				};
+				direction = 'prev';
 			},
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
@@ -40,7 +48,8 @@ $(document).ready(function(){
 			loopedSlides: listLength,
 			slideActiveClass: 'active',
 			slideDuplicateClass: 'duplicate',
-			runCallbacksOnInit: false,
+			prevButton: '.swiper-button-prev',
+			runCallbacksOnInit: false,	
 			onSlideChangeStart: function(swiper){
 				var old = $(swiper.wrapper).find('.active');
 				swiper.update();
@@ -56,6 +65,7 @@ $(document).ready(function(){
 
 				swiper.update();
 				slideMenu(swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));  
+				console.log('slide');
 			},
 			onTransitionEnd: function(swiper){
 				var activeSlide = $(swiper.wrapper).find('.active');
@@ -76,6 +86,7 @@ $(document).ready(function(){
 			};
 
 			if( ! parentHash ){ 
+				console.log('noparent');
 				activeChild = activeSlide, activeSlide = oldChild;
 				var hash = newChild.attr('data-hash');
 			} else { 
@@ -104,10 +115,11 @@ $(document).ready(function(){
 							submenu.swiper.slideTo(parseInt($(submenu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+submenu.listLength, 0, false);
 						}, 1000);
 					} else {
+						console.log(newChild);
 						submenu.swiper.slideTo(newChild.index(), 1000, false);
 					}
+					submenu.swiper.update();
 				}
-				submenu.swiper.update();
 			}
 			if (scrolling === false ){ 
 				slideColumn(hash);
@@ -130,7 +142,7 @@ $(document).ready(function(){
 				clearTimeout($.data(this, 'scrollTimer'));
 				$.data(this, 'scrollTimer', setTimeout(function() {
 					scrolling = false;
-				}, 750));
+				}, 1000));
 
 				var cutoff = $(window).scrollTop();
 				topId = $('.top').attr('id');
@@ -140,7 +152,6 @@ $(document).ready(function(){
 						return false; // stops the iteration after the first one on screen
 					}
 				});
-
 				var st = $(this).scrollTop();
 				var menuId = $('#submenu').find('.active').attr('data-hash');
 				if (st > lastScrollTop){
@@ -153,30 +164,38 @@ $(document).ready(function(){
 					oldId = topId;
 					submenu.swiper.slideTo(activeSlide.index(), 1000, false);
 					// loop mode : update !
-					//slideMenu(submenu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 					slideMenu(menu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
+					console.log('scroll');
 					lastScrollTop = st;
 				}
 			}
 		});
+		$('#prev').click(function() {
+			submenu.swiper.slidePrev(true, 600);
+		});
 
 	};
 
-
-	function goTo (ref) {
-		// body...
-	}
 
 
 	/* Manifestations
 	---------------------------------------------- */
 	$('.manifestations-summary .full-text').slideUp(0);
 	$('.manifestations-summary .synth').click(function() {
+		var $this = $(this);
 		if ($(this).hasClass('open')){
 			$(this).removeClass('open').siblings('.full-text').slideUp('fast');
 		} else {
 			$('.manifestations-summary .synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
-			$(this).addClass('open').siblings('.full-text').slideDown('fast');
+			$this.addClass('open').siblings('.full-text').slideDown('fast');
+            setTimeout(function () {
+                $('html,body').stop(false, false).animate({
+                    'scrollTop': $this.offset().top - 20
+                }, {
+                    duration: 310,
+                    queue: false
+                });
+            }, 240);
 		}
 	});
 
