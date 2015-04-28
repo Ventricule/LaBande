@@ -213,6 +213,7 @@ nav{
 	position: absolute;
 	/*border-right: 1px solid;*/
 	white-space: nowrap;
+	top: -1px;
 }
 #prev{
 	position : absolute;
@@ -254,6 +255,7 @@ nav{
 	-moz-transition: background .3s ease-in-out;
 	-o-transition: background .3s ease-in-out;
 	transition: background .3s ease-in-out;
+	margin-bottom:	-1px;
 }
 
 
