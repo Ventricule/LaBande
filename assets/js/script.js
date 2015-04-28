@@ -36,7 +36,7 @@ $(document).ready(function(){
 					console.log('init');
 				};
 				direction = 'prev';
-				setTimeout(function(){ swiper.update(true);}, 100);
+				setTimeout(function(){ swiper.update(true);}, 200);
 				console.log('yop');
 			},
 			slidesPerView: 'auto',
