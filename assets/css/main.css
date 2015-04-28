@@ -256,6 +256,7 @@ nav{
 	-o-transition: background .3s ease-in-out;
 	transition: background .3s ease-in-out;
 	margin-bottom:	-1px;
+	height: auto; /* safari */
 }
 
 
