@@ -138,7 +138,7 @@ $(document).ready(function(){
 				clearTimeout($.data(this, 'scrollTimer'));
 				$.data(this, 'scrollTimer', setTimeout(function() {
 					scrolling = false;
-				}, 1000));
+				}, 750));
 
 				var cutoff = $(window).scrollTop();
 				topId = $('.top').attr('id');
