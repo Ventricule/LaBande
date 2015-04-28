@@ -33,11 +33,10 @@ $(document).ready(function(){
 			onInit: function(swiper){
 				if (listLength <= 5){
 					childs.clone().appendTo(parent);
-					console.log('init');
 				};
-				direction = 'prev';
+				direction = 'next';
 				setTimeout(function(){ swiper.update(true);}, 300);
-				console.log('yop');
+				$('main .item').first().addClass('top');
 			},
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
@@ -64,10 +63,8 @@ $(document).ready(function(){
 				} else { 
 					direction = 'null';
 				};
-
 				swiper.update();
 				slideMenu(swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));  
-				console.log('onSlideChangeStart');
 			},
 			onTransitionEnd: function(swiper){
 				var activeSlide = $(swiper.wrapper).find('.active');
@@ -77,7 +74,6 @@ $(document).ready(function(){
 		});
 
 		function slideMenu(swiper, hash, parentHash) {
-			console.log('slidemenu');
 			var oldParent = $('#menu').find('li.active');	
 			var oldChild = $('#submenu').find('li.active');
 			if( direction == 'next' ){
@@ -87,9 +83,7 @@ $(document).ready(function(){
 				var newParent = oldParent.prevAll('li[data-hash='+parentHash+']').first()
 				var newChild = oldChild.prevAll('li[data-p-hash='+hash+'][data-num=1]').first();
 			};
-
 			if( ! parentHash ){ 
-				console.log('noparent');
 				activeChild = activeSlide, activeSlide = oldChild;
 				var hash = newChild.attr('data-hash');
 			} else { 
@@ -118,7 +112,6 @@ $(document).ready(function(){
 							submenu.swiper.slideTo(parseInt($(submenu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+submenu.listLength, 0, false);
 						}, 1000);
 					} else {
-						console.log(newChild);
 						submenu.swiper.slideTo(newChild.index(), 1000, false);
 					}
 					submenu.swiper.update();
@@ -130,7 +123,6 @@ $(document).ready(function(){
 		};
 
 		function slideColumn (hash) {
-			console.log('slide');
 			anchor = $("#"+hash);
 			if(anchor.length){
 				swiping = true;
@@ -141,7 +133,6 @@ $(document).ready(function(){
 		};
 
 		$(document).scroll(function(e) {	
-			console.log('scroll');		
 			if (swiping === false ){
 				scrolling = true; // scrolling the column
 				clearTimeout($.data(this, 'scrollTimer'));
@@ -170,8 +161,8 @@ $(document).ready(function(){
 					submenu.swiper.slideTo(activeSlide.index(), 1000, false);
 					// loop mode : update !
 					slideMenu(menu.swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
-					console.log('scroll');
 					lastScrollTop = st;
+
 				}
 			}
 		});
