@@ -9,14 +9,6 @@ $(document).ready(function(){
 	
 	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
 
-	$('#menu').find('li').each( function(){
-		oldH += $(this).height();
-	});
-	var pad = Math.ceil((winH - oldH)/(menuL*2));
-	if (pad > 0){
-		$("#menu>li").css('padding-top', pad+1).css('padding-bottom', pad+1)
-	};
-
 	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
@@ -31,6 +23,16 @@ $(document).ready(function(){
 		this.listLength = listLength;
 		this.swiper = new Swiper(container, {
 			onInit: function(swiper){
+
+				// set #menu elements heights (padding) if elements.height is less than windows.height
+				$('#menu').find('li:not(.duplicate)').each( function(){
+					oldH += $(this).height();
+				});
+				var pad = Math.ceil((winH - oldH)/(menuL*2));
+				if (pad > 0){
+					$("#menu>li").css('padding-top', pad+1).css('padding-bottom', pad+1)
+				};
+
 				if (listLength <= 5){
 					childs.clone().appendTo(parent);
 				};
