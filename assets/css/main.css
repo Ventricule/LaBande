@@ -142,6 +142,9 @@ p {
 -------------------------------------------------- */
 a {
 	text-decoration: none;
+	-webkit-transition: color ..5s, background ..5s, border ..5s;
+	-ms-transition: color ..5s, background ..5s, border ..5s;
+	-o-transition: color ..5s, background ..5s, border ..5s;
 	transition: color ..5s, background ..5s, border ..5s;
 }
 a:hover {
@@ -193,10 +196,10 @@ nav{
 	width: 70px;
 	height: 100%;
 	z-index: 999;
-
+	-webkit-backface-visibility: hidden;
 }
 #bande1, #bande2{
-	height: 100%;
+	height: 35px;
 	width: 35px;
 	cursor: move;
 	cursor: ns-resize;
@@ -209,8 +212,16 @@ nav{
 	margin: 0;
 	position: absolute;
 	/*border-right: 1px solid;*/
-	top: -1px;
 	white-space: nowrap;
+	top: -1px;
+}
+#prev{
+	position : absolute;
+	width: 70px;
+	height: 40px;
+	top: 0;
+	z-index: 2;
+	cursor: n-resize;
 }
 #bande1 {
 }
@@ -244,8 +255,8 @@ nav{
 	-moz-transition: background .3s ease-in-out;
 	-o-transition: background .3s ease-in-out;
 	transition: background .3s ease-in-out;
-	/* Y'a une ligne d'1px sous le premier bouton du menu. Je comprend pas d'où ça vient */
-	margin-bottom: -1px;
+	margin-bottom:	-1px;
+	height: auto; /* safari */
 }
 
 
@@ -260,27 +271,27 @@ nav{
 	padding-top: 100%; 	/* initial ratio of 1:1*/
 }
 .box span {
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
 	transform: rotate(-90deg);
-	display: block;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
 	transform-origin: 0 0;
+	display: block;
 	padding-right: 32px;
 	/*border-right: 1px solid black;*/
 }
 
-@media screen and (min-width: 40em) {
-	body {
+@media screen and (max-width: 500px) {
+	main{
+		left: 35px !important;
 	}
-	.logo {
+	#bande2{
+		opacity: 0;
 	}
-	#menu {
-	}
-	#menu > li {
-	}
-	#menu > li > a {
-	}
-	#menu > li:hover #submenu {
-		display: block;
-	}
+
 }
 
 
@@ -290,13 +301,13 @@ nav{
 /* placement */
 main {
 	width: 28%;
-	min-width: 320px;
+	min-width: 285px;
 	background: #fff;
 	position: absolute;
 	top: 0;
 	left: 70px;
 	z-index: 999;
-	/*box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);*/
+	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
 main hr {
 	margin-bottom: 3rem;
@@ -456,5 +467,5 @@ main .circle:before {
 
 /* Map
 -------------------------------------------------- */
-#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; }
+#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; -webkit-backface-visibility: hidden; }
 .mapbox-logo {	display: none !important; }
