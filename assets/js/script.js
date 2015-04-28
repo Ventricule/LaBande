@@ -181,6 +181,14 @@ $(document).ready(function(){
 		var $this = $(this);
 		if ($(this).hasClass('open')){
 			$(this).removeClass('open').siblings('.full-text').slideUp('fast');
+            setTimeout(function () {
+                $('html,body').stop(false, false).animate({
+                    'scrollTop': $this.closest('ul').offset().top - 20
+                }, {
+                    duration: 310,
+                    queue: false
+                });
+            }, 240);
 		} else {
 			$('.manifestations-summary .synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
 			$this.addClass('open').siblings('.full-text').slideDown('fast');

@@ -142,6 +142,9 @@ p {
 -------------------------------------------------- */
 a {
 	text-decoration: none;
+	-webkit-transition: color ..5s, background ..5s, border ..5s;
+	-ms-transition: color ..5s, background ..5s, border ..5s;
+	-o-transition: color ..5s, background ..5s, border ..5s;
 	transition: color ..5s, background ..5s, border ..5s;
 }
 a:hover {
@@ -265,9 +268,15 @@ nav{
 	padding-top: 100%; 	/* initial ratio of 1:1*/
 }
 .box span {
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
 	transform: rotate(-90deg);
-	display: block;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
 	transform-origin: 0 0;
+	display: block;
 	padding-right: 32px;
 	/*border-right: 1px solid black;*/
 }
