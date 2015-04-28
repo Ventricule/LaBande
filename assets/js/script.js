@@ -30,12 +30,13 @@ $(document).ready(function(){
 
 		this.listLength = listLength;
 		this.swiper = new Swiper(container, {
-			onInit: function(){
+			onInit: function(swiper){
 				if (listLength <= 5){
 					childs.clone().appendTo(parent);
 					console.log('init');
 				};
 				direction = 'prev';
+				swiper.update(true);
 			},
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
@@ -50,6 +51,9 @@ $(document).ready(function(){
 			slideDuplicateClass: 'duplicate',
 			prevButton: '.swiper-button-prev',
 			runCallbacksOnInit: false,	
+			onSetTranslate : function(swiper, translate){
+				console.log('onSetTranslate');
+			},
 			onSlideChangeStart: function(swiper){
 				var old = $(swiper.wrapper).find('.active');
 				swiper.update();
@@ -65,7 +69,7 @@ $(document).ready(function(){
 
 				swiper.update();
 				slideMenu(swiper, activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));  
-				console.log('slide');
+				console.log('onSlideChangeStart');
 			},
 			onTransitionEnd: function(swiper){
 				var activeSlide = $(swiper.wrapper).find('.active');
@@ -75,6 +79,7 @@ $(document).ready(function(){
 		});
 
 		function slideMenu(swiper, hash, parentHash) {
+			console.log('slidemenu');
 			var oldParent = $('#menu').find('li.active');	
 			var oldChild = $('#submenu').find('li.active');
 			if( direction == 'next' ){
@@ -127,6 +132,7 @@ $(document).ready(function(){
 		};
 
 		function slideColumn (hash) {
+			console.log('slide');
 			anchor = $("#"+hash);
 			if(anchor.length){
 				swiping = true;
@@ -136,7 +142,8 @@ $(document).ready(function(){
 			};
 		};
 
-		$(document).scroll(function(e) {			
+		$(document).scroll(function(e) {	
+			console.log('scroll');		
 			if (swiping === false ){
 				scrolling = true; // scrolling the column
 				clearTimeout($.data(this, 'scrollTimer'));
@@ -147,7 +154,7 @@ $(document).ready(function(){
 				var cutoff = $(window).scrollTop();
 				topId = $('.top').attr('id');
 				$('.item').removeClass('top').each(function() {
-					if ( $(this).offset().top > cutoff - parseInt($(this).height()) ) {
+					if ( $(this).offset().top > cutoff - parseInt($(this).height() - 50 ) ) {
 						$(this).addClass('top');
 						return false; // stops the iteration after the first one on screen
 					}

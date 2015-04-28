@@ -193,7 +193,7 @@ nav{
 	width: 70px;
 	height: 100%;
 	z-index: 999;
-
+	-webkit-backface-visibility: hidden;
 }
 #bande1, #bande2{
 	height: 35px;
@@ -455,5 +455,5 @@ main .circle:before {
 
 /* Map
 -------------------------------------------------- */
-#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; }
+#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; -webkit-backface-visibility: hidden; }
 .mapbox-logo {	display: none !important; }
