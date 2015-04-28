@@ -14,7 +14,7 @@ $(document).ready(function(){
 	});
 	var pad = Math.ceil((winH - oldH)/(menuL*2));
 	if (pad > 0){
-		$("#menu>li").css('padding-top', pad).css('padding-bottom', pad+1)
+		$("#menu>li").css('padding-top', pad+1).css('padding-bottom', pad+1)
 	};
 
 	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
