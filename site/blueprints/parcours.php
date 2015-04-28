@@ -20,13 +20,3 @@ fields:
 	text:
 		label: Présentation
 		type:  textarea
-	manifestations:
-		label: Manifestations
-		type: structure
-		entry: {{manifestation}}
-		fields:
-			manifestation:
-				type: select
-				options: query
-				query:
-					page: manifestations

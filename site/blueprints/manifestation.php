@@ -20,6 +20,16 @@ fields:
 	text:
 		label: Text
 		type:  textarea
+	parcours:
+		label: Parcours
+		type: structure
+		entry: {{parcours}}
+		fields:
+			parcours:
+				type: select
+				options: query
+				query:
+					page: parcours
 	price:
 		label: Tarif (ou Entrée libre)
 		type: text
