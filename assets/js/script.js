@@ -37,6 +37,7 @@ $(document).ready(function(){
 				};
 				direction = 'prev';
 				swiper.update(true);
+				console.log('yop');
 			},
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
@@ -51,9 +52,6 @@ $(document).ready(function(){
 			slideDuplicateClass: 'duplicate',
 			prevButton: '.swiper-button-prev',
 			runCallbacksOnInit: false,	
-			onSetTranslate : function(swiper, translate){
-				console.log('onSetTranslate');
-			},
 			onSlideChangeStart: function(swiper){
 				var old = $(swiper.wrapper).find('.active');
 				swiper.update();
