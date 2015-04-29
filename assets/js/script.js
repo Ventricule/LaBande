@@ -183,25 +183,25 @@ $(document).ready(function(){
 		var $this = $(this);
 		if ($(this).hasClass('open')){
 			$(this).removeClass('open').siblings('.full-text').slideUp('fast');
-            setTimeout(function () {
-                $('html,body').stop(false, false).animate({
-                    'scrollTop': $this.closest('ul').offset().top - 20
-                }, {
-                    duration: 310,
-                    queue: false
-                });
-            }, 240);
+			setTimeout(function () {
+				$('html,body').stop(false, false).animate({
+					'scrollTop': $this.closest('ul').offset().top - 20
+				}, {
+					duration: 310,
+					queue: false
+				});
+			}, 240);
 		} else {
 			$('.manifestations-summary .synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
 			$this.addClass('open').siblings('.full-text').slideDown('fast');
-            setTimeout(function () {
-                $('html,body').stop(false, false).animate({
-                    'scrollTop': $this.offset().top - 20
-                }, {
-                    duration: 310,
-                    queue: false
-                });
-            }, 240);
+			setTimeout(function () {
+				$('html,body').stop(false, false).animate({
+					'scrollTop': $this.offset().top - 20
+				}, {
+					duration: 310,
+					queue: false
+				});
+			}, 240);
 		}
 	});
 
@@ -261,15 +261,35 @@ $(document).ready(function(){
 	var markers = new L.MarkerClusterGroup({zoomToBoundsOnClick:false,showCoverageOnHover:false,animateAddingMarkers:true,maxClusterRadius:10});
 	
 	var featureLayer = L.mapbox.featureLayer()
-    .loadURL('/LaBande/api')
+	.loadURL('/LaBande/api')
 		.on('ready', initMarkers);
 	
+	var hashTagActive = "";	
 	function initMarkers() {
 		featureLayer.eachLayer(function(marker) {
 			marker.off('click');
-			marker.on('click', function() {
+			marker.on('click', function(e) {
+				
+				//e.preventDefault();   // FAIL !
+
 				//slideToUid(marker.feature.properties.uid);
 				location.hash = "#" + marker.feature.properties.hash;
+
+				if(hashTagActive != location.hash) { //this will prevent if the user click several times the same link to freeze the scroll.
+					//calculate destination place
+					var dest = 0;
+					if ($(location.hash).offset().top > $(document).height() - $(window).height()) {
+						dest = $(document).height() - $(window).height();
+					} else {
+						dest = $(location.hash).offset().top;
+					}
+					//go to destination
+					$('html,body').animate({
+						scrollTop: dest
+					}, 2000, 'swing');
+					hashTagActive = location.hash;
+				}
+
 			});
 			marker.setIcon(L.icon(marker.feature.properties.icon));
 			marker.bindLabel(marker.feature.properties.title, {className:'map-etiquette'})
@@ -299,20 +319,20 @@ jQuery.fn.brightness = function() {
   var bg_color, rgba, y;
   bg_color = this.css('background-color');
   if ((bg_color != null) && bg_color.length) {
-    rgba = bg_color.match(/^rgb(?:a)?\(([0-9]{1,3}),\s([0-9]{1,3}),\s([0-9]{1,3})(?:,\s)?([0-9]{1,3})?\)$/);
-    if (rgba != null) {
-      if (rgba[4] === '0') {
-        if (this.parent().length) return this.parent().brightness();
-      } else {
-        y = 2.99 * rgba[1] + 5.87 * rgba[2] + 1.14 * rgba[3];
-        if (y >= 1275) {
-          return 'light';
-        } else {
-          return 'dark';
-        }
-      }
-    }
+	rgba = bg_color.match(/^rgb(?:a)?\(([0-9]{1,3}),\s([0-9]{1,3}),\s([0-9]{1,3})(?:,\s)?([0-9]{1,3})?\)$/);
+	if (rgba != null) {
+	  if (rgba[4] === '0') {
+		if (this.parent().length) return this.parent().brightness();
+	  } else {
+		y = 2.99 * rgba[1] + 5.87 * rgba[2] + 1.14 * rgba[3];
+		if (y >= 1275) {
+		  return 'light';
+		} else {
+		  return 'dark';
+		}
+	  }
+	}
   } else {
-    if (this.parent().length) return this.parent().brightness();
+	if (this.parent().length) return this.parent().brightness();
   }
 };
