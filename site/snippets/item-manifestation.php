@@ -1,3 +1,4 @@
+			
 <h4 class="collapse" >
 	<span class="entry-date icon-calendar icon-medium"><?php echo $entry->date('d.m.y') ?></span> 
 	<span class="entry-time icon-clock icon-medium"><?php echo $entry->time() ?></span><br>

@@ -6,9 +6,13 @@
 		<div class="content">
 			<?php snippet('content') ?>
 		</div>
-	<?php snippet('footer') ?>
-	<div class="timeline"></div>
-
+		<?php snippet('footer') ?>
+		<div class="timeline"></div>
 	</main>
-	
-  <div id='map'></div>
+
+	<div id='map'></div>
+
+	<div id='splash'>
+		<div id="splashContainer"></div>
+		<div id="splashCross" class="icon-cancel"></div>
+	</div>

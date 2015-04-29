@@ -7,7 +7,9 @@ fields:
   title:
     label: Titre
     type:  text
-    width: 1/2
+  text:
+    label: Texte
+    type:  textarea
   number:
     label: Nombre d'événements à afficher
     type: number
