@@ -1,9 +1,9 @@
 <ul class="rubrique cf">
-  <?php $first=true; 
+<?php $first=true; 
 	foreach($pages->children() as $entry): ?>
-	  <li id="<?php echo $entry->hash() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
+		<li id="<?php echo $entry->hash() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
 			<?php if($image = $entry->images()->sortBy('sort', 'asc')->first()): ?>
-	      <figure class="head">
+				<figure class="head">
 					<a href="<?php echo $entry->url() ?>">
 						<img src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
 					</a>
@@ -26,7 +26,7 @@
 				endif;
 				?>
 			</div>
-	  </li>
-	  <?php $first=false;
+		</li>
+		<?php $first=false;
 	endforeach ?>
 </ul>
