@@ -1,22 +1,22 @@
 
-var siteFolder = "/LaBande";
+
 
 //----------------------------------------------
 //                FUNCTIONS
 //----------------------------------------------
 
 $(document).ready(function(){
-
+	
 	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
 
-	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId;
+	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('id'), oldId = topId;
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 	var activebox = new Bande($('#bande3'));
 	
-	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
+	var direction, activeSlide, activeChild;
 
-	function Bande(container, type) {
+	function Bande(container) {
 		this.container = container;
 		var parent = container.find('ul'), childs = container.find('ul > li'), listLength = childs.length;
 		var mySpeed = 500;
@@ -44,6 +44,7 @@ $(document).ready(function(){
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
 			mousewheelControl: true,
+			//hashnav: true,
 			direction: 'vertical',
 			speed: mySpeed,
 			resistanceRatio : 0.8,
@@ -54,34 +55,19 @@ $(document).ready(function(){
 			prevButton: '.swiper-button-prev',
 			runCallbacksOnInit: false,	
 			onSlideChangeStart: function(swiper){
-				var oldSlide = $(swiper.wrapper).find('.active');
+				var old = $(swiper.wrapper).find('.active');
 				swiper.update();
-				var activeSlide = $(swiper.wrapper).find('.active');
+				activeSlide = $(swiper.wrapper).find('.active');
 
-				if (oldSlide.index() < activeSlide.index() ) { 
+				if (old.index() < activeSlide.index() ) { 
 					direction = 'next';
-				} else if (oldSlide.index() > activeSlide.index() ) { 
+				} else if (old.index() > activeSlide.index() ) { 
 					direction = 'prev';
 				} else { 
-					direction = false;
+					direction = 'null';
 				};
-			
-				slideUid = activeSlide.attr('data-uid');
-				parentSlideUid = activeSlide.attr('data-parent-uid');
-				if(undefined != parentSlideUid) {
-					var rubrique = parentSlideUid,
-							item = slideUid,
-							url = siteFolder+'/'+rubrique+'/'+item,
-							slide = "item"
-				} else {
-					var rubrique = slideUid,
-							item = false,
-							url = siteFolder+'/'+rubrique,
-							slide = "rubrique";
-				}
-				if (rubrique != activeRubrique || item != activeItem && !scrolling) {
-					History.pushState({rubrique: rubrique, item:item, slideDirection:direction}, item , url);
-				}
+				swiper.update();
+				//slideMenu(activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 			},
 			onTransitionEnd: function(swiper){
 				var activeSlide = $(swiper.wrapper).find('.active');
@@ -91,68 +77,75 @@ $(document).ready(function(){
 		});
 		
 	};
-	
-	History.Adapter.bind(window,'statechange',function(){
-		var State = History.getState();
-		slideView(State.data.rubrique, State.data.item, State.data.slideDirection);
-	});
-	
-	function slideView(rubrique, item, slideDirection) {
-		if (item) {
-			slideSubMenuTo(item, slideDirection);
-			rubrique = submenu.container.find('.swiper-slide[data-uid="'+item+'"]').attr('data-parent-uid');
-			slideMenuTo(rubrique, slideDirection);
-			if(!scrolling) {
-				slideColumnTo(item);
-			}
-		} else if(rubrique) {
-			slideMenuTo(rubrique, slideDirection);
-			item = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+rubrique+'"]').attr('data-uid'); 
-			slideSubMenuTo(item, slideDirection);
-			if(!scrolling) {
-				slideColumnTo(item);
-			}
-		}
-		
-		function slideSubMenuTo(uid, direction) {
-			if ( uid != activeItem ) {
-				activeItem = uid;
-				if(direction=='prev') {
-					var slide = submenu.container.find('.swiper-slide.active').prevAll('li[data-uid="'+uid+'"]').first();
-				} else {
-					var slide = submenu.container.find('.swiper-slide.active').nextAll('li[data-uid="'+uid+'"]').first();
-				}
-				submenu.swiper.slideTo( slide.index(), 1000);
-			}
-		}
 
-		function slideMenuTo(uid, direction) {
-			if ( uid != activeRubrique ) {
-				activeRubrique = uid;
-				if(direction=='prev') {
-					var slide = menu.container.find('.swiper-slide.active').prevAll('.swiper-slide[data-uid="'+uid+'"]').first();
-				} else {
-					var slide = menu.container.find('.swiper-slide.active').nextAll('.swiper-slide[data-uid="'+uid+'"]').first();
-				}
-				menu.swiper.slideTo( slide.index(), 1000);
-			}
-		}
-		function slideColumnTo(uid) {
-			anchor = $("main li.item[data-uid='"+uid+"']");
-			if(anchor.length){
-				swiping = true;
-				$('html,body').animate({scrollTop: anchor.offset().top + 1},750, function() {
-					swiping = false;
-				});
-			};
+	function slideMenu(hash, parentHash) {
+		var oldParent = $('#menu').find('li.active');	
+		var oldChild = $('#submenu').find('li.active');
+		if( direction == 'next' ){
+			var newParent = oldParent.nextAll('li[data-hash='+parentHash+']').first()
+			var newChild = oldChild.nextAll('li[data-p-hash='+hash+']').first();
+		} else if (direction == 'prev'){	
+			var newParent = oldParent.prevAll('li[data-hash='+parentHash+']').first()
+			var newChild = oldChild.prevAll('li[data-p-hash='+hash+'][data-num=1]').first();
 		};
-	}		
+		if( ! parentHash ){ 
+			activeChild = activeSlide, activeSlide = oldChild;
+			var hash = newChild.attr('data-hash');
+		} else { 
+			activeChild = activeSlide, activeSlide = oldParent;
+			var hash = activeChild.attr('data-hash');
+		};
 
+		if( activeSlide.attr('data-id') !== activeChild.attr('data-id') ){
+			if (parentHash && menu) {
+				if(newParent.hasClass('duplicate')){
+					menu.swiper.slideTo(newParent.index(), 1000, false);
+					menu.swiper.update();
+					setTimeout(function() {
+						menu.swiper.slideTo(parseInt($(menu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+menu.listLength, 0, false);
+					}, 1000);
+				} else {
+					menu.swiper.slideTo(newParent.index(), 1000, false);
+				}
+				menu.swiper.update();
+			} else if (submenu) {
+				if(newChild.hasClass('duplicate')){
+					submenu.swiper.slideTo(newChild.index(), 1000, false);
+					submenu.swiper.update();
+					setTimeout(function() {
+						submenu.swiper.slideTo(parseInt($(submenu.swiper.wrapper).find('.active').attr('data-swiper-slide-index'))+submenu.listLength, 0, false);
+					}, 1000);
+				} else {
+					submenu.swiper.slideTo(newChild.index(), 1000, false);
+				}
+				submenu.swiper.update();
+			}
+		}
+		if (scrolling === false ){ 
+			slideColumn(hash);
+		};
+	};
 
-	$(document).scroll(function(e) {
+	function slideColumn(hash) {
+		anchor = $("#"+hash);
+		if(anchor.length){
+			swiping = true;
+			$('html,body').animate({scrollTop: anchor.offset().top + 1},750, function() {
+				swiping = false;
+			});
+		};
+	};
+
+	$(document).scroll(function(e) {	
 		if (swiping === false ){
+			scrolling = true; // scrolling the column
+			clearTimeout($.data(this, 'scrollTimer'));
+			$.data(this, 'scrollTimer', setTimeout(function() {
+				scrolling = false;
+			}, 750));
+
 			var cutoff = $(window).scrollTop();
-			topId = $('.top').attr('data-uid');
+			topId = $('.top').attr('id');
 			$('.item').removeClass('top').each(function() {
 				if ( $(this).offset().top > cutoff - parseInt($(this).height() - 50 ) ) {
 					$(this).addClass('top');
@@ -160,30 +153,22 @@ $(document).ready(function(){
 				}
 			});
 			var st = $(this).scrollTop();
-			var menuId = $('#submenu').find('.active').attr('data-uid');
+			var menuId = $('#submenu').find('.active').attr('data-hash');
 			if (st > lastScrollTop){
 				direction = "next";
 			} else {
 				direction = "prev";
 			}
-			
 			if (topId != menuId && topId != oldId){
-				activeSlide = submenu.container.find('li[data-uid='+topId+']:not(.duplicate)');
-				parentSlideUid = activeSlide.attr('data-parent-uid');
+				activeSlide = $('#submenu').find('li[data-hash='+topId+']:not(.duplicate)');
 				oldId = topId;
-				var rubrique = parentSlideUid,
-						item = topId,
-						url = siteFolder+'/'+rubrique+'/'+item,
-						slide = "item";
-				clearTimeout(scrolling);
-				scrolling = setTimeout(function(){
-					slideView('', item, direction) 
-					scrolling = false;
-				},100);
+				submenu.swiper.slideTo(activeSlide.index(), 1000, false);
+				// loop mode : update !
+				slideMenu(activeSlide.attr('data-hash'), activeSlide.attr('data-p-hash'));
 				lastScrollTop = st;
+
 			}
 		}
-		
 	});
 	$('#prev').click(function() {
 		submenu.swiper.slidePrev(true, 600);
@@ -283,12 +268,26 @@ $(document).ready(function(){
 		featureLayer.eachLayer(function(marker) {
 			marker.off('click');
 			marker.on('click', function() {
-				History.pushState({item:marker.feature.properties.uid, slideDirection:'next'}, marker.feature.properties.title , marker.feature.properties.uid);
+				//slideToUid(marker.feature.properties.uid);
+				//location.hash = "#" + marker.feature.properties.hash;
+				History.pushState({uid:marker.feature.properties.uid, hash:marker.feature.properties.hash}, marker.feature.properties.title , marker.feature.properties.uid);
 			});
 			marker.setIcon(L.icon(marker.feature.properties.icon));
 			marker.bindLabel(marker.feature.properties.title, {className:'map-etiquette'})
 			marker.addTo(markers);
 		});
+	}
+	
+	History.Adapter.bind(window,'statechange',function(){
+		var State = History.getState();
+		slideToUid(State.data.uid)
+		//submenu.slideMenu(State.data.hash);
+	});
+	
+	
+	function slideToUid(uid) {
+		var slide = $('.swiper-slide:not(".duplicate")[data-uid="'+uid+'"]');
+		//submenu.swiper.slideTo(slide.index(), 1000, false);
 	}
 	
 	markers.on('clusterclick', function (a) {

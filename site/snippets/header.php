@@ -24,6 +24,7 @@
 		'assets/js/jquery-ui.min.js',
 		'assets/js/jquery.pep.js',
 		'assets/js/script.js',
+		'assets/js/jquery.history.js',
     '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js',
 		'//f.vimeocdn.com/js/froogaloop2.min.js',
 		'assets/swiper/js/swiper.jquery.min.js',

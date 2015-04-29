@@ -1,7 +1,7 @@
 <ul class="rubrique cf">
 <?php $first=true; 
 	foreach($pages->children() as $entry): ?>
-		<li id="<?php echo $entry->hash() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
+		<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
 			<?php if($image = $entry->images()->sortBy('sort', 'asc')->first()): ?>
 				<figure class="head">
 					<a href="<?php echo $entry->url() ?>">
