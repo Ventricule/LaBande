@@ -269,26 +269,9 @@ $(document).ready(function(){
 		featureLayer.eachLayer(function(marker) {
 			marker.off('click');
 			marker.on('click', function(e) {
-				
-				//e.preventDefault();   // FAIL !
 
 				//slideToUid(marker.feature.properties.uid);
 				location.hash = "#" + marker.feature.properties.hash;
-
-				if(hashTagActive != location.hash) { //this will prevent if the user click several times the same link to freeze the scroll.
-					//calculate destination place
-					var dest = 0;
-					if ($(location.hash).offset().top > $(document).height() - $(window).height()) {
-						dest = $(document).height() - $(window).height();
-					} else {
-						dest = $(location.hash).offset().top;
-					}
-					//go to destination
-					$('html,body').animate({
-						scrollTop: dest
-					}, 2000, 'swing');
-					hashTagActive = location.hash;
-				}
 
 			});
 			marker.setIcon(L.icon(marker.feature.properties.icon));
