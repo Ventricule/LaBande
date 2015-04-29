@@ -180,11 +180,11 @@ $(document).ready(function(){
 		$(this).find('img').clone().appendTo($('#splashContainer'))
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
 		console.log(rgbaCol);
-		$('#splash').css('background-color', rgbaCol ).fadeIn(500);
+		$('#splash').css('background-color', rgbaCol ).addClass('shown');
 	});
 
 	$('#splash, #splashCross').on("click", function(e){
-		$('#splash').fadeOut(500);
+		$('#splash').removeClass('shown');
 	});
 
 	$('#splash *:not(#splashCross)').on("click", function(e){
