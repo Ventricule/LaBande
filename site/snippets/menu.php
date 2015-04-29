@@ -3,7 +3,7 @@
 	<div id="bande1" class="swiper-container">
 		<ul id="menu" class="swiper-wrapper">
 			<?php foreach($pages->visible() as $p): ?>
-			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-id="<?php echo $p->id() ?>" style="background-color:<?php echo $p->color() ?>">
+			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-uid="<?php echo $p->uid() ?>" data-id="<?php echo $p->id() ?>" style="background-color:<?php echo $p->color() ?>">
 				<div class="box">
 					<span><?php echo $p->title()->html() ?></span>
 				</div>
@@ -17,7 +17,7 @@
 			<?php foreach($pages->visible() as $p): ?>
 				<?php if($p->hasVisibleChildren()): ?>
 					<?php foreach($p->children()->visible() as $p): ?>
-					<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-p-hash="<?php echo $p->parent()->hash() ?>" data-id="<?php echo $p->parent() ?>" data-num="<?php echo $p->num() ?>">
+					<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-p-hash="<?php echo $p->parent()->hash() ?>" data-uid="<?php echo $p->uid() ?>" data-id="<?php echo $p->parent() ?>" data-num="<?php echo $p->num() ?>">
 						<div class="box">
 							<span><?php echo $p->title()->html() ?></span>
 						</div>

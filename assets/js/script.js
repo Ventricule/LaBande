@@ -124,7 +124,7 @@ $(document).ready(function(){
 			};
 		};
 
-		function slideColumn (hash) {
+		function slideColumn(hash) {
 			anchor = $("#"+hash);
 			if(anchor.length){
 				swiping = true;
@@ -266,12 +266,24 @@ $(document).ready(function(){
 	
 	function initMarkers() {
 		featureLayer.eachLayer(function(marker) {
+			marker.off('click');
+			marker.on('click', function() {
+				//slideToUid(marker.feature.properties.uid);
+				location.hash = "#" + marker.feature.properties.hash;
+			});
 			marker.setIcon(L.icon(marker.feature.properties.icon));
-			marker.bindLabel('hello !')
+			marker.bindLabel(marker.feature.properties.title, {className:'map-etiquette'})
 			marker.addTo(markers);
 		});
 	}
-	
+	/*
+	function slideToUid(uid) {
+		var slide = $('.swiper-slide:not(".duplicate")[data-uid="'+uid+'"]');
+		console.log(slide);
+		//submenu.swiper.slideTo(marker.feature.properties.hash, 1000, false);
+		//.index
+	}
+	*/
 	markers.on('clusterclick', function (a) {
 		a.layer.spiderfy();
 	});

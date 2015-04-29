@@ -36,6 +36,8 @@ foreach($data as $article) {
     ),
     'properties' => array(
       "title" => (string)$article->title(),
+      "uid" => (string)$article->uid(),
+      "hash" => (string)$article->hash(),
       //"description" => (string)$article->text(),
       "lieu-uid" => $lieu,
       "icon" => array(
@@ -43,6 +45,7 @@ foreach($data as $article) {
 				"iconSize"=> [20, 20], // size of the icon
 				"iconAnchor"=> [10, 10], // point of the icon which will correspond to marker's location
 				"popupAnchor"=> [0, -10], // point from which the popup should open relative to the iconAnchor
+				"labelAnchor"=> [10, 0],
 				"className"=> "marker"
 			)
     )

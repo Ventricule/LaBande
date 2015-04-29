@@ -488,3 +488,30 @@ ul.avenir li.item-avenir{
 -------------------------------------------------- */
 #map { position:fixed; top:0; bottom:0; width:100%; height: 100%; -webkit-backface-visibility: hidden; }
 .mapbox-logo {	display: none !important; }
+
+.leaflet-label.map-etiquette {
+	border: 0px solid;
+	border-radius: 0px;
+	z-index: 999999999 !important;
+	margin: 4px 0px;
+	background-color: rgb(163, 186, 255);
+	font-family: "whoismono",sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	color: rgba(0, 0, 0,0.9);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.leaflet-label.map-etiquette::before {
+    border-right: 11px solid #A3BAFF;
+    left: -11px;
+}
+.leaflet-label.map-etiquette::after {
+    border-left: 11px solid #A3BAFF;
+    right: -11px;
+}
+.leaflet-label.map-etiquette::before, .leaflet-label.map-etiquette::after {
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    position: absolute;
+    top: 0px;
+}
