@@ -8,8 +8,8 @@ language: fr
 role: admin
 token: 96038d7103eda26cf0147311beffe839bb7882b1
 history:
+  - manifestations/project-a
+  - manifestations/manifestation-4
+  - manifestations/manifestation-3
+  - manifestations/exposition-de-frondes
   - manifestations/project-c
-  - manifestations/project-b
-  - lieux/autre-lieu-2
-  - lieux/khiasma
-  - lieux/autre-lieu-1

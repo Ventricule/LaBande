@@ -29,7 +29,7 @@ Locationname:
 Parcours: 
 
 - 
-  parcours: project-a
+  parcours: parcours-avril
 
 ----
 

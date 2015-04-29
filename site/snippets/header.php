@@ -16,7 +16,8 @@
 		'assets/swiper/css/swiper.min.css',
     'https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css',
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',
-		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css'
+		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css',
+		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css'
 	)) ?>
 	<?php echo js(array(
 		'assets/js/jquery-1.11.2.min.js',
@@ -27,7 +28,8 @@
 		'//f.vimeocdn.com/js/froogaloop2.min.js',
 		'assets/swiper/js/swiper.jquery.min.js',
     'https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js',
-		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'
+		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js',
+		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'
 	)) ?>
 
 

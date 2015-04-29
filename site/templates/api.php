@@ -9,6 +9,19 @@ foreach($data as $article) {
   $coordinates;
   $lieu = (string)$article->lieu();
   $emplacement = (string)$article->location();
+	$color='FFFFFF';
+	if( (string)$article->parcours() ) {
+		$parcoursYaml = yaml($article->parcours());
+		$parcoursList = array();
+		foreach($parcoursYaml as $parcours) {
+			$parcoursList[] = $parcours['parcours'];
+		}
+		$parcoursA = $parcoursList[0];
+		$parcoursA = page('parcours')->children()->find($parcoursA);
+		if($parcoursA) {
+			$color = str_replace('#','',(string)$parcoursA->color());
+		}
+	}
   if ( $lieu ) {
     $coordinates = (string)$pages->index()->findBy('uid', $lieu)->location();
   } else {
@@ -23,10 +36,10 @@ foreach($data as $article) {
     ),
     'properties' => array(
       "title" => (string)$article->title(),
-      "description" => (string)$article->text(),
+      //"description" => (string)$article->text(),
       "lieu-uid" => $lieu,
       "icon" => array(
-				"iconUrl" => "assets/images/marker.php?color=FFFF00",
+				"iconUrl" => "assets/images/marker.php?color=".$color,
 				"iconSize"=> [20, 20], // size of the icon
 				"iconAnchor"=> [10, 10], // point of the icon which will correspond to marker's location
 				"popupAnchor"=> [0, -10], // point from which the popup should open relative to the iconAnchor

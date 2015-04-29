@@ -230,15 +230,6 @@ $(document).ready(function(){
 		point.reverse(); 
 	});
 
-
-	map.featureLayer.on('layeradd', function(e) {
-		var marker = e.layer,
-				feature = marker.feature;
-		marker.setIcon(L.icon(feature.properties.icon));
-	});
-
-	map.featureLayer.loadURL('/LaBande/api');
-
 	var colors = ['#FFE138', '#45FF7A', '#FF6A45', '#8ABBFF', '#3C1E1E'];
 
 	var polyline = [];
@@ -276,6 +267,7 @@ $(document).ready(function(){
 	function initMarkers() {
 		featureLayer.eachLayer(function(marker) {
 			marker.setIcon(L.icon(marker.feature.properties.icon));
+			marker.bindLabel('hello !')
 			marker.addTo(markers);
 		});
 	}
