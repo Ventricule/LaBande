@@ -174,7 +174,22 @@ $(document).ready(function(){
 
 	};
 
+	$('figure').on("click", function(e){
+		e.preventDefault();
+		$('#splashContainer').html('');
+		$(this).find('img').clone().appendTo($('#splashContainer'))
+		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
+		console.log(rgbaCol);
+		$('#splash').css('background-color', rgbaCol ).fadeIn(500);
+	});
 
+	$('#splash, #splashCross').on("click", function(e){
+		$('#splash').fadeOut(500);
+	});
+
+	$('#splash *:not(#splashCross)').on("click", function(e){
+		e.stopPropagation();
+	});
 
 	/* Manifestations
 	---------------------------------------------- */
