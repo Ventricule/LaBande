@@ -1,11 +1,8 @@
 <?php 
 $manifestations = array();
 if ($entry->intendedTemplate() == 'parcours'):
-	global $entry;
-	$manifestations = page('manifestations')->children()->filter(function($child) {
-		
-		//$lookFor = $entry->uid();
-		$lookFor = 'project-a';
+	$manifestations = page('manifestations')->children()->filter(function($child) use ($entry) {
+		$lookFor = $entry->uid();
 		$lookAt = yaml($child->parcours());
 		$parcoursList = array();
 		foreach($lookAt as $parcours) {
@@ -13,17 +10,6 @@ if ($entry->intendedTemplate() == 'parcours'):
 		}
 		return in_array($lookFor,$parcoursList);
 	});
-
-	/*if ((string)$entry->manifestations()) :
-		$manifestations = yaml($entry->manifestations());
-		$manifestationsOrdered = [];
-		foreach($manifestations as $manifestation):
-			$manifestation = page('manifestations')->children()->find($manifestation['manifestation']);
-			$manifestationsOrdered[$manifestation->date('Ymd')."-".$manifestation->time()] = $manifestation;
-		endforeach;
-		ksort($manifestationsOrdered);
-		$manifestations = $manifestationsOrdered;
-	endif;*/
 elseif ($entry->intendedTemplate() == 'lieu'):
 	$manifestations = page('manifestations')->children()->filterBy('lieu', $entry->uid());
 endif;

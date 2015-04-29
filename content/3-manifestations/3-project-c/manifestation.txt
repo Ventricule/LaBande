@@ -23,3 +23,18 @@ Time: 16:30
 ----
 
 Locationname: 
+
+----
+
+Parcours: 
+
+- 
+  parcours: parcours-juin
+
+----
+
+Price: 
+
+----
+
+Transport: 
