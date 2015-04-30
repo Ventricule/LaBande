@@ -54,6 +54,7 @@ $(document).ready(function(){
 			prevButton: '.swiper-button-prev',
 			runCallbacksOnInit: false,	
 			onSlideChangeStart: function(swiper){
+				
 				var oldSlide = $(swiper.wrapper).find('.active');
 				swiper.update();
 				var activeSlide = $(swiper.wrapper).find('.active');
@@ -79,7 +80,7 @@ $(document).ready(function(){
 							url = siteFolder+'/'+rubrique,
 							slide = "rubrique";
 				}
-				if (rubrique != activeRubrique || item != activeItem && !scrolling) {
+				if (rubrique != activeRubrique || item != activeItem) {
 					History.pushState({rubrique: rubrique, item:item, slideDirection:direction}, item , url);
 				}
 			},
@@ -94,27 +95,27 @@ $(document).ready(function(){
 	
 	History.Adapter.bind(window,'statechange',function(){
 		var State = History.getState();
-		slideView(State.data.rubrique, State.data.item, State.data.slideDirection);
+		slideView(State.data.rubrique, State.data.item, State.data.slideDirection, true);
 	});
 	
-	function slideView(rubrique, item, slideDirection) {
+	function slideView(rubrique, item, slideDirection, slideContent) {
 		if (item) {
-			slideSubMenuTo(item, slideDirection);
+			slideSubMenuTo(item, slideDirection, slideContent);
 			rubrique = submenu.container.find('.swiper-slide[data-uid="'+item+'"]').attr('data-parent-uid');
-			slideMenuTo(rubrique, slideDirection);
-			if(!scrolling) {
+			slideMenuTo(rubrique, slideDirection, slideContent);
+			if(slideContent) {
 				slideColumnTo(item);
 			}
 		} else if(rubrique) {
-			slideMenuTo(rubrique, slideDirection);
+			slideMenuTo(rubrique, slideDirection, slideContent);
 			item = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+rubrique+'"]').attr('data-uid'); 
-			slideSubMenuTo(item, slideDirection);
-			if(!scrolling) {
+			slideSubMenuTo(item, slideDirection, slideContent);
+			if(slideContent) {
 				slideColumnTo(item);
 			}
 		}
 		
-		function slideSubMenuTo(uid, direction) {
+		function slideSubMenuTo(uid, direction, callbacks) {
 			if ( uid != activeItem ) {
 				activeItem = uid;
 				if(direction=='prev') {
@@ -122,11 +123,11 @@ $(document).ready(function(){
 				} else {
 					var slide = submenu.container.find('.swiper-slide.active').nextAll('li[data-uid="'+uid+'"]').first();
 				}
-				submenu.swiper.slideTo( slide.index(), 1000);
+				submenu.swiper.slideTo( slide.index(), 1000, callbacks);
 			}
 		}
 
-		function slideMenuTo(uid, direction) {
+		function slideMenuTo(uid, direction, callbacks) {
 			if ( uid != activeRubrique ) {
 				activeRubrique = uid;
 				if(direction=='prev') {
@@ -134,7 +135,7 @@ $(document).ready(function(){
 				} else {
 					var slide = menu.container.find('.swiper-slide.active').nextAll('.swiper-slide[data-uid="'+uid+'"]').first();
 				}
-				menu.swiper.slideTo( slide.index(), 1000);
+				menu.swiper.slideTo( slide.index(), 1000, callbacks);
 			}
 		}
 		function slideColumnTo(uid) {
@@ -175,11 +176,10 @@ $(document).ready(function(){
 						item = topId,
 						url = siteFolder+'/'+rubrique+'/'+item,
 						slide = "item";
-				clearTimeout(scrolling);
-				scrolling = setTimeout(function(){
-					slideView('', item, direction) 
-					scrolling = false;
-				},100);
+				if(!menu.swiper.animating && !submenu.swiper.animating) {
+					//slideView('', item, direction, false) 
+					console.log("animating");
+				}
 				lastScrollTop = st;
 			}
 		}
