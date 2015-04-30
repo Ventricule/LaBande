@@ -15,6 +15,7 @@ $(document).ready(function(){
 	var activebox = new Bande($('#bande3'));
 	
 	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
+	var nextRubrique = activeRubrique, nextItem = activeItem, direction = 'next';
 
 	function Bande(container, type) {
 		this.container = container;
@@ -148,8 +149,7 @@ $(document).ready(function(){
 			};
 		};
 	}		
-
-
+	
 	$(document).scroll(function(e) {
 		if (swiping === false ){
 			var cutoff = $(window).scrollTop();
@@ -176,15 +176,22 @@ $(document).ready(function(){
 						item = topId,
 						url = siteFolder+'/'+rubrique+'/'+item,
 						slide = "item";
-				if(!menu.swiper.animating && !submenu.swiper.animating) {
-					//slideView('', item, direction, false) 
-					console.log("animating");
-				}
+				nextRubrique = rubrique;
+				nextItem = item;
 				lastScrollTop = st;
 			}
 		}
-		
 	});
+	
+	$(window).scrollEnd(function(){
+		slideView('', nextItem, direction, false) 
+		if (nextRubrique == 'manifestations'){
+			setMarker(nextItem);
+		} else {
+			filterMarkers(nextRubrique, nextItem);
+		}
+	}, 100);
+	
 	$('#prev').click(function() {
 		submenu.swiper.slidePrev(true, 600);
 	});
@@ -194,7 +201,6 @@ $(document).ready(function(){
 		$('#splashContainer').html('');
 		$(this).find('img').clone().appendTo($('#splashContainer'))
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
-		console.log(rgbaCol);
 		$('#splash').css('background-color', rgbaCol ).addClass('shown');
 	});
 
@@ -242,6 +248,12 @@ $(document).ready(function(){
 		$(this).siblings().children().hide();
 		$(this).children().show();
 	});
+	
+	/* Parcours
+	---------------------------------------------- */
+	$('.parcoursSelect').click(function(){
+		filterMarkers('parcours', $(this).attr('data-parcours'));
+	});
 
 
 	/* Map
@@ -249,7 +261,7 @@ $(document).ready(function(){
 	L.mapbox.accessToken = 'pk.eyJ1Ijoic2FtdWVscm0iLCJhIjoicVJuNV9YMCJ9.7Bol-cHVhp6d_l-lVhPpew';
 	var map = L.mapbox.map('map', 'samuelrm.3e35d3f6', { zoomControl: false, attributionControl: false });
 	new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
-	map.setView([48.8707,2.3130], 12);
+	map.setView([48.87,2.4], 12);
 
 	map.featureLayer.on('click', function(e) {
 		map.panTo(e.layer.getLatLng());
@@ -288,20 +300,37 @@ $(document).ready(function(){
 
 	// MARKERS
 	
-	var markers = new L.MarkerClusterGroup({zoomToBoundsOnClick:false,showCoverageOnHover:false,animateAddingMarkers:true,maxClusterRadius:10});
+	var markers = new L.MarkerClusterGroup({ 
+		iconCreateFunction: function(cluster) {
+			var markers = cluster.getAllChildMarkers();
+			var lieux = [];
+			for (var i = 0; i < markers.length; i++) {
+				lieux.push( markers[i].feature.properties.lieuName );
+			}
+			var lieu = mode(lieux);
+			return new L.DivIcon({ 
+				className:"clusterIcon", 
+				html: '<b>' + cluster.getChildCount() + '</b><div class="cluster-icon-lieu"><span>'+lieu+'</span></div>' 
+			})
+		},
+		zoomToBoundsOnClick:false,
+		showCoverageOnHover:false,
+		animateAddingMarkers:true,
+		maxClusterRadius:10,
+		title:'titre'
+	});
 	
 	var featureLayer = L.mapbox.featureLayer()
 	.loadURL('/LaBande/api')
 		.on('ready', initMarkers);
 	
-	var hashTagActive = "";	
 	function initMarkers() {
 		featureLayer.eachLayer(function(marker) {
 			marker.off('click');
 			marker.on('click', function() {
 				History.pushState({item:marker.feature.properties.uid, slideDirection:'next'}, marker.feature.properties.title , marker.feature.properties.uid);
 			});
-			marker.setIcon(L.icon(marker.feature.properties.icon));
+			marker.setIcon(L.divIcon(marker.feature.properties.divIcon));
 			marker.bindLabel(marker.feature.properties.title, {className:'map-etiquette'})
 			marker.addTo(markers);
 		});
@@ -312,8 +341,112 @@ $(document).ready(function(){
 	});
 	
 	map.addLayer(markers);
+	
+	// Moving map when reading manifs
+	function setMarker(newItem) {
+    // If the ID hasn't actually changed, don't do anything
+    //if (newItem === activeItem) return;
+    // Otherwise, iterate through layers, setting the current
+    // marker to a different color and zooming to it.
+    markers.eachLayer(function(layer) {
+			if (layer.feature.properties.uid === newItem) {
+				map.setView(layer.getLatLng(), 15);
+				spiderfy(layer);
+				selectMarker(layer, true);
+			} else {
+				spiderfy(layer);
+				selectMarker(layer, false);
+			}
+    });
+	}
+
+	
+	function spiderfy(layer) {
+		var markerCluster = markers.getVisibleParent(layer);
 		
+		if (markerCluster instanceof L.MarkerCluster){
+			markerCluster.spiderfy();
+		}
+	}
+	
+	function selectMarker(marker, select) {
+		icon = marker.feature.properties.divIcon;
+		if(select) {
+			icon.className = "div-icon selected";
+		} else {
+			icon.className = "div-icon";
+		}
+		marker.setIcon(L.divIcon(icon));
+	}
+	
+	function filterMarkers(property, value) {
+		var arrayOfLatLngs = [];
+		markers.eachLayer(function(layer) {
+			if(''+property+'' in layer.feature.properties) {
+				var key = layer.feature.properties[property];
+				function highlight(layer) {
+					arrayOfLatLngs.push(layer.getLatLng());
+					spiderfy(layer);
+					selectMarker(layer, true);
+				}
+				function turnOff(layer) {
+					selectMarker(layer, false);
+				}
+				
+				if (key.constructor === Array) {
+					if (layer.feature.properties[property].indexOf(value)!== -1) {
+						highlight(layer);
+					} else {
+						turnOff(layer);
+					}
+				} else {
+					if (layer.feature.properties[property] == value) {
+						highlight(layer);
+					} else {
+						turnOff(layer);
+					}
+				}
+			}
+    });
+		if(arrayOfLatLngs) {
+			var bounds = new L.LatLngBounds(arrayOfLatLngs);
+			map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+		}
+	}
+	
+	
+	map.on('zoomend', function() {
+		$("#map").removeClass('showPlaceName');
+		if(map.getZoom()>=14){
+			$("#map").addClass('showPlaceName');
+		}
+	});
+
 });
+
+/* UTILITIES
+---------------------------------------------- */
+function mode(array)
+{
+    if(array.length == 0)
+    	return null;
+    var modeMap = {};
+    var maxEl = array[0], maxCount = 1;
+    for(var i = 0; i < array.length; i++)
+    {
+    	var el = array[i];
+    	if(modeMap[el] == null)
+    		modeMap[el] = 1;
+    	else
+    		modeMap[el]++;	
+    	if(modeMap[el] > maxCount)
+    	{
+    		maxEl = el;
+    		maxCount = modeMap[el];
+    	}
+    }
+    return maxEl;
+}
 
 
 /* Brigthness
@@ -338,4 +471,17 @@ jQuery.fn.brightness = function() {
   } else {
 	if (this.parent().length) return this.parent().brightness();
   }
+};
+
+/* Scroll end
+---------------------------------------------- */
+
+$.fn.scrollEnd = function(callback, timeout) {          
+  $(this).scroll(function(){
+    var $this = $(this);
+    if ($this.data('scrollTimeout')) {
+      clearTimeout($this.data('scrollTimeout'));
+    }
+    $this.data('scrollTimeout', setTimeout(callback,timeout));
+  });
 };

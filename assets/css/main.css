@@ -14,28 +14,25 @@ Email:  support@getkirby.com
 /* FONTS
 -------------------------------------------------- */
 @font-face {
-	font-family: 'Source Sans Pro';
-	font-style: normal;
-	font-weight: 300;
-	src: url(../fonts/sourcesanspro-300.woff) format('woff');
+		font-family: 'dauphine';
+		src: url(../fonts/dauphine-webfont.eot);
+		src: url(../fonts/dauphine-webfont.eot?#iefix) format('embedded-opentype'),
+				 url(../fonts/dauphine-webfont.woff) format('woff'),
+				 url(../fonts/dauphine-webfont.ttf) format('truetype'),
+				 url(../fonts/dauphine-webfont.svg#whoismono) format('svg');
+		font-weight: normal;
+		font-style: normal;
 }
 @font-face {
-	font-family: 'Source Sans Pro';
-	font-style: normal;
-	font-weight: 400;
-	src: url(../fonts/sourcesanspro-400.woff) format('woff');
-}
-@font-face {
-	font-family: 'Source Sans Pro';
-	font-style: normal;
-	font-weight: 600;
-	src: url(../fonts/sourcesanspro-600.woff) format('woff');
-}
-@font-face {
-	font-family: 'Source Sans Pro';
-	font-style: italic;
-	font-weight: 400;
-	src: url(../fonts/sourcesanspro-400-italic.woff) format('woff');
+		font-family: 'dauphine';
+		src: url(../fonts/dauphine_italic-webfont.eot);
+		src: url(../fonts/dauphine_italic-webfont.eot?#iefix) format('embedded-opentype'),
+				 url(../fonts/dauphine_italic-webfont.woff) format('woff'),
+				 url(../fonts/dauphine_italic-webfont.woff) format('woff'),
+				 url(../fonts/dauphine_italic-webfont.ttf) format('truetype'),
+				 url(../fonts/dauphine_italic-webfont.svg#whoismono) format('svg');
+		font-weight: normal;
+		font-style: italic;
 }
 @font-face {
 		font-family: 'whoismono';
@@ -46,7 +43,6 @@ Email:  support@getkirby.com
 				 url(../fonts/whois-mono.svg#whoismono) format('svg');
 		font-weight: normal;
 		font-style: normal;
-
 }
 @font-face {
 		font-family: 'leucadiaregular';
@@ -60,10 +56,7 @@ Email:  support@getkirby.com
 		font-style: normal;
 
 }
-@font-face {
-		font-family: 'try';
-		src: local("Karla-Regular")
-}
+
 /* Reset
 -------------------------------------------------- */
 *, *:before, *:after {
@@ -535,7 +528,7 @@ ul.avenir li.item-avenir{
 
 /* Map
 -------------------------------------------------- */
-#map { position:fixed; top:0; bottom:0; width:100%; height: 100%; -webkit-backface-visibility: hidden; }
+#map { position:fixed; top:0; left:28%; right: 0; height: 100%; -webkit-backface-visibility: hidden; }
 .mapbox-logo {	display: none !important; }
 
 .leaflet-label.map-etiquette {
@@ -563,4 +556,63 @@ ul.avenir li.item-avenir{
     border-bottom: 11px solid transparent;
     position: absolute;
     top: 0px;
+}
+.div-icon {
+	background: none;
+	border: 0;
+	width: 14px !important;
+	height: 14px !important;
+	margin-top: -7px !important;
+	margin-left: -7px !important;
+}
+.div-icon.selected {
+	width: 24px !important;
+	height: 24px !important;
+	margin-left: -12px !important;
+	margin-top: -12px !important;
+}
+.div-icon>div {
+	border-radius: 30px;
+	width: 100%;
+	height: 100%;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+.leaflet-marker-icon.clusterIcon {
+	width: 24px !important;
+	height: 24px !important;
+	margin-left: -12px !important;
+	margin-top: -12px !important;
+	background-color: #3C1E1E;
+	border-radius: 30px;
+	color: #F9FF9B;
+	text-align: center;
+	line-height: 25px;
+	font-family: "whoismono";
+	font-weight: 200;
+	box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+#map.showPlaceName .cluster-icon-lieu {
+	display: block;
+}
+.cluster-icon-lieu {
+	color: rgb(93, 93, 93);
+	text-align: center;
+	width: 200px;
+	position: absolute;
+	left: -92px;
+	top: 21px;
+	text-shadow: -1px -1px 0px rgb(255, 255, 255), 1px -1px 0px rgb(255, 255, 255), -1px 1px 0px rgb(255, 255, 255), 1px 1px 0px rgb(255, 255, 255);
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: none;
+}
+.cluster-icon-lieu span {
+	white-space: nowrap;
+	font-family: "dauphine";
+}
+
+.mapController {
+	cursor: pointer;
 }

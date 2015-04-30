@@ -7,12 +7,12 @@ $json = array();
 foreach($data as $article) {
   
   $coordinates;
-  $lieu = (string)$article->lieu();
+  $lieuUid = (string)$article->lieu();
   $emplacement = (string)$article->location();
 	$color='FFFFFF';
+	$parcoursList = array();
 	if( (string)$article->parcours() ) {
 		$parcoursYaml = yaml($article->parcours());
-		$parcoursList = array();
 		foreach($parcoursYaml as $parcours) {
 			$parcoursList[] = $parcours['parcours'];
 		}
@@ -22,10 +22,13 @@ foreach($data as $article) {
 			$color = str_replace('#','',(string)$parcoursA->color());
 		}
 	}
-  if ( $lieu ) {
-    $coordinates = (string)$pages->index()->findBy('uid', $lieu)->location();
+  if ( $lieuUid ) {
+		$lieu = $pages->index()->findBy('uid', $lieuUid);
+    $coordinates = (string)$lieu->location();
+		$lieuName = (string)$lieu->title();
   } else {
     $coordinates = $emplacement;
+		$lieuName = (string)$article->locationName();
   }
 
   $json[] = array(
@@ -38,15 +41,14 @@ foreach($data as $article) {
       "title" => (string)$article->title(),
       "uid" => (string)$article->uid(),
       "hash" => (string)$article->hash(),
-      //"description" => (string)$article->text(),
-      "lieu-uid" => $lieu,
-      "icon" => array(
-				"iconUrl" => "assets/images/marker.php?color=".$color,
-				"iconSize"=> [20, 20], // size of the icon
-				"iconAnchor"=> [10, 10], // point of the icon which will correspond to marker's location
-				"popupAnchor"=> [0, -10], // point from which the popup should open relative to the iconAnchor
+			"zoom" => 14,
+      "lieux" => $lieuUid,
+      "lieuName" => $lieuName,
+			"parcours" => $parcoursList,
+			"divIcon" => array(
 				"labelAnchor"=> [10, 0],
-				"className"=> "marker"
+				"className"=> "div-icon",
+				"html"=> "<div style='background-color:#".$color.";'></div>"
 			)
     )
   );
