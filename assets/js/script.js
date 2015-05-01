@@ -339,6 +339,8 @@ $(document).ready(function(){
 			//var maxZoom = zoom ? 15 : map.getZoom();
 			var bounds = new L.LatLngBounds(arrayOfLatLngs);
 			map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+		} else if (zoom) {
+			map.setView([48.87,2.4], 12);
 		}
 	}
 	
