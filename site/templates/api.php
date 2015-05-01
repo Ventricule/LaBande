@@ -40,6 +40,7 @@ foreach($data as $article) {
     'properties' => array(
       "title" => (string)$article->title(),
       "uid" => (string)$article->uid(),
+      "manifestations" => (string)$article->uid(),
       "hash" => (string)$article->hash(),
 			"zoom" => 14,
       "lieux" => $lieuUid,
