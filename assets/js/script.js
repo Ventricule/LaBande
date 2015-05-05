@@ -242,7 +242,7 @@ $(document).ready(function(){
 		dash = iteration*dashSize;
 		space = colors.length * dashSize - dash ;
 		var dashArray = [space, dash];
-		var line = L.polyline(labande, {
+		var line = new L.polyline(labande, {
 			color: color,
 			dashArray: dashArray,
 			lineCap: 'butt',
@@ -369,7 +369,7 @@ $(document).ready(function(){
 	----------------------------------------------- */
 	var lc = L.control.locate({
 		position: 'bottomright',
-		follow: true,
+		//follow: true,
 		setView: false,
 		keepCurrentZoomLevel: true,
 		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
@@ -392,15 +392,26 @@ $(document).ready(function(){
 	
 	/* Direction
 	----------------------------------------------- */
-	var directions = L.mapbox.directions({
-	profile: 'mapbox.walking'
-	});
+	var directions = L.Routing.control({
+		waypoints: [],
+		router: L.Routing.graphHopper('2dfa30e1-ef46-454f-872c-b1c7f7c30bdc', { urlParameters: {locale:'fr', vehicle:'foot'}})
+	}).addTo(map);
 	
-	var directionsLayer = L.mapbox.directions.layer(directions)
+	directions.setWaypoints([ L.latLng([48.8755312,2.414216300000021]), L.latLng([48.847067028875536,2.411069869995117]) ])
+	
+	/*var directionsLayer = L.mapbox.directions.layer(directions)
 		.addTo(map);
 
 	var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
 		.addTo(map);
+	
+	
+	directions
+				.setOrigin(L.latLng([48.8755312,2.414216300000021]))
+				.setDestination(L.latLng([48.847067028875536,2.411069869995117]))
+				//.setDestination(toLatLng( destination ))
+				//.setWaypoints(L.latLng(''))
+				.query();
 
 	function toLatLng(waypoint) {
 		return L.latLng(waypoint.split(','));
@@ -419,7 +430,7 @@ $(document).ready(function(){
 				//.setWaypoints(L.latLng(''))
 				.query();
 		}, lc);
-	});
+	});*/
 	
 	
 	

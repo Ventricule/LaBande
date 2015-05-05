@@ -702,3 +702,6 @@ ul.avenir li.item-avenir{
 	line-height: 25px !important;
 	font-size: 19px !important;
 }
+.leaflet-routing-container {
+	display: none;
+}

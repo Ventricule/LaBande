@@ -13,6 +13,7 @@
 	<?php echo css(array(
 		'assets/css/main.css',
 		'assets/css/entypo.css',
+		'assets/css/leaflet-routing-machine.css',
 		'assets/swiper/css/swiper.min.css',
     'https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css',
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',
@@ -34,7 +35,8 @@
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js',
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js',
 		'//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js',
-		'https://api.tiles.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.1.0/mapbox.directions.js'
+		'assets/js/leaflet-routing-machine.min.js',
+		'assets/js/lrm-graphhopper-1.1.0.min.js',
 	)) ?>
 
 
