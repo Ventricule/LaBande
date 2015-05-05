@@ -364,8 +364,55 @@ $(document).ready(function(){
 		}
 	}
 	
+	/* Locate
+	----------------------------------------------- */
+	var lc = L.control.locate({
+		position: 'bottomright',
+		follow: true,
+		setView: false,
+		//keepCurrentZoomLevel: true,
+		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
+			//var bounds = markers;
+			//bounds.push(lc);
+			console.log(context);
+      //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+    },
+		icon: 'locate-button icon-target',
+		iconLoading: 'locate-button animate-spin icon-target',
+	}).addTo(map);
 	
+	map.on('locationfound', function(e) { 
+		var bounds = labande;
+		var markerLocation = [e.latitude, e.longitude];
+		bounds.push(markerLocation);
+		map.fitBounds(bounds, {padding:[20,20], maxZoom:15});
+	}, lc);
+	//lc.start();
 	
+	/*
+	L.Control.MyLocate = L.Control.Locate.extend({
+		 drawMarker: function(map) {
+			 // override to customize the marker
+		 }
+	});
+	
+	var lc = new L.Control.MyLocate({
+		position: 'bottomright',
+		follow: true,
+		//setView: false,
+		//keepCurrentZoomLevel: true,
+		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
+			//var bounds = markers;
+			//bounds.push(lc);
+			console.log(context);
+      //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+    },
+		icon: 'fa fa-map-marker',
+		iconLoading: 'fa fa-spinner fa-spin',
+	}).addTo(map);
+	
+	lc.start();
+	*/
 	
 	
 	

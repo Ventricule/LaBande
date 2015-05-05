@@ -616,3 +616,15 @@ ul.avenir li.item-avenir{
 .mapController {
 	cursor: pointer;
 }
+
+.locate-button {
+
+}
+.locate-button::before {
+	padding: 0px !important;
+	margin: 0px !important;
+	width: 25px;
+	vertical-align: middle !important;
+	line-height: 25px !important;
+	font-size: 19px !important;
+}
