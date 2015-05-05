@@ -499,6 +499,7 @@ $(document).ready(function(){
 			slideDuplicateClass: 'duplicateImg',
 			slideToClickedSlide: true,
 			resistanceRatio : 0.9,
+			keyboardControl: true,
 		});
 		splash.update();		
 		splash.on('slideChangeStart', function(){
@@ -517,6 +518,9 @@ $(document).ready(function(){
 		});
 		$('#splash *:not(#splashCross)').on("click", function(e){
 			e.stopPropagation();
+		});
+		$(document).keydown(function(e) {
+			if (e.keyCode == 27) { $('#splash').removeClass('shown'); }   // escape key maps to keycode `27`
 		});
 	});
 
