@@ -484,7 +484,12 @@ $(document).ready(function(){
 		var s_total = $(this).parent().find('.pagination .total').text();
 		$('#splashWrapper').html('');
 		$(this).parent().find('figure').each(function(){
-			$(this).clone().appendTo($('#splashWrapper'));
+			var img_src = $(this).find('img').attr('data-src');
+			$(this).clone().attr('src', img_src).appendTo($('#splashWrapper'));
+		});
+		$('#splash').find('img').each(function(){
+			var img_src = $(this).attr('data-src');
+			$(this).attr('src', img_src);
 		});
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
 		$('#splash').css('background-color', rgbaCol ).addClass('shown');
@@ -500,6 +505,7 @@ $(document).ready(function(){
 			slideToClickedSlide: true,
 			resistanceRatio : 0.9,
 			keyboardControl: true,
+			lazyLoading: true,
 		});
 		splash.update();		
 		splash.on('slideChangeStart', function(){

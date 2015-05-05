@@ -8,7 +8,7 @@
 						<div class="swiper-wrapper">
 							<?php foreach($images as $image): ?>
 								<figure class="swiper-slide" data-index="">
-									<img src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
+									<img src="<?php echo thumb($image, array('width' => 450, 'crop' => false))->url(); ?>" data-src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
 									<?php if ($caption = $image->caption()): ?>
 										<figcaption><?php echo $caption ?></figcaption>
 									<?php endif ?>
@@ -25,6 +25,7 @@
 				<?php elseif($images->count() == 1): ?>
 					<figure>
 						<img src="<?php echo $images->first()->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
+						<div class="nav icon-search"></div>
 					</figure>
 				<?php endif ?>
 			<?php elseif(!$images): ?>

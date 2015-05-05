@@ -369,7 +369,7 @@ main figure img {
 	z-index: 99;
 	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4);
 }
-.gallery .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gallery figcaption {
+main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gallery figcaption {
 	visibility: hidden;
 	opacity:0;
 	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
