@@ -9,6 +9,34 @@ $(document).ready(function(){
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 	var activebox = new Bande($('#bande3'));
+
+	var gallery = [];
+	$('main').find('section.gallery').each(function(index){
+		var $el = $(this), imgIndex = 0, total = $el.find('img').length;
+		$el.find('.pagination .total').text(total)
+		$el.find('figure').each(function(){
+			imgIndex += 1;
+			$(this).attr('data-index', imgIndex);
+		});
+		gallery[index] = $el.swiper({
+			mode:'horizontal',
+			loop: true,
+			speed: 500,
+			slideActiveClass: 'activeImg',
+			slideDuplicateClass: 'duplicateImg',
+		});
+		gallery[index].on('slideChangeStart', function(){
+			gallery[index].update();
+			var imgNumber = $el.find('figure.activeImg').attr('data-index')
+			$el.find('.pagination .number').text(imgNumber);
+		});
+		$el.find('.prev-slide').on('click', function(){
+			gallery[index].slidePrev();
+		});
+		$el.find('.next-slide').on('click', function(){
+			gallery[index].slideNext();
+		});
+	})
 	
 	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
 	var nextRubrique = activeRubrique, nextItem = activeItem, oldItem, direction = 'next';
@@ -24,32 +52,32 @@ $(document).ready(function(){
 		direction = typeof direction !== 'undefined' ?  direction : 'next';
 		stateChange = typeof stateChange !== 'undefined' ?  stateChange : false;
 		switch(part) {
-    case 'menu':
-        //slideMenuTo(uid, direction);
+	case 'menu':
+		//slideMenuTo(uid, direction);
 				itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 				slideSubMenuTo(itemUid, direction);
 				slideColumnTo(itemUid);
 				slideMapTo(itemUid);
-        break;
-    case 'submenu':
-        //slideSubMenuTo(uid, direction);
+		break;
+	case 'submenu':
+		//slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
 				slideColumnTo(uid);
 				slideMapTo(uid);
-        break;
+		break;
 		case 'content':
-        slideSubMenuTo(uid, direction);
+		slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
 				slideMapTo(uid);
-        break;
+		break;
 		case 'map':
-        slideSubMenuTo(uid, direction);
+		slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
 				slideColumnTo(uid);
-        break;
+		break;
 		} 
 	}
 	
@@ -164,7 +192,8 @@ $(document).ready(function(){
 		});
 		
 	};
-	
+
+
 	/*	Content scroll
 	-------------------------------------------- */
 	$(document).scroll(function(e) {
@@ -334,7 +363,7 @@ $(document).ready(function(){
 					}
 				}
 			}
-    });
+	});
 		if(arrayOfLatLngs.length && zoom) {
 			//var maxZoom = zoom ? 15 : map.getZoom();
 			var bounds = new L.LatLngBounds(arrayOfLatLngs);
@@ -375,8 +404,8 @@ $(document).ready(function(){
 			//var bounds = markers;
 			//bounds.push(lc);
 			console.log(context);
-      //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
-    },
+	  //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+	},
 		icon: 'locate-button icon-target',
 		iconLoading: 'locate-button animate-spin icon-target',
 	}).addTo(map);
@@ -392,7 +421,7 @@ $(document).ready(function(){
 	/* Direction
 	----------------------------------------------- */
 	var directions = L.mapbox.directions({
-    profile: 'mapbox.walking'
+	profile: 'mapbox.walking'
 	});
 	
 	var directionsLayer = L.mapbox.directions.layer(directions)
@@ -435,7 +464,7 @@ $(document).ready(function(){
 	
 	/* Image and slideshow
 	---------------------------------------------- */
-	$('figure').on("click", function(e){
+	$('.nav.icon-search').on("click", function(e){
 		e.preventDefault();
 		$('#splashContainer').html('');
 		$(this).find('img').clone().appendTo($('#splashContainer'))
@@ -509,24 +538,24 @@ $(document).ready(function(){
 ---------------------------------------------- */
 function mode(array)
 {
-    if(array.length == 0)
-    	return null;
-    var modeMap = {};
-    var maxEl = array[0], maxCount = 1;
-    for(var i = 0; i < array.length; i++)
-    {
-    	var el = array[i];
-    	if(modeMap[el] == null)
-    		modeMap[el] = 1;
-    	else
-    		modeMap[el]++;	
-    	if(modeMap[el] > maxCount)
-    	{
-    		maxEl = el;
-    		maxCount = modeMap[el];
-    	}
-    }
-    return maxEl;
+	if(array.length == 0)
+		return null;
+	var modeMap = {};
+	var maxEl = array[0], maxCount = 1;
+	for(var i = 0; i < array.length; i++)
+	{
+		var el = array[i];
+		if(modeMap[el] == null)
+			modeMap[el] = 1;
+		else
+			modeMap[el]++;	
+		if(modeMap[el] > maxCount)
+		{
+			maxEl = el;
+			maxCount = modeMap[el];
+		}
+	}
+	return maxEl;
 }
 
 
@@ -558,10 +587,10 @@ jQuery.fn.brightness = function() {
 ---------------------------------------------- */
 $.fn.scrollEnd = function(callback, timeout) {          
   $(this).scroll(function(){
-    var $this = $(this);
-    if ($this.data('scrollTimeout')) {
-      clearTimeout($this.data('scrollTimeout'));
-    }
-    $this.data('scrollTimeout', setTimeout(callback,timeout));
+	var $this = $(this);
+	if ($this.data('scrollTimeout')) {
+	  clearTimeout($this.data('scrollTimeout'));
+	}
+	$this.data('scrollTimeout', setTimeout(callback,timeout));
   });
 };

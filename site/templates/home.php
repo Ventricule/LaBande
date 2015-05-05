@@ -2,7 +2,7 @@
 <?php snippet('header') ?>
 <body>
 	<?php snippet('menu') ?>
-	<main class="main" role="main">
+	<main id="column" class="main" role="main">
 		<div class="content">
 			<?php snippet('content') ?>
 		</div>

@@ -314,7 +314,6 @@ main h1,
 main h2,
 main h3,
 main h4,
-main figure,
 main ul,
 main ol {
 	margin: 1.5rem 0;
@@ -336,10 +335,14 @@ main .content > ul > li:first-child {
 }
 
 /* Images */
-main figure.head {
+main section.gallery {
+	overflow: hidden;
+	position: relative;
+}
+main section.gallery figure{
 	margin: 0;
 }
-main figure.head img {
+main section.gallery figure img {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	filter: gray;
@@ -347,14 +350,60 @@ main figure.head img {
 /*	-webkit-transition: -webkit-filter 1s linear;
 	transition: filter 1s linear; */
 }
-main figure.head img:hover {
+main section.gallery figure img:hover {
 /*	-webkit-filter: grayscale(0%);
 	filter: none;
 	-webkit-transition: -webkit-filter 1s linear;
 	transition: filter 1s linear;*/
 }
+.nav{
+	position: absolute;
+	z-index: 99;
+	text-shadow: 0px 0px 6px rgba(0,0,0,.3);
+}
+.nav.icon-search, .nav.prev-slide, .nav.next-slide {
+	visibility: hidden;
+	opacity:0;
+	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-moz-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+}
+.gallery:hover .nav.icon-search, .gallery:hover .nav.prev-slide, .gallery:hover .nav.next-slide{
+	visibility:visible;
+	opacity:1;
+	-webkit-transition-delay:0s;
+	-moz-transition-delay:0s;
+	-o-transition-delay:0s;
+	transition-delay:0s;
+}
 
-/* Texte */
+.nav.pagination{
+	bottom: 17px;
+	left: 15px;
+}
+.nav.icon-search{
+	right: 8px;
+	bottom: 17px;
+	font-size: 20px;
+	cursor: pointer;
+}
+.nav.prev-slide, .nav.next-slide{
+  font-size: 25px;
+  top: 50%;
+  margin-top: -21%;
+  width: 4rem;
+  height: 12rem;
+  line-height: 12rem;
+  cursor: pointer;
+}
+.nav.prev-slide{
+	left: 16px;
+}
+.nav.next-slide{
+	right: 8px;
+	text-align: right;
+}/* Texte */
 .entry-content {
 	margin: 0 1rem;
 	padding: 1.5rem 0;
@@ -443,10 +492,10 @@ ul.avenir li.item-avenir{
 	z-index: 9999999999999;
 	visibility: hidden;
 	opacity:0;
-  	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
-  	-moz-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
-  	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
-  	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-moz-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 }
 #splash.shown{
 	visibility:visible;
