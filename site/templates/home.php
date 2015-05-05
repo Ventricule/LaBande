@@ -13,7 +13,14 @@
 	<div id='map'></div>
 
 	<div id='splash'>
-		<div id="splashContainer"></div>
+		<div id="splashContainer">
+			<div id="splashWrapper" class="swiper-wrapper"></div>
+			<div class="nav pagination">
+				<span class="number">1</span><span class="slash">/</span><span class="total"></span>
+			</div>
+			<div class="nav icon-left-open-big prev-slide"></div>
+			<div class="nav icon-right-open-big next-slide"></div>
+		</div>
 		<div id="splashCross" class="icon-cancel"></div>
 	</div>
 

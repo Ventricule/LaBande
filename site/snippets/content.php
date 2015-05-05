@@ -9,6 +9,9 @@
 							<?php foreach($images as $image): ?>
 								<figure class="swiper-slide" data-index="">
 									<img src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
+									<?php if ($caption = $image->caption()): ?>
+										<figcaption><?php echo $caption ?></figcaption>
+									<?php endif ?>
 								</figure>
 							<?php endforeach ?>
 						</div>

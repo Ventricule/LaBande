@@ -10,34 +10,6 @@ $(document).ready(function(){
 	var submenu = new Bande($('#bande2'));
 	var activebox = new Bande($('#bande3'));
 
-	var gallery = [];
-	$('main').find('section.gallery').each(function(index){
-		var $el = $(this), imgIndex = 0, total = $el.find('img').length;
-		$el.find('.pagination .total').text(total)
-		$el.find('figure').each(function(){
-			imgIndex += 1;
-			$(this).attr('data-index', imgIndex);
-		});
-		gallery[index] = $el.swiper({
-			mode:'horizontal',
-			loop: true,
-			speed: 500,
-			slideActiveClass: 'activeImg',
-			slideDuplicateClass: 'duplicateImg',
-		});
-		gallery[index].on('slideChangeStart', function(){
-			gallery[index].update();
-			var imgNumber = $el.find('figure.activeImg').attr('data-index')
-			$el.find('.pagination .number').text(imgNumber);
-		});
-		$el.find('.prev-slide').on('click', function(){
-			gallery[index].slidePrev();
-		});
-		$el.find('.next-slide').on('click', function(){
-			gallery[index].slideNext();
-		});
-	})
-	
 	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
 	var nextRubrique = activeRubrique, nextItem = activeItem, oldItem, direction = 'next';
 	
@@ -464,19 +436,81 @@ $(document).ready(function(){
 	
 	/* Image and slideshow
 	---------------------------------------------- */
+
+
+
+	var gallery = [];
+	$('main').find('section.gallery').each(function(index){
+		var $el = $(this), imgIndex = 0, total = $el.find('img').length;
+		$el.find('.pagination .total').text(total)
+		$el.find('figure').each(function(){
+			imgIndex += 1;
+			$(this).attr('data-index', imgIndex);
+		});
+		gallery[index] = $el.swiper({
+			mode:'horizontal',
+			loop: true,
+			speed: 500,
+			slideActiveClass: 'activeImg',
+			slideDuplicateClass: 'duplicateImg',
+		});
+		gallery[index].on('slideChangeStart', function(){
+			gallery[index].update();
+			var imgNumber = $el.find('figure.activeImg').attr('data-index')
+			$el.find('.pagination .number').text(imgNumber);
+		});
+		$el.find('.prev-slide').on('click', function(){
+			gallery[index].slidePrev();
+		});
+		$el.find('.next-slide').on('click', function(){
+			gallery[index].slideNext();
+		});
+	})
+	
+
 	$('.nav.icon-search').on("click", function(e){
 		e.preventDefault();
-		$('#splashContainer').html('');
-		//$(this).find('img').clone().appendTo($('#splashContainer'))
+		var s_total = $(this).parent().find('.pagination .total').text();
+		$('#splashWrapper').html('');
+		$(this).parent().find('figure').each(function(){
+			$(this).clone().appendTo($('#splashWrapper'));
+		});
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
 		$('#splash').css('background-color', rgbaCol ).addClass('shown');
+		$('#splash figcaption').css('background-color', $(this).closest('.item').css('background-color') );
+		$('#splash').find('.pagination .total').text(s_total)
+
+		var splash = new Swiper('#splashContainer', {
+			mode:'horizontal',
+			loop: true,
+			speed: 500,
+			slideActiveClass: 'activeImg',
+			slideDuplicateClass: 'duplicateImg',
+			slideToClickedSlide: true,
+			resistanceRatio : 0.9,
+		});
+		splash.update();		
+		splash.on('slideChangeStart', function(){
+			splash.update();
+			var s_number = $('#splashContainer').find('figure.activeImg').attr('data-index')
+			$('#splashContainer').find('.pagination .number').text(s_number);
+		});
+		$('#splashContainer').find('.prev-slide').on('click', function(){
+			splash.slidePrev();
+		});
+		$('#splashContainer').find('.next-slide').on('click', function(){
+			splash.slideNext();
+		});
+		$('#splash, #splashCross').on("click", function(e){
+			$('#splash').removeClass('shown');
+		});
+		$('#splash *:not(#splashCross)').on("click", function(e){
+			e.stopPropagation();
+		});
 	});
-	$('#splash, #splashCross').on("click", function(e){
-		$('#splash').removeClass('shown');
-	});
-	$('#splash *:not(#splashCross)').on("click", function(e){
-		e.stopPropagation();
-	});
+
+
+
 
 	/* Manifestations
 	---------------------------------------------- */

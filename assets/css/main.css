@@ -339,29 +339,37 @@ main section.gallery {
 	overflow: hidden;
 	position: relative;
 }
-main section.gallery figure{
+main figure{
 	margin: 0;
 }
-main section.gallery figure img {
+main figure img {
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	filter: gray;
 	filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
-/*	-webkit-transition: -webkit-filter 1s linear;
-	transition: filter 1s linear; */
 }
-main section.gallery figure img:hover {
-/*	-webkit-filter: grayscale(0%);
-	filter: none;
-	-webkit-transition: -webkit-filter 1s linear;
-	transition: filter 1s linear;*/
+#splash figcaption {
+	position: absolute;
+	bottom: 17px;
+	width: 100%;
+	text-align: center;
+	padding: 0px 55px;
+
 }
-.nav{
+.gallery figcaption {
+	position: absolute;
+	bottom: 17px;
+	width: 100%;
+	text-align: center;
+	padding: 0px 55px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4);
+}
+.gallery .nav{
 	position: absolute;
 	z-index: 99;
-	text-shadow: 0px 0px 6px rgba(0,0,0,.3);
+	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4);
 }
-.nav.icon-search, .nav.prev-slide, .nav.next-slide {
+.gallery .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gallery figcaption {
 	visibility: hidden;
 	opacity:0;
 	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
@@ -369,7 +377,7 @@ main section.gallery figure img:hover {
 	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 }
-.gallery:hover .nav.icon-search, .gallery:hover .nav.prev-slide, .gallery:hover .nav.next-slide{
+.gallery:hover .nav.icon-search, .gallery:hover .nav.prev-slide, .gallery:hover .nav.next-slide, .gallery:hover figcaption{
 	visibility:visible;
 	opacity:1;
 	-webkit-transition-delay:0s;
@@ -378,24 +386,42 @@ main section.gallery figure img:hover {
 	transition-delay:0s;
 }
 
-.nav.pagination{
+.gallery .nav.pagination{
 	bottom: 17px;
 	left: 15px;
 }
-.nav.icon-search{
+#splash .nav.pagination{
+  bottom: 17px;
+  left: 15px;
+  position: absolute;
+  z-index: 1;
+}
+.gallery .nav.icon-search{
 	right: 8px;
 	bottom: 17px;
 	font-size: 20px;
 	cursor: pointer;
 }
 .nav.prev-slide, .nav.next-slide{
-  font-size: 25px;
-  top: 50%;
-  margin-top: -21%;
-  width: 4rem;
-  height: 12rem;
-  line-height: 12rem;
-  cursor: pointer;
+	cursor: pointer;
+	position: absolute;
+}
+.gallery .nav.prev-slide, .gallery .nav.next-slide{
+	font-size: 25px;
+	top: 50%;
+	margin-top: -21%;
+	width: 4rem;
+	height: 12rem;
+	line-height: 12rem;
+}
+#splash .nav.prev-slide, #splash .nav.next-slide{
+	font-size: 35px;
+	top: 50%;
+	margin-top: -16.5%;
+	width: 8rem;
+	height: 30rem;
+	line-height: 30rem;
+	z-index: 99999;
 }
 .nav.prev-slide{
 	left: 16px;
@@ -515,7 +541,7 @@ ul.avenir li.item-avenir{
 	z-index: 1;
 }
 #splashContainer{
-
+	height: 100%;
 }
 #splashContainer img{
     max-width: 90%;
