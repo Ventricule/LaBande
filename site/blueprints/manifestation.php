@@ -4,6 +4,10 @@ title: Manifestation
 pages: false
 files:
 	sortable: true
+	fields:
+		caption:
+			label: Légende
+			type: textarea
 fields:
 	title:
 		label: Title

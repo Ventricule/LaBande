@@ -11,7 +11,14 @@
 			<h4><?php echo html($manifestation->title()) ?></h4>
 			
 			<?php
-				$date =	ucfirst(strftime('%A %d %B %Y', $manifestation->date()));
+				$journum = ucfirst(strftime('%d', $manifestation->date()));
+				if ( $journum < 10 ){ 
+					$journum = $journum[1];
+				};
+				if ($journum == 1){
+					$journum = "1<sup>er</sup>";
+				};
+				$date =	ucfirst(strftime('%A '.$journum.' %B %Y', $manifestation->date()));
 				$heure = str_replace(":","h",$manifestation->time());
 			?>
 

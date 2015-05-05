@@ -34,11 +34,20 @@ endif;
 						$adress = $lieu->adress();
 					} else {
 						$lieuName = $manifestation->locationName();
-					}
+					};
+					$journum = ucfirst(strftime('%d', $manifestation->date()));
+					if ( $journum < 10 ){ 
+						$journum = $journum[1];
+					};
+					if ($journum == 1){
+						$journum = "1<sup>er</sup>";
+					};
+					$date =	ucfirst(strftime('%A '.$journum.' %B %Y', $manifestation->date()));
+					$heure = str_replace(":","h",$manifestation->time());
 					?>
 					<h5>
-						<span class="icon-calendar"><?php echo ucfirst(strftime('%A %d %B %Y', $manifestation->date())) ?></span><br>
-						<span class="icon-clock"><?php echo str_replace(':', 'h', $manifestation->time()) ?></span><br>
+						<span class="icon-calendar"><?php echo $date ?></span><br>
+						<span class="icon-clock"><?php echo $heure ?></span><br>
 						<span class="icon-home"><?php echo $lieuName ?></span><br>
 						<span class="icon-map"><?php echo $adress ?></span>
 					</h5>
