@@ -18,9 +18,11 @@ if ( (string)$lieu ) {
 	$lieuName = (string)$lieu->title();
 	$adress = (string)$lieu->adress();
 	$transport = (string)$lieu->transport();
+	$coordinates = (string)$lieu->location();
 } else {
 	$adress = (string)$entry->locationName();
 	$transport = (string)$entry->transport();
+	$coordinates = (string)$entry->location();
 }
 ?>
 <h5 class="collapse">
@@ -28,4 +30,5 @@ if ( (string)$lieu ) {
 	<?php if($adress){ ?><span class="icon-map"><?php echo $adress ?></span><br><?php } ?>
 	<?php if($transport){ ?><span class="icon-bus"><?php echo $transport ?></span><br><?php } ?>
 	<?php if($price){ ?><span class="icon-ticket"><?php echo $price ?></span><?php } ?>
+	<?php if($coordinates){ ?><span class="icon-direction button-gps" data-coordinates="<?php echo $coordinates ?>">GPS</span><?php } ?>
 </h5>

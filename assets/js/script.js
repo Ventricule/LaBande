@@ -370,7 +370,7 @@ $(document).ready(function(){
 		position: 'bottomright',
 		follow: true,
 		setView: false,
-		//keepCurrentZoomLevel: true,
+		keepCurrentZoomLevel: true,
 		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
 			//var bounds = markers;
 			//bounds.push(lc);
@@ -381,38 +381,44 @@ $(document).ready(function(){
 		iconLoading: 'locate-button animate-spin icon-target',
 	}).addTo(map);
 	
-	map.on('locationfound', function(e) { 
+	/*map.on('startfollowing', function(e) { 
 		var bounds = labande;
 		var markerLocation = [e.latitude, e.longitude];
 		bounds.push(markerLocation);
 		map.fitBounds(bounds, {padding:[20,20], maxZoom:15});
-	}, lc);
-	//lc.start();
+	}, lc);*/
 	
-	/*
-	L.Control.MyLocate = L.Control.Locate.extend({
-		 drawMarker: function(map) {
-			 // override to customize the marker
-		 }
+	
+	/* Direction
+	----------------------------------------------- */
+	var directions = L.mapbox.directions({
+    profile: 'mapbox.walking'
 	});
 	
-	var lc = new L.Control.MyLocate({
-		position: 'bottomright',
-		follow: true,
-		//setView: false,
-		//keepCurrentZoomLevel: true,
-		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
-			//var bounds = markers;
-			//bounds.push(lc);
-			console.log(context);
-      //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
-    },
-		icon: 'fa fa-map-marker',
-		iconLoading: 'fa fa-spinner fa-spin',
-	}).addTo(map);
-	
-	lc.start();
-	*/
+	var directionsLayer = L.mapbox.directions.layer(directions)
+		.addTo(map);
+
+	var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
+		.addTo(map);
+
+	function toLatLng(waypoint) {
+		return L.latLng(waypoint.split(','));
+	}
+
+	$('.button-gps').click(function() {
+		lc.start();
+		var destination = $(this).attr('data-coordinates');
+		map.on('locationfound', function(e) { 
+			console.log('from : '+[e.latitude, e.longitude]);
+			console.log('to : '+destination);
+			
+			directions
+				.setOrigin(L.latLng([e.latitude, e.longitude]))
+				.setDestination(toLatLng( destination ))
+				//.setWaypoints(L.latLng(''))
+				.query();
+		}, lc);
+	});
 	
 	
 	

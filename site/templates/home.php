@@ -16,3 +16,5 @@
 		<div id="splashContainer"></div>
 		<div id="splashCross" class="icon-cancel"></div>
 	</div>
+
+<div id='errors'></div>
