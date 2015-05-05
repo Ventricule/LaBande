@@ -467,7 +467,7 @@ $(document).ready(function(){
 	$('.nav.icon-search').on("click", function(e){
 		e.preventDefault();
 		$('#splashContainer').html('');
-		$(this).find('img').clone().appendTo($('#splashContainer'))
+		//$(this).find('img').clone().appendTo($('#splashContainer'))
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
 		$('#splash').css('background-color', rgbaCol ).addClass('shown');
 	});

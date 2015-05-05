@@ -19,7 +19,7 @@
 						<div class="nav icon-right-open-big next-slide"></div>
 						<div class="nav icon-search"></div>
 					</section>
-				<?php else: ?>
+				<?php elseif($images->count() == 1): ?>
 					<figure>
 						<img src="<?php echo $images->first()->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
 					</figure>
