@@ -330,7 +330,7 @@ main .content > ul {
 main .content > ul > li {
 	margin:0;
 	padding:0;
-	padding-bottom: 3rem;
+	padding-bottom: 1.5rem;
 }
 main .content > ul > li:first-child {
 	padding-top: 1.5rem;
@@ -459,22 +459,42 @@ main .nav.fullscreen{
 
 /* pictogrammes */
 main .circle {
+	width: 35px;
+	height: 35px;
+	border-radius: 35px;
+	text-align: center;
+	line-height: 35px;
+	border: 1px solid rgba(0,0,0,0.5);
+	display: inline-block;
+	overflow: hidden;
+}
+main .circle::before {
+	margin: 0;
+	line-height: 33px;
+}
+main .top-right-button {
 	position: absolute;
 	top: 1.5rem;
 	margin-top: -5px;
 	right: 0;
-	width: 35px;
-	height: 35px;
-	background-color: #FF8C00;
-	border-radius: 35px;
-	text-align: center;
+	background-color: #222;
+	border: 0;
 }
-main .circle:before {
+main .mapFit::before {
 	color: white;
 	font-size: 22px;
 	line-height: 34px;
 	margin: 0;
 	padding-left: 1px;
+}
+
+/* Bottom Buttons Bar */
+.bottom-buttons-bar {
+	height: 0;
+	margin: 1.5rem 0;
+}
+.bottom-buttons-bar .circle {
+	margin-right: .5rem;
 }
 
 /* Liste de manifestations */
@@ -712,7 +732,4 @@ ul.avenir li.item-avenir{
 	vertical-align: middle !important;
 	line-height: 25px !important;
 	font-size: 19px !important;
-}
-.leaflet-routing-container {
-	display: none;
 }
