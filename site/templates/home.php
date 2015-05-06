@@ -18,10 +18,10 @@
 			<div class="nav pagination">
 				<span class="number">1</span><span class="slash">/</span><span class="total"></span>
 			</div>
-			<div class="nav icon-left-open-big prev-slide"></div>
-			<div class="nav icon-right-open-big next-slide"></div>
+			<div class="nav prev-slide"><div class="icon-left-open-big"></div></div>
+			<div class="nav next-slide"><div class="icon-right-open-big"></div></div>
 		</div>
-		<div id="splashCross" class="icon-cancel"></div>
+		<div id="splashCross" class="icon-cancel-circled"></div>
 	</div>
 
 <div id='errors'></div>

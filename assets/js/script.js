@@ -480,13 +480,15 @@ $(document).ready(function(){
 	})
 	
 
-	$('.nav.icon-search').on("click", function(e){
+	$('.nav.fullscreen').on("click", function(e){
 		e.preventDefault();
-		var s_total = $(this).parent().find('.pagination .total').text();
+		var s_total = $(this).parent().find('.pagination .total').text(), count = 0;
 		$('#splashWrapper').html('');
-		$(this).parent().find('figure').each(function(){
+
+		$(this).closest('li').find('figure').each(function(){
 			var img_src = $(this).find('img').attr('data-src');
 			$(this).clone().attr('src', img_src).appendTo($('#splashWrapper'));
+			count += 1;
 		});
 		$('#splash').find('img').each(function(){
 			var img_src = $(this).attr('data-src');
@@ -494,37 +496,43 @@ $(document).ready(function(){
 		});
 		var rgbaCol = $(this).closest('.item').css('background-color').replace(')', ', 0.95)').replace('rgb', 'rgba');;
 		$('#splash').css('background-color', rgbaCol ).addClass('shown');
-		$('#splash figcaption').css('background-color', $(this).closest('.item').css('background-color') );
+		$('#splash figcaption, #splash .nav, #splashCross').css('text-shadow', '-1px -1px 10px '+rgbaCol+', 1px -1px 10px '+rgbaCol+', 1px 1px 10px '+rgbaCol+', -1px 1px 10px '+rgbaCol);
 		$('#splash').find('.pagination .total').text(s_total)
-
-		var splash = new Swiper('#splashContainer', {
-			mode:'horizontal',
-			loop: true,
-			speed: 500,
-			slideActiveClass: 'activeImg',
-			slideDuplicateClass: 'duplicateImg',
-			slideToClickedSlide: true,
-			resistanceRatio : 0.9,
-			keyboardControl: true,
-			lazyLoading: true,
-		});
-		splash.update();		
-		splash.on('slideChangeStart', function(){
-			splash.update();
-			var s_number = $('#splashContainer').find('figure.activeImg').attr('data-index')
-			$('#splashContainer').find('.pagination .number').text(s_number);
-		});
-		$('#splashContainer').find('.prev-slide').on('click', function(){
-			splash.slidePrev();
-		});
-		$('#splashContainer').find('.next-slide').on('click', function(){
-			splash.slideNext();
-		});
-		$('#splash, #splashCross').on("click", function(e){
+		if (count <= 1){
+			$('#splash .nav').hide()
+		} else {
+			$('#splash .nav').show()
+			var splash = new Swiper('#splashContainer', {
+				mode:'horizontal',
+				loop: true,
+				speed: 500,
+				slideActiveClass: 'activeImg',
+				slideDuplicateClass: 'duplicateImg',
+				slideToClickedSlide: true,
+				resistanceRatio : 0.9,
+				keyboardControl: true,
+				lazyLoading: true,
+			});
+			splash.update();		
+			splash.on('slideChangeStart', function(){
+				splash.update();
+				var s_number = $('#splashContainer').find('figure.activeImg').attr('data-index')
+				$('#splashContainer').find('.pagination .number').text(s_number);
+			});
+			$('#splashContainer').find('.prev-slide').on('click', function(){
+				splash.slidePrev();
+				splash.update();
+			});
+			$('#splashContainer').find('.next-slide').on('click', function(){
+				splash.slideNext();
+				splash.update();
+			});
+			$('#splashCross').on("click", function(e){
+				setTimeout(function() { splash.setWrapperTranslate(0); }, 500); 
+			});
+		};
+		$('#splashCross').on("click", function(e){
 			$('#splash').removeClass('shown');
-		});
-		$('#splash *:not(#splashCross)').on("click", function(e){
-			e.stopPropagation();
 		});
 		$(document).keydown(function(e) {
 			if (e.keyCode == 27) { $('#splash').removeClass('shown'); }   // escape key maps to keycode `27`

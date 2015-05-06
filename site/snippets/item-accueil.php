@@ -1,5 +1,6 @@
-<!-- <h3 class="entry-title" ><a href="<?php echo $entry->url() ?>"><?php echo $entry->title()->html() ?></a></h3> -->
-
+<header class="header cf" role="banner">
+	<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
+</header>
 <p><?php echo $entry->text() ?></p>
 
 

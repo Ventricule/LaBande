@@ -1,5 +1,5 @@
 <ul class="rubrique cf">
-<?php $first=true; 
+<?php $first = true; 
 	foreach($pages->children() as $entry): ?>
 		<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
 			<?php if($images = $entry->images()->sortBy('sort', 'asc')): ?>
@@ -8,7 +8,7 @@
 						<div class="swiper-wrapper">
 							<?php foreach($images as $image): ?>
 								<figure class="swiper-slide" data-index="">
-									<img src="<?php echo thumb($image, array('width' => 450, 'crop' => false))->url(); ?>" data-src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
+									<img src="<?php echo thumb($image, array('width' => 500, 'crop' => false))->url(); ?>" data-src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
 									<?php if ($caption = $image->caption()): ?>
 										<figcaption><?php echo $caption ?></figcaption>
 									<?php endif ?>
@@ -20,25 +20,28 @@
 						</div>
 						<div class="nav icon-left-open-big prev-slide"></div>
 						<div class="nav icon-right-open-big next-slide"></div>
-						<div class="nav icon-search"></div>
+						<div class="nav icon-search fullscreen"></div>
 					</section>
 				<?php elseif($images->count() == 1): ?>
 					<figure>
 						<img src="<?php echo $images->first()->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
-						<div class="nav icon-search"></div>
+						<?php if ($caption = $image->caption()): ?>
+							<figcaption><?php echo $caption ?></figcaption>
+						<?php endif ?>
+						<div class="nav icon-search fullscreen" style="color:<?php echo $entry->parent()->color() ?>"></div>
 					</figure>
+				<?php elseif(!$first): ?>
+					<hr>
 				<?php endif ?>
-			<?php elseif(!$images): ?>
-				<hr>
 			<?php endif ?>
 			<div class="entry-content">
 				<?php
-				if ($entry->intendedTemplate() == 'lieu'): 
+				if ($entry->intendedTemplate() == 'accueil'): 
+					snippet('item-accueil', array('entry' => $entry));
+				elseif ($entry->intendedTemplate() == 'lieu'): 
 					snippet('item-lieu', array('entry' => $entry));
 				elseif ($entry->intendedTemplate() == 'parcours'): 
 					snippet('item-parcours', array('entry' => $entry));
-				elseif ($entry->intendedTemplate() == 'avenir'): 
-					snippet('item-avenir', array('entry' => $entry));
 				elseif ($entry->intendedTemplate() == 'manifestation'): 
 					snippet('item-manifestation', array('entry' => $entry));
 				else: 
@@ -47,6 +50,6 @@
 				?>
 			</div>
 		</li>
-		<?php $first=false;
+	<?php $first = false;
 	endforeach ?>
 </ul>

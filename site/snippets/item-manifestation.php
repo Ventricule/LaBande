@@ -1,7 +1,7 @@
 			
 <h4 class="collapse" >
 	<span class="entry-date icon-calendar icon-medium"><?php echo $entry->date('d.m.y') ?></span> 
-	<span class="entry-time icon-clock icon-medium"><?php echo $entry->time() ?></span><br>
+	<span class="entry-time icon-clock icon-medium"><?php echo str_replace(":","h",$entry->time()) ?></span><br>
 </h4>
 <h3 class="collapse">
 	<a href="<?php echo $entry->url() ?>"><?php echo $entry->title()->html() ?></a>

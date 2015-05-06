@@ -115,7 +115,7 @@ p {
 /* Header
 -------------------------------------------------- */
 .header {
-	margin-bottom: 1.5em;
+  margin: -.5rem -1.5rem 2em -2rem;
 }
 .logo {
 	display: block;
@@ -341,8 +341,10 @@ main section.gallery {
 }
 main figure{
 	margin: 0;
+	position: relative;
 }
 main figure img {
+	width: 100%;
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
 	filter: gray;
@@ -362,14 +364,14 @@ main figure img {
 	width: 100%;
 	text-align: center;
 	padding: 0px 55px;
-	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4);
+	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4), -1px 1px 1px rgba(0,0,0,.4), 1px -1px 1px rgba(0,0,0,.4);
 }
-.gallery .nav{
+main .nav{
 	position: absolute;
 	z-index: 99;
-	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4);
+	text-shadow: 1px 1px 1px rgba(0,0,0,.4), -1px -1px 1px rgba(0,0,0,.4), -1px 1px 1px rgba(0,0,0,.4), 1px -1px 1px rgba(0,0,0,.4);
 }
-main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gallery figcaption {
+main .nav.fullscreen, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gallery figcaption {
 	visibility: hidden;
 	opacity:0;
 	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
@@ -377,7 +379,7 @@ main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gall
 	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 }
-.gallery:hover .nav.icon-search, .gallery:hover .nav.prev-slide, .gallery:hover .nav.next-slide, .gallery:hover figcaption{
+figure:hover .nav.fullscreen, .gallery:hover .nav.fullscreen, .gallery:hover .nav.prev-slide, .gallery:hover .nav.next-slide, .gallery:hover figcaption{
 	visibility:visible;
 	opacity:1;
 	-webkit-transition-delay:0s;
@@ -396,7 +398,7 @@ main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gall
   position: absolute;
   z-index: 1;
 }
-.gallery .nav.icon-search{
+main .nav.fullscreen{
 	right: 8px;
 	bottom: 17px;
 	font-size: 20px;
@@ -405,6 +407,14 @@ main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gall
 .nav.prev-slide, .nav.next-slide{
 	cursor: pointer;
 	position: absolute;
+}
+.nav.prev-slide > div, .nav.next-slide > div{
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 20px;
+  position: relative;
 }
 .gallery .nav.prev-slide, .gallery .nav.next-slide{
 	font-size: 25px;
@@ -416,12 +426,12 @@ main .nav.icon-search, .gallery .nav.prev-slide, .gallery .nav.next-slide, .gall
 }
 #splash .nav.prev-slide, #splash .nav.next-slide{
 	font-size: 35px;
-	top: 50%;
-	margin-top: -16.5%;
 	width: 8rem;
-	height: 30rem;
-	line-height: 30rem;
-	z-index: 99999;
+	top: 10%;
+	height: 80%;
+	bottom: 10%;
+	position: absolute;
+	z-index: 99;
 }
 .nav.prev-slide{
 	left: 16px;
@@ -532,11 +542,10 @@ ul.avenir li.item-avenir{
 	transition-delay:0s;
 }
 #splashCross{
-	color: white;
-	font-size: 35px;
+	font-size: 25px;
 	position: absolute;
-	top: 2rem;
-	right: 2rem;
+	top: 24px;
+	right: 10px;
 	cursor: pointer;
 	z-index: 1;
 }

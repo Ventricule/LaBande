@@ -1,7 +1,7 @@
 <?php if(!defined('KIRBY')) exit ?>
 
 title: Page
-pages: avenir
+pages: accueil
 files: false
 fields:
   title:
