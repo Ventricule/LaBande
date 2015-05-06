@@ -22,7 +22,6 @@ endif;
 				<p class="synth">
 					<span class="date"><?php echo $manifestation->date('d.m.y'); ?></span>
 					<span class="titre">&nbsp;&nbsp;&nbsp;<?php echo $manifestation->title(); ?></span>
-					<span class="cross"></span>
 				</p>
 				<div class="full-text">
 					<h4><?php echo $manifestation->title(); ?></h4>

@@ -534,13 +534,50 @@ ul.avenir li.item-avenir:last-child{
 
 }
 ul.avenir li.item-avenir{
-	padding: .5rem 1rem;
 	margin: 0 -1rem;
-	padding-bottom: 2rem;
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	position: relative;
 }
 .meta-avenir {
 	margin-bottom: 2rem;
+}
+.dateBloc{
+	display: inline-block;
+	font-size: 40px;
+	line-height: 40px;
+	position: absolute;
+	height: 100%;
+	width: 100px;
+	margin-left: 1px;
+	min-height: 120px;
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.dateWrap{
+	position: absolute;
+	text-align: center;
+	height: 90px;
+	width: 60px;
+	top: 50%;
+	left: 50%;
+	margin-top: -45px;
+	margin-left: -30px;
+}
+.dateBloc .day{
+	border-bottom: 1px solid;
+}
+.dateBloc .day, .dateBloc .month{
+	padding: 2px 8px;
+	text-align: center;
+}
+.sideBloc {
+	display: inline-block;
+	margin-left: 100px;
+	padding: 20px;
+	min-height: 120px;
+}
+.sideBloc h4{
+	margin: 0;
+	margin-bottom: .5rem;
 }
 #splash {
 	background-color: rgba(0, 0, 0, .9);
@@ -598,38 +635,6 @@ ul.avenir li.item-avenir{
 .hidden {
 	display: none;
 }
-.cross {
-  width: 1rem;
-	height: 1rem;
-	display: inline-block;
-	vertical-align: middle;
-	position: absolute;
-	right: 0;
-	top: 50%;
-	margin-top: -.5rem;
-}
-
-.cross:before, .cross:after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background: #000;
-}
-
-.cross:before {
-  left: 50%;
-  width: 1px;
-  margin-left: -.5px;
-  height: 100%;
-}
-
-.cross:after {
-  top: 50%;
-  height: 1px;
-  margin-top: -.5px;
-  width: 100%;
-}
-
 
 /* Map
 -------------------------------------------------- */
