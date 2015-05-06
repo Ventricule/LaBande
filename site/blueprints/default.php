@@ -10,6 +10,3 @@ fields:
   text:
     label: Texte
     type:  textarea
-	color:
-		label: Couleur
-		type: color

@@ -12,6 +12,6 @@ if ((string)$entry->end_date()):
 endif; ?>
 </h5>
 
-<p><?php echo $entry->text()->kirbyText() ?></p>
+<p><?php echo kirbytext($entry->text()) ?></p>
 
 <?php snippet('part-manifestations', array('entry' => $entry)) ?>

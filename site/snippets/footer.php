@@ -1,7 +1,7 @@
   <footer class="footer cf" role="contentinfo">
 
     <div class="copyright">
-      <?php echo $site->copyright()->kirbytext() ?>
+      <?php echo kirbytext($site->copyright()) ?>
     </div>
 
     <div class="colophon">

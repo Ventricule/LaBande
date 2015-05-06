@@ -19,8 +19,8 @@
 						<div class="nav pagination">
 							<span class="number">1</span><span class="slash">/</span><span class="total"></span>
 						</div>
-						<div class="nav icon-left-open-big nomobile prev-slide"></div>
-						<div class="nav icon-right-open-big nomobile next-slide"></div>
+						<div class="nav nomobile prev-slide"><div class="icon-left-open-big"></div></div>
+						<div class="nav nomobile next-slide"><div class="icon-right-open-big"></div></div>
 						<div class="nav icon-search mobile fullscreen"></div>
 					</section>
 				<?php elseif($images->count() == 1): ?>

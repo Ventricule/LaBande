@@ -1,7 +1,7 @@
 <header class="header cf" role="banner">
 	<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
 </header>
-<p><?php echo $entry->text() ?></p>
+<p><?php echo kirbytext($entry->text())  ?></p>
 
 
 <h3 class="avenir-title">Événements à venir :</h3>

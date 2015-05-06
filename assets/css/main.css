@@ -361,7 +361,7 @@ main figure img {
 }
 #splash figcaption {
 	position: absolute;
-	bottom: 17px;
+	bottom: 10%;;
 	width: 100%;
 	text-align: center;
 	padding: 0px 55px;
@@ -402,10 +402,10 @@ figure:hover .nav.fullscreen, .gallery:hover .nav.fullscreen, .gallery:hover .na
 	left: 15px;
 }
 #splash .nav.pagination{
-  bottom: 17px;
-  left: 15px;
-  position: absolute;
-  z-index: 1;
+	bottom: 10%;
+	right: 20px;
+	position: absolute;
+	z-index: 1;
 }
 main .nav.fullscreen{
 	right: 8px;
@@ -427,17 +427,16 @@ main .nav.fullscreen{
 }
 .gallery .nav.prev-slide, .gallery .nav.next-slide{
 	font-size: 25px;
-	top: 50%;
-	margin-top: -21%;
-	width: 4rem;
-	height: 12rem;
-	line-height: 12rem;
+	top: 15%;
+	height: 70%;
+	bottom: 15%;
+	width: 20%;
 }
 #splash .nav.prev-slide, #splash .nav.next-slide{
 	font-size: 35px;
-	width: 8rem;
+	width: 20%;
 	top: 15%;
-	height: 80%;
+	height: 70%;
 	bottom: 15%;
 	position: absolute;
 	z-index: 99;

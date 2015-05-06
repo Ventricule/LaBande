@@ -50,7 +50,7 @@ endif;
 						<span class="icon-home"><?php echo $lieuName ?></span><br>
 						<span class="icon-map"><?php echo $adress ?></span>
 					</h5>
-					<p class="text"><?php echo $manifestation->text() ?></p>
+					<p class="text"><?php echo kirbytext($manifestation->text())  ?></p>
 					
 				</div>
 			</li>

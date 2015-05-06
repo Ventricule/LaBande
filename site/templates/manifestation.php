@@ -10,7 +10,7 @@
     </ul>
 
     <div class="text">
-      <?php echo $page->text()->kirbytext() ?>
+      <?php echo kirbytext($page->text()) ?>
 
       <?php foreach($page->images()->sortBy('sort', 'asc') as $image): ?>
       <figure>
