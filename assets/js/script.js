@@ -349,11 +349,11 @@ $(document).ready(function(){
 			if (path.length>1) {
 				directions.setWaypoints( arrayOfLatLngs );
 			} else {
-				directions.setWaypoints( [] );
+				//directions.setWaypoints( [] );
 			}
 		} else {
-			directions.setWaypoints( [] );
-			map.removeLayer(directions);
+			//directions.setWaypoints( [] );
+			//map.removeLayer(directions);
 		}
 	}
 	
