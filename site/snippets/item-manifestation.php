@@ -33,7 +33,14 @@ if ( $entry->parcours() != '' ) {
 }
 //
 ?>
-
+<!--
+<?php if($parcours){ 
+	$parc = $entry->parcours()->split(':'); ?>
+	<div class="parcours-meta">
+		<span class="small-circle mapLink mapFit mapController" style="background-color:<?php echo $color; ?>" data-type="manifestations" data-uid="<?php echo $entry->uid() ?>"></span>
+		<span class="parcours-name">Dans le cadre de <?php echo $parc[1]; ?></span>
+	</div>
+<?php } ?> -->
 <div class="circle icon-right-open-big top-right-button mapLink mapFit mapController" style="background-color:<?php echo $color; ?>" data-type="manifestations" data-uid="<?php echo $entry->uid() ?>"></div>
 
 <h5 class="collapse">

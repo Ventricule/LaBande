@@ -9,8 +9,9 @@
 							<?php foreach($images as $image): ?>
 								<figure class="swiper-slide" data-index="">
 									<img src="<?php echo thumb($image, array('width' => 500, 'crop' => false))->url(); ?>" data-src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
-									<?php if ($caption = $image->caption()): ?>
-										<figcaption><?php echo $caption ?></figcaption>
+									<?php $caption = $image->caption();
+									if ($caption != ""): ?>
+										<figcaption class="mobile"><?php echo $caption ?></figcaption>
 									<?php endif ?>
 								</figure>
 							<?php endforeach ?>
@@ -18,17 +19,18 @@
 						<div class="nav pagination">
 							<span class="number">1</span><span class="slash">/</span><span class="total"></span>
 						</div>
-						<div class="nav icon-left-open-big prev-slide"></div>
-						<div class="nav icon-right-open-big next-slide"></div>
-						<div class="nav icon-search fullscreen"></div>
+						<div class="nav icon-left-open-big nomobile prev-slide"></div>
+						<div class="nav icon-right-open-big nomobile next-slide"></div>
+						<div class="nav icon-search mobile fullscreen"></div>
 					</section>
 				<?php elseif($images->count() == 1): ?>
 					<figure>
 						<img src="<?php echo $images->first()->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
-						<?php if ($caption = $image->caption()): ?>
-							<figcaption><?php echo $caption ?></figcaption>
+						<?php $caption = $image->caption();
+						if ($caption != ""): ?>
+							<figcaption class="mobile"><?php echo $caption ?></figcaption>
 						<?php endif ?>
-						<div class="nav icon-search fullscreen" style="color:<?php echo $entry->parent()->color() ?>"></div>
+						<div class="nav icon-search mobile fullscreen" style="color:<?php echo $entry->parent()->color() ?>"></div>
 					</figure>
 				<?php elseif(!$first): ?>
 					<hr>

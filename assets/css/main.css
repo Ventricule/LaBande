@@ -286,7 +286,14 @@ nav{
 	#bande2{
 		opacity: 0;
 	}
-
+	.mobile{
+		visibility: visible !important;
+		opacity: 1 !important;
+	}
+	.nomobile{
+		visibility: hidden; !important;
+		opacity: 0 !important;
+	}
 }
 
 
@@ -468,6 +475,16 @@ main .circle {
 	display: inline-block;
 	overflow: hidden;
 }
+main .small-circle {
+	width: 24px;
+	height: 24px;
+	border-radius: 24px;
+	text-align: center;
+	line-height: 24px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+	display: inline-block;
+	overflow: hidden;
+}
 main .circle::before {
 	margin: 0;
 	line-height: 33px;
@@ -486,6 +503,12 @@ main .mapFit::before {
 	line-height: 34px;
 	margin: 0;
 	padding-left: 1px;
+}
+.parcours-meta{
+	margin-top: 10px;
+}
+.parcours-name {
+	vertical-align: super;
 }
 
 /* Bottom Buttons Bar */
