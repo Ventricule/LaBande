@@ -394,6 +394,7 @@ $(document).ready(function(){
 	----------------------------------------------- */
 	var directions = L.Routing.control({
 		waypoints: [],
+		fitSelectedRoutes: false,
 		router: L.Routing.graphHopper('2dfa30e1-ef46-454f-872c-b1c7f7c30bdc', { urlParameters: {locale:'fr', vehicle:'foot'}})
 	}).addTo(map);
 	
