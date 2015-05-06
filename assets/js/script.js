@@ -95,7 +95,6 @@ $(document).ready(function(){
 	// Catch url changement
 	History.Adapter.bind(window,'statechange',function(){
 		var State = History.getState();
-		//slideView(State.data.rubrique, State.data.item, State.data.slideDirection, true);
 	});
 	
 	
@@ -227,15 +226,16 @@ $(document).ready(function(){
 	// Couleurs du ver
 	var colors = ['#FFE138', '#45FF7A', '#FF6A45', '#8ABBFF', '#3C1E1E'];
 	
+	var ver = new L.FeatureGroup();
+	map.addLayer(ver);
+	
 	// Dessin du ver
-	var polyline = [];
 	/*var stroke = L.polyline(labande, {
 		color: '#ddd',
 		lineCap: 'butt',
 		opacity: 1,
 		weight:18
-	}).addTo(map);
-	polyline.push(stroke);*/
+	}).addTo(ver);*/
 	colors.forEach(function(color, index) {
 		dashSize = 20;
 		iteration = index;
@@ -248,8 +248,7 @@ $(document).ready(function(){
 			lineCap: 'butt',
 			opacity: 1,
 			weight:15
-		}).addTo(map);
-		polyline.push(line);
+		}).addTo(ver);
 	});
 	
 	// Hide/Show place name depending on zoom
@@ -319,7 +318,8 @@ $(document).ready(function(){
 				var key = layer.feature.properties[property];
 				if (key.constructor === Array) {
 					if (layer.feature.properties[property].indexOf(value)!== -1) {
-						arrayOfLatLngs.push(layer.getLatLng());
+						var coordinates = layer.feature.geometry.coordinates ;
+						arrayOfLatLngs.push(L.latLng( coordinates.reverse() ));
 						spiderfyCluster(layer)
 						selectMarker(layer);
 					} else {
@@ -327,7 +327,8 @@ $(document).ready(function(){
 					}
 				} else {
 					if (layer.feature.properties[property] == value) {
-						arrayOfLatLngs.push(layer.getLatLng());
+						var coordinates = layer.feature.geometry.coordinates ;
+						arrayOfLatLngs.push(L.latLng(coordinates.reverse()));
 						spiderfyCluster(layer)
 						selectMarker(layer);
 					} else {
@@ -335,13 +336,24 @@ $(document).ready(function(){
 					}
 				}
 			}
-	});
+		});
 		if(arrayOfLatLngs.length && zoom) {
 			//var maxZoom = zoom ? 15 : map.getZoom();
 			var bounds = new L.LatLngBounds(arrayOfLatLngs);
 			map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
 		} else if (zoom) {
 			map.setView([48.87,2.4], 12);
+		}
+		if(property=='parcours'){
+			path = uniqBy(arrayOfLatLngs, JSON.stringify);
+			if (path.length>1) {
+				directions.setWaypoints( arrayOfLatLngs );
+			} else {
+				directions.setWaypoints( [] );
+			}
+		} else {
+			directions.setWaypoints( [] );
+			map.removeLayer(directions);
 		}
 	}
 	
@@ -375,7 +387,6 @@ $(document).ready(function(){
 		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
 			//var bounds = markers;
 			//bounds.push(lc);
-			console.log(context);
 	  //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
 	},
 		icon: 'locate-button icon-target',
@@ -394,44 +405,42 @@ $(document).ready(function(){
 	----------------------------------------------- */
 	var directions = L.Routing.control({
 		waypoints: [],
-		fitSelectedRoutes: false,
+		createMarker: function(waypointIndex, waypoint, numberOfWaypoints) {
+				/*return new L.marker(waypoint.latLng, {
+					icon: new L.DivIcon({ 
+						className:"GPSicon", 
+						html: 'AAA' 
+					})
+				})*/
+		},
+		lineOptions: {    
+			styles: 
+				[
+					{color: 'black', opacity: 0.15, weight: 9}, //sombra
+					{color: 'white', opacity: 0.8, weight: 6}, // Contorno
+					{color: 'blue', opacity: 1, weight: 4} // Centro
+				]
+		},
+		//fitSelectedRoutes: false,
+		autoroute: false,
+		show: false,
 		router: L.Routing.graphHopper('2dfa30e1-ef46-454f-872c-b1c7f7c30bdc', { urlParameters: {locale:'fr', vehicle:'foot'}})
 	}).addTo(map);
-	
-	directions.setWaypoints([ L.latLng([48.8755312,2.414216300000021]), L.latLng([48.847067028875536,2.411069869995117]) ])
-	
-	/*var directionsLayer = L.mapbox.directions.layer(directions)
-		.addTo(map);
-
-	var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
-		.addTo(map);
-	
-	
-	directions
-				.setOrigin(L.latLng([48.8755312,2.414216300000021]))
-				.setDestination(L.latLng([48.847067028875536,2.411069869995117]))
-				//.setDestination(toLatLng( destination ))
-				//.setWaypoints(L.latLng(''))
-				.query();
 
 	function toLatLng(waypoint) {
 		return L.latLng(waypoint.split(','));
 	}
 
-	$('.button-gps').click(function() {
+	$('.mapGPS').click(function() {
+		var $this = $(this);
+		$this.addClass('icon-cog animate-spin');
 		lc.start();
 		var destination = $(this).attr('data-coordinates');
-		map.on('locationfound', function(e) { 
-			console.log('from : '+[e.latitude, e.longitude]);
-			console.log('to : '+destination);
-			
-			directions
-				.setOrigin(L.latLng([e.latitude, e.longitude]))
-				.setDestination(toLatLng( destination ))
-				//.setWaypoints(L.latLng(''))
-				.query();
+		map.once('locationfound', function(e) { 
+			directions.setWaypoints( [ L.latLng([e.latitude, e.longitude]), toLatLng( destination ) ] );
+			$this.removeClass('icon-cog animate-spin');
 		}, lc);
-	});*/
+	});
 	
 	
 	
@@ -579,10 +588,14 @@ $(document).ready(function(){
 		$(this).children().show();
 	});
 	
-	/* Parcours
+	/* ShowOnMap
 	---------------------------------------------- */
-	$('.parcoursSelect').click(function(){
-		selectMarkers('parcours', $(this).attr('data-parcours'));
+	$('.mapFit').click(function(){
+		var type = $(this).attr('data-type');
+		var uid = $(this).attr('data-uid');
+		if(type && uid){
+			selectMarkers(type, uid);
+		}
 	});
 	
 }); // END OF JQUERY
@@ -659,3 +672,13 @@ $.fn.scrollEnd = function(callback, timeout) {
 	$this.data('scrollTimeout', setTimeout(callback,timeout));
   });
 };
+
+/* Uniq
+---------------------------------------------- */
+function uniqBy(a, key) {
+    var seen = {};
+    return a.filter(function(item) {
+        var k = key(item);
+        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    })
+}
