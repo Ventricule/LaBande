@@ -8,7 +8,6 @@ $(document).ready(function(){
 	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId;
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
-	var activebox = new Bande($('#bande3'));
 
 	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
 	var nextRubrique = activeRubrique, nextItem = activeItem, oldItem, direction = 'next';
@@ -521,7 +520,6 @@ $(document).ready(function(){
 				speed: 500,
 				slideActiveClass: 'activeImg',
 				slideDuplicateClass: 'duplicateImg',
-				slideToClickedSlide: true,
 				resistanceRatio : 0.9,
 				keyboardControl: true,
 				lazyLoading: true,

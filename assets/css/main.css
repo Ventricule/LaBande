@@ -117,19 +117,6 @@ p {
 .header {
   margin: -.5rem -1.5rem 2em -2rem;
 }
-.logo {
-	display: block;
-	margin-bottom: 1.5em;
-	font-family: "leucadiaregular", serif;
-	text-align: center;
-	font-size: 1rem;
-	-ms-transform: rotate(-90deg); /* IE 9 */
-	-webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
-	transform: rotate(-90deg);
-	position: absolute;
-	left: -20px;
-	top: 90px;
-}
 
 /* Links
 -------------------------------------------------- */
@@ -364,7 +351,6 @@ main figure img {
 	width: 100%;
 	text-align: center;
 	padding: 0px 55px;
-
 }
 .gallery figcaption {
 	position: absolute;
@@ -456,9 +442,7 @@ main .nav.fullscreen{
 	margin: 0;
 }
 /* Text blocks */
-.text ul,
-.text ol,
-.text li {
+ul, ol, li {
 	list-style: none;
 }
 
@@ -522,12 +506,7 @@ main .small-circle:before{
 	margin: 0;
 	line-height: 25px;
 }
-.parcours-meta{
-	margin-top: 10px;
-}
-.parcours-name {
-	vertical-align: super;
-}
+
 
 /* Bottom Buttons Bar */
 .bottom-buttons-bar {
@@ -578,9 +557,6 @@ ul.avenir li.item-avenir{
 	margin: 0 -1rem;
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 	position: relative;
-}
-.meta-avenir {
-	margin-bottom: 2rem;
 }
 .dateBloc{
 	display: inline-block;
