@@ -46,6 +46,8 @@ foreach($data as $article) {
       "lieux" => $lieuUid,
       "lieuName" => $lieuName,
 			"parcours" => $parcoursList,
+			"color" => $color,
+			"location" => $coordinates,
 			"divIcon" => array(
 				"labelAnchor"=> [10, 0],
 				"className"=> "div-icon",

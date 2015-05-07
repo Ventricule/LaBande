@@ -312,23 +312,24 @@ $(document).ready(function(){
 	
 	// Select markers by property=>value and fitBounds
 	function selectMarkers(property, value, zoom) {
-		var arrayOfLatLngs = [];
+		var arrayOfLatLngs = [], color;
 		markers.eachLayer(function(layer) {
 			if(''+property+'' in layer.feature.properties) {
 				var key = layer.feature.properties[property];
 				if (key.constructor === Array) {
 					if (layer.feature.properties[property].indexOf(value)!== -1) {
-						var coordinates = layer.feature.geometry.coordinates ;
-						arrayOfLatLngs.push(L.latLng( coordinates.reverse() ));
+						var coordinates = layer.feature.properties.location	 ;
+						arrayOfLatLngs.push(toLatLng(coordinates));
 						spiderfyCluster(layer)
 						selectMarker(layer);
+						color = layer.feature.properties.color;
 					} else {
 						deselectMarker(layer);
 					}
 				} else {
 					if (layer.feature.properties[property] == value) {
-						var coordinates = layer.feature.geometry.coordinates ;
-						arrayOfLatLngs.push(L.latLng(coordinates.reverse()));
+						var coordinates = layer.feature.properties.location	 ;
+						arrayOfLatLngs.push(toLatLng(coordinates));
 						spiderfyCluster(layer)
 						selectMarker(layer);
 					} else {
@@ -347,13 +348,12 @@ $(document).ready(function(){
 		if(property=='parcours'){
 			path = uniqBy(arrayOfLatLngs, JSON.stringify);
 			if (path.length>1) {
-				directions.setWaypoints( arrayOfLatLngs );
+				drawRoute( arrayOfLatLngs, color );
 			} else {
-				//directions.setWaypoints( [] );
+				removeRoute();
 			}
 		} else {
-			//directions.setWaypoints( [] );
-			//map.removeLayer(directions);
+			removeRoute();
 		}
 	}
 	
@@ -403,29 +403,34 @@ $(document).ready(function(){
 	
 	/* Direction
 	----------------------------------------------- */
+	var routeColor = "#000000";
+	
 	var directions = L.Routing.control({
 		waypoints: [],
 		createMarker: function(waypointIndex, waypoint, numberOfWaypoints) {
-				/*return new L.marker(waypoint.latLng, {
-					icon: new L.DivIcon({ 
-						className:"GPSicon", 
-						html: 'AAA' 
-					})
-				})*/
 		},
-		lineOptions: {    
-			styles: 
-				[
-					{color: 'black', opacity: 0.15, weight: 9}, //sombra
-					{color: 'white', opacity: 0.8, weight: 6}, // Contorno
-					{color: 'blue', opacity: 1, weight: 4} // Centro
-				]
+		routeLine: function(route, options) { 
+			return L.Routing.line(route, {
+				styles:
+					[
+						{color: 'black', opacity: 0.15, weight: 9}, //sombra
+						{color: 'white', opacity: 0.8, weight: 6}, // Contorno
+						{color: routeColor, opacity: 1, weight: 4} // Centro
+					] 
+				});
 		},
-		//fitSelectedRoutes: false,
 		autoroute: false,
 		show: false,
 		router: L.Routing.graphHopper('2dfa30e1-ef46-454f-872c-b1c7f7c30bdc', { urlParameters: {locale:'fr', vehicle:'foot'}})
 	}).addTo(map);
+	
+	function drawRoute(waypoints, color) {
+		routeColor = "#"+color;
+		waypoints.length>1 ? directions.setWaypoints(waypoints) : false;
+	}
+	function removeRoute() {
+		directions._clearLine();
+	}
 
 	function toLatLng(waypoint) {
 		return L.latLng(waypoint.split(','));
