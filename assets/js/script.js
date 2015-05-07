@@ -186,7 +186,7 @@ $(document).ready(function(){
 	var getItemAtTop = function () {
 		var itemAtTop;
 		$('main .item').removeClass('active').each(function() {
-			if ( $(this).offset().top > $(window).scrollTop() - parseInt($(this).height() - 10 ) ) {
+			if ( $(this).offset().top > $(window).scrollTop() - parseInt($(this).height() - 50 ) ) {
 				$(this).addClass('active');
 				var $this = $(this);
 				itemAtTop = $this;
@@ -275,7 +275,7 @@ $(document).ready(function(){
 				slideMapTo(marker.feature.properties.uid, false);
 			});
 			marker.setIcon(L.divIcon(marker.feature.properties.divIcon));
-			marker.bindLabel(marker.feature.properties.title, {className:'map-etiquette'})
+			marker.bindLabel('<span class="map-etiquette-date">'+marker.feature.properties.date+'</span> '+marker.feature.properties.title, {className:'map-etiquette'})
 			marker.addTo(markers);
 		});
 	}
@@ -322,7 +322,7 @@ $(document).ready(function(){
 						arrayOfLatLngs.push(toLatLng(coordinates));
 						spiderfyCluster(layer)
 						selectMarker(layer);
-						color = layer.feature.properties.color;
+						color = "#"+layer.feature.properties.color;
 					} else {
 						deselectMarker(layer);
 					}
@@ -381,7 +381,7 @@ $(document).ready(function(){
 	----------------------------------------------- */
 	var lc = L.control.locate({
 		position: 'bottomright',
-		//follow: true,
+		follow: true,
 		setView: false,
 		keepCurrentZoomLevel: true,
 		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
@@ -413,8 +413,8 @@ $(document).ready(function(){
 			return L.Routing.line(route, {
 				styles:
 					[
-						{color: 'black', opacity: 0.15, weight: 9}, //sombra
-						{color: 'white', opacity: 0.8, weight: 6}, // Contorno
+						{color: 'black', opacity: 0.1, weight: 9}, //sombra
+						{color: 'white', opacity: 0.9, weight: 6}, // Contorno
 						{color: routeColor, opacity: 1, weight: 4} // Centro
 					] 
 				});
@@ -425,7 +425,7 @@ $(document).ready(function(){
 	}).addTo(map);
 	
 	function drawRoute(waypoints, color) {
-		routeColor = "#"+color;
+		routeColor = color;
 		waypoints.length>1 ? directions.setWaypoints(waypoints) : false;
 	}
 	function removeRoute() {
@@ -442,7 +442,7 @@ $(document).ready(function(){
 		lc.start();
 		var destination = $(this).attr('data-coordinates');
 		map.once('locationfound', function(e) { 
-			directions.setWaypoints( [ L.latLng([e.latitude, e.longitude]), toLatLng( destination ) ] );
+			drawRoute([ L.latLng([e.latitude, e.longitude]), toLatLng( destination ) ], '#FF6A45')
 			$this.removeClass('icon-cog animate-spin');
 		}, lc);
 	});

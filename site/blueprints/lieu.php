@@ -10,6 +10,17 @@ fields:
   text:
     label: Présentation
     type:  textarea
+	infos:
+		label: Informations pratiques
+		type: headline
+	schedule:
+		label: Horaires
+		type: text
+		width: 1/2
+	price:
+		label: Tarifs d'entrée
+		type: text
+		width: 1/2
 	website:
 		label: Site internet
 		type: url
@@ -28,14 +39,6 @@ fields:
 		width: 1/2
 	transport:
 		label: Transports
-		type: text
-		width: 1/2
-	schedule:
-		label: Horaires
-		type: text
-		width: 1/2
-	price:
-		label: Tarif (ou Entrée libre)
 		type: text
 		width: 1/2
 	location:

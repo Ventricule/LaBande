@@ -181,7 +181,6 @@ h1 a, h2 a, h3 a, h4 a {
 }
 
 
-
 /* Navigation
 -------------------------------------------------- */
 nav{
@@ -689,6 +688,9 @@ ul.avenir li.item-avenir{
     position: absolute;
     top: 0px;
 }
+.leaflet-label.map-etiquette .map-etiquette-date {
+	color: rgba(0,0,0,.6);
+}
 .div-icon {
 	background: none;
 	border: 0;
@@ -759,4 +761,7 @@ ul.avenir li.item-avenir{
 	vertical-align: middle !important;
 	line-height: 25px !important;
 	font-size: 19px !important;
+}
+.leaflet-routing-container {
+	display: none;
 }

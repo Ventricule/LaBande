@@ -13,4 +13,4 @@ fields:
   number:
     label: Nombre d'événements à afficher
     type: number
-    width: 1/2
+    width: 1/4

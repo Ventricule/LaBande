@@ -10,17 +10,20 @@ files:
 			type: textarea
 fields:
 	title:
-		label: Title
+		label: Titre
 		type:  text
-		begin_date:
-			label: Date de début
-			type: date
-		end_date:
-			label: Date de fin
-			type: date
-		color:
-			label: Couleur
-			type: color
-		text:
-			label: Présentation
-			type:  textarea
+	begin_date:
+		label: Date de début
+		type: date
+		width:1/4
+	end_date:
+		label: Date de fin
+		type: date
+		width:1/4
+	color:
+		label: Couleur
+		type: color
+		width:1/4
+	text:
+		label: Présentation
+		type:  textarea

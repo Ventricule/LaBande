@@ -4,8 +4,7 @@ header('Content-type: application/json; charset=utf-8');
 $data = $pages->find('manifestations')->children()->visible();
 $json = array();
 
-foreach($data as $article) {
-  
+foreach($data as $article) { 
   $coordinates;
   $lieuUid = (string)$article->lieu();
   $emplacement = (string)$article->location();
@@ -42,6 +41,7 @@ foreach($data as $article) {
       "uid" => (string)$article->uid(),
       "manifestations" => (string)$article->uid(),
       "hash" => (string)$article->hash(),
+      "date" => (string)$article->date('d/m'),
 			"zoom" => 14,
       "lieux" => $lieuUid,
       "lieuName" => $lieuName,

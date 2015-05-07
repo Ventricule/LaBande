@@ -23,3 +23,18 @@ Time: 10:00
 ----
 
 Locationname: 
+
+----
+
+Parcours: 
+
+- 
+  parcours: parcours-avril
+
+----
+
+Price: 
+
+----
+
+Transport: 

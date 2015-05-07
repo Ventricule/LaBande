@@ -10,20 +10,31 @@ files:
 			type: textarea
 fields:
 	title:
-		label: Title
+		label: Titre
 		type:  text
+	text:
+		label: Texte
+		type:  textarea
+	infos:
+		label: Informations pratiques
+		type: headline
 	date:
 		label: Date
 		type: date
-		width: 1/2
+		width: 1/4
 	time:
 		label: Heure
 		type: time
 		interval: 15
-		width: 1/2
-	text:
-		label: Text
-		type:  textarea
+		width: 1/4
+	price:
+		label: Tarif
+		type: text
+		width: 1/4
+	transport:
+		label: Transports
+		type: text
+		width: 1/4
 	parcours:
 		label: Parcours
 		type: structure
@@ -34,14 +45,6 @@ fields:
 				options: query
 				query:
 					page: parcours
-	price:
-		label: Tarif (ou Entrée libre)
-		type: text
-		width: 1/2
-	transport:
-		label: Transports
-		type: text
-		width: 1/2
 	emplacement:
 		label: Géographie
 		type: headline
@@ -61,9 +64,9 @@ fields:
 	ou:
 		label: ou
 		type: info
-	location:
-		label: Emplacement
-		type: geolocation
 	locationName:
 		label: Nom de l'emplacement
 		type: text
+	location:
+		label: Emplacement
+		type: geolocation
