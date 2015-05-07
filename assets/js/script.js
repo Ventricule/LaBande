@@ -539,8 +539,10 @@ $(document).ready(function(){
 	});
 	$('#splashCross').on("click", function(){
 		$('#splash').removeClass('shown');
-		splash.destroy(true, true);
-		splash=null;
+		setTimeout(function() {
+			splash.destroy(true, true);
+			splash=null;			
+		}, 500);
 	});
 	$(document).keydown(function(e) {
 		if (e.keyCode == 27) { // escape key maps to keycode `27`

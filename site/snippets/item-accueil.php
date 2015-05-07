@@ -44,7 +44,7 @@
 						if ($m_time[0] >= 18){
 							echo 'Demain soir!';
 						} elseif ($m_time[0] > 12 && $m_time[0] < 18){
-							echo 'Demain après-midi!';
+							echo 'Demain!';
 						} else {
 							echo 'Demain!';
 						}

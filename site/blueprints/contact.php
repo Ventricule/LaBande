@@ -10,3 +10,5 @@ fields:
 	color:
 		label: Couleur
 		type: color
+
+		
