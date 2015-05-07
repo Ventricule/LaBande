@@ -9,6 +9,14 @@
 <ul class="avenir">
 	<?php 
 	foreach( page('manifestations')->children()->visible()->filterBy('date', '>', time())->sortBy('date', 'asc') as $manifestation): 
+		$parcours = $color = '';
+		if ( $manifestation->parcours() != '' ) {
+			$parcours = yaml($manifestation->parcours());
+			foreach($parcours as $thisParcours) {
+				$parcours = page('parcours')->children()->find($thisParcours['parcours']);
+				$color = $parcours->color();
+			}
+		}
 		date_default_timezone_set('Europe/Paris');
 		$m_time = explode(":",$manifestation->time());
 		$m_sec = $m_time[0]*60*60+$m_time[1]*60;
@@ -27,14 +35,9 @@
 
 		if ( $day_count <= $entry->number()->int()  ): ?>
 			<li class='item-avenir'>
-				<!--<span class="dateBloc">
-					<div class="dateWrap">
-						<div class="day"><?php echo $manifestation->date('d') ?></div>
-						<?php $month = ucfirst(strftime('%B', $manifestation->date())); ?>
-						<div class="month"><?php echo str::lower($month); ?></div>	
-					</div>			
-				</span>-->
+
 				<span class="dateBloc">
+					<div class="dateWrap">
 					<?php if ($subj_count > 1 ){ 
 						echo 'Dans '.$subj_count.' jours'; 
 					} elseif ($subj_count == 1){
@@ -56,9 +59,11 @@
 							}
 						} 
 					}?>
+					</div>
 				</span>
 				<span class="sideBloc">
 					<h4><?php echo html($manifestation->title()) ?></h4>
+					<span class="scroll-button"><span class="small-circle" style="background-color:<?php echo $entry->parent()->color(); ?>">⬂</span></span>
 					
 					<?php
 						$journum = ucfirst(strftime('%d', $manifestation->date()));
@@ -75,13 +80,6 @@
 					<div class="entry-date icon-calendar"><?php echo $date ?></div> 
 					<div class="entry-time icon-clock"><?php echo $heure ?></div>
 
-
-		<!--			<?php if($image = $manifestation->images()->sortBy('sort', 'asc')->first()): ?>
-						<figure class="head preview">
-							<img src="<?php echo $image->url() ?>" alt="<?php echo $manifestation->title()->html() ?>" >
-						</figure>
-					<?php endif ?>
-		-->
 					<?php 
 						$lieu = $manifestation->lieu();
 						$price = (string)$manifestation->price();

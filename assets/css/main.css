@@ -502,6 +502,24 @@ main .mapFit::before {
 	margin: 0;
 	padding-left: 1px;
 }
+main .scroll-button{
+	cursor: pointer;
+	color: white;
+	position: absolute;
+	bottom: 18px;
+	right: 20px;
+}
+main .scroll-button .small-circle{
+	background: #422222;
+	font-size: 17px;
+	line-height: 22px;
+	color: red;
+	border: 1px solid;
+}
+main .small-circle:before{
+	margin: 0;
+	line-height: 25px;
+}
 .parcours-meta{
 	margin-top: 10px;
 }
@@ -568,31 +586,24 @@ ul.avenir li.item-avenir{
 	font-size: 20px;
 	line-height: 1.2em;
 	position: absolute;
-	width: 100px;
-	-webkit-transform: rotate(-45deg);
-	-moz-transform: rotate(-45deg);
-	-o-transform: rotate(-45deg);
-	transform: rotate(-45deg);
+	width: 110px;
+	color: red;
+	height: 100%
 }
 .dateWrap{
 	position: absolute;
 	text-align: center;
-	height: 90px;
+	height: 40px;
 	width: 90px;
 	top: 50%;
 	left: 50%;
-	margin-top: -45px;
+	margin-top: -35px;
 	margin-left: -45px;
-}
-.dateBloc .day{
-	border-bottom: 1px solid rgba(0,0,0,.4);
-	padding-bottom: 5px;
-}
-.dateBloc .month{
-	font-size: 18px;
-}
-.dateBloc .day, .dateBloc .month{
-	text-align: center;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+
 }
 .sideBloc {
 	display: inline-block;

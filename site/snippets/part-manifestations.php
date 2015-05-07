@@ -25,6 +25,7 @@ endif;
 				</p>
 				<div class="full-text">
 					<h4><?php echo $manifestation->title(); ?></h4>
+					<span class="scroll-button"><span class="small-circle">⤸</span></span>
 					<?php 
 					$lieu = $manifestation->lieu();
 					if ( (string)$lieu ) {
