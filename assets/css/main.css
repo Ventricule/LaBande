@@ -504,10 +504,12 @@ main .mapFit::before {
 }
 main .scroll-button{
 	cursor: pointer;
-	color: white;
+	color: red;
 	position: absolute;
 	bottom: 18px;
-	right: 20px;
+	right: 15px;
+	font-size: 20px;
+	transform: rotate(-45deg);
 }
 main .scroll-button .small-circle{
 	background: #422222;

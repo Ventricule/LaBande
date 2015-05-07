@@ -63,8 +63,8 @@
 				</span>
 				<span class="sideBloc">
 					<h4><?php echo html($manifestation->title()) ?></h4>
-					<span class="scroll-button"><span class="small-circle" style="background-color:<?php echo $entry->parent()->color(); ?>">⬂</span></span>
-					
+					<!--<span class="scroll-button"><span class="small-circle" style="background-color:<?php echo $entry->parent()->color(); ?>">⬂</span></span>-->
+					<span class="scroll-button">Go⤵</span>
 					<?php
 						$journum = ucfirst(strftime('%d', $manifestation->date()));
 						if ( $journum < 10 ){ 
