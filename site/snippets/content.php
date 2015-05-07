@@ -8,7 +8,7 @@
 						<div class="swiper-wrapper">
 							<?php foreach($images as $image): ?>
 								<figure class="swiper-slide" data-index="">
-									<img src="<?php echo thumb($image, array('width' => 500, 'crop' => false))->url(); ?>" data-src="<?php echo $image->url() ?>" alt="<?php echo $entry->title()->html() ?>" >
+									<img src="<?php echo thumb($image, array('width' => 500, 'crop' => false))->url(); ?>" data-src="<?php echo thumb($image, array('width' => 1600, 'crop' => false))->url(); ?>" alt="<?php echo $entry->title()->html() ?>" >
 									<?php $caption = $image->caption();
 									if ($caption != ""): ?>
 										<figcaption class="mobile"><?php echo $caption ?></figcaption>

@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
 
-	var swiping = false, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId;
+	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId;
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 	var activebox = new Bande($('#bande3'));
@@ -455,11 +455,9 @@ $(document).ready(function(){
 		submenu.swiper.slidePrev(true, 600);
 	});
 	
+	
 	/* Image and slideshow
 	---------------------------------------------- */
-
-
-
 	var gallery = [];
 	$('main').find('section.gallery').each(function(index){
 		var $el = $(this), imgIndex = 0, total = $el.find('img').length;
@@ -486,9 +484,8 @@ $(document).ready(function(){
 		$el.find('.next-slide').on('click', function(){
 			gallery[index].slideNext();
 		});
-	})
+	});
 	
-
 	$('.nav.fullscreen').on("click", function(e){
 		e.preventDefault();
 		var s_total = $(this).parent().find('.pagination .total').text(), count = 0;
@@ -514,7 +511,7 @@ $(document).ready(function(){
 		} else {
 			$('#splash figure').addClass('swipable')
 			$('#splash .nav').show()
-			var splash = new Swiper('#splashContainer', {
+			splash = new Swiper('#splashContainer', {
 				mode:'horizontal',
 				loop: true,
 				speed: 500,
@@ -534,21 +531,18 @@ $(document).ready(function(){
 				var s_number = $('#splashContainer').find('figure.activeImg').attr('data-index')
 				$('#splashContainer').find('.pagination .number').text(s_number);
 			});
-			$('#splashCross').on("click", function(){
-				splash.destroy();
-			});
-			$(document).keydown(function(e) {
-				if (e.keyCode == 27) { splash.destroy(); }   // escape key maps to keycode `27`
-			});
 		};
-		$('#splashCross').on("click", function(e){
-			$('#splash').removeClass('shown');
-		});
-		$(document).keydown(function(e) {
-			if (e.keyCode == 27) { $('#splash').removeClass('shown'); }   // escape key maps to keycode `27`
-		});
 	});
-
+	$('#splashCross').on("click", function(){
+		$('#splash').removeClass('shown');
+		splash.destroy(true, true);
+		splash=null;
+	});
+	$(document).keydown(function(e) {
+		if (e.keyCode == 27) { // escape key maps to keycode `27`
+			$('#splashCross').click();
+		}
+	});
 
 
 
