@@ -497,8 +497,7 @@ $(document).ready(function(){
 		$('#splashWrapper').html('');
 
 		$(this).closest('li').find('figure').each(function(){
-			var img_src = $(this).find('img').attr('data-src');
-			$(this).clone().attr('src', img_src).appendTo($('#splashWrapper'));
+			$(this).clone().appendTo($('#splashWrapper'));
 			count += 1;
 		});
 		$('#splash').find('img').each(function(){

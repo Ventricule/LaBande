@@ -14,12 +14,24 @@ Location: 48.881935,2.4194519999999784
 
 ----
 
-Date: 2015-05-15
+Date: 2015-05-08
 
 ----
 
-Time: 13:00
+Time: 14:00
 
 ----
 
 Locationname: Place des Lilas
+
+----
+
+Parcours: 
+
+----
+
+Price: 
+
+----
+
+Transport: 

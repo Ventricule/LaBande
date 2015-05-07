@@ -564,30 +564,34 @@ ul.avenir li.item-avenir{
 }
 .dateBloc{
 	display: inline-block;
-	font-size: 40px;
-	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 1.2em;
 	position: absolute;
-	height: 100%;
 	width: 100px;
-	margin-left: 1px;
-	min-height: 120px;
-	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 .dateWrap{
 	position: absolute;
 	text-align: center;
 	height: 90px;
-	width: 60px;
+	width: 90px;
 	top: 50%;
 	left: 50%;
 	margin-top: -45px;
-	margin-left: -30px;
+	margin-left: -45px;
 }
 .dateBloc .day{
-	border-bottom: 1px solid;
+	border-bottom: 1px solid rgba(0,0,0,.4);
+	padding-bottom: 5px;
+}
+.dateBloc .month{
+	font-size: 18px;
 }
 .dateBloc .day, .dateBloc .month{
-	padding: 2px 8px;
 	text-align: center;
 }
 .sideBloc {

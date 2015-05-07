@@ -11,6 +11,6 @@ fields:
     label: Texte
     type:  textarea
   number:
-    label: Nombre d'événements à afficher
+    label: Afficher les événements qui auront lieu d'ici (x) jours
     type: number
     width: 1/4
