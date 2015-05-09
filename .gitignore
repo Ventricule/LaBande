@@ -20,7 +20,8 @@ $RECYCLE.BIN/
 # Content
 # content
 thumbs
-site/accounts
+site/accounts/
+content
 
 # =========================
 # Operating System Files
