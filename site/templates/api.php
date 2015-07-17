@@ -8,7 +8,8 @@ foreach($data as $article) {
   $coordinates;
   $lieuUid = (string)$article->lieu();
   $emplacement = (string)$article->location();
-	$color='FFFFFF';
+	$color= str_replace('#','',(string)$article->parent()->color());
+  $icon= 'icon-flag';
 	$parcoursList = array();
 	if( (string)$article->parcours() ) {
 		$parcoursYaml = yaml($article->parcours());
@@ -51,7 +52,7 @@ foreach($data as $article) {
 			"divIcon" => array(
 				"labelAnchor"=> [10, 0],
 				"className"=> "div-icon",
-				"html"=> "<div style='background-color:#".$color.";'></div>"
+				"html"=> "<div class='icon $icon' style='background-color:#$color;'></div>"
 			)
     )
   );
