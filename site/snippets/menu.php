@@ -3,9 +3,9 @@
 	<div id="bande1" class="swiper-container">
 		<ul id="menu" class="swiper-wrapper">
 			<?php foreach($pages->visible() as $p): ?>
-			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-uid="<?php echo $p->uid() ?>" data-id="<?php echo $p->id() ?>" style="background-color:<?php echo $p->color() ?>">
+			<li class="swiper-slide" data-hash="<?php echo $p->hash() ?>" data-uid="<?php echo $p->uid() ?>" data-id="<?php echo $p->id() ?>" style="background-color:<?php echo $p->color() ?>; border-left-color:<?php echo $p->color() ?>; ">
 				<div class="box">
-					<span><?php echo $p->title()->html() ?></span>
+					<span style="background-color:<?php echo $p->color() ?>" ><?php echo $p->title()->html() ?></span>
 				</div>
 			</li>
 			<?php endforeach ?>

@@ -14,7 +14,7 @@ $(document).ready(function(){
 	
 	var slideShouldUpdateView = { menu:true, submenu:true, content:true };
 	
-	$('main .item').first().addClass('active');
+	$('main .item').first().addClass('active arrow');
 	
 	//----------------------------------------------
 	//                GRAND ORDONATEUR
@@ -140,6 +140,7 @@ $(document).ready(function(){
 				var direction, prevSlide, nextSlide;
 				
 				prevSlide = $(swiper.wrapper).find('.active');
+				$(swiper.wrapper).find('.arrow').removeClass('arrow');
 				swiper.update();
 				nextSlide = $(swiper.wrapper).find('.active');
 				nextSlideUid = nextSlide.attr('data-uid');
@@ -156,6 +157,8 @@ $(document).ready(function(){
 			},
 			onTransitionEnd: function(swiper){
 				var activeSlide = swiper.container.find('.active');
+				$(swiper.wrapper).find('.arrow').removeClass('arrow');
+				activeSlide.addClass('arrow');
 				swiper.slideTo( parseInt(activeSlide.attr('data-swiper-slide-index'))+listLength, 0, false);
 				swiper.update();
 			} 

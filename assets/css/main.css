@@ -177,7 +177,7 @@ nav{
 	left: 0;
 	width: 70px;
 	height: 100%;
-	z-index: 999;
+	z-index: 9999;
 	-webkit-backface-visibility: hidden;
 }
 #bande1, #bande2{
@@ -210,6 +210,7 @@ nav{
 #bande1 {
 }
 #bande2 {
+	display: none;
 	left: 35px;
 }
 #bande1:active, #bande2:active { 
@@ -220,6 +221,7 @@ nav{
 
 #menu, #submenu{
 	height: auto;
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 #submenu li {
 	background-color: #3C1E1E;
@@ -229,6 +231,49 @@ nav{
 	background-color: white;
 	color: #000;
 	border: 0;
+}
+li.swiper-slide:not(.active) {
+  color: rgba(0,0,0,.65);
+}
+#menu li.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+#menu li.active:before, #menu li.active:after {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  border-style: solid;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  right: 0;
+  border-color: transparent;
+}
+#menu li.active:after {
+  top: calc(50% - 15px);
+  border-width: 15px 0 15px 15px;
+  border-left-color: inherit;
+}
+#menu li.active:before {
+  top: calc(50% - 16px);
+  border-width: 16px 0px 16px 16px;
+  border-left-color: rgba(0,0,0,.18);
+  right: -1px;
+}
+#menu li.active.arrow:before, #menu li.active.arrow:after {
+  -webkit-transform: translateX(15px);
+  transform: translateX(15px);
 }
 
 #menu li, #submenu li {
@@ -296,7 +341,7 @@ main {
 	background: #fff;
 	position: absolute;
 	top: 0;
-	left: 70px;
+	left: 35px;
 	z-index: 999;
 	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
