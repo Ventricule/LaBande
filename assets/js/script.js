@@ -359,7 +359,7 @@ $(document).ready(function(){
 		}
 		if(property=='parcours'){
 			path = uniqBy(arrayOfLatLngs, JSON.stringify);
-      color = '#ff6a45';
+      color = $('#bande1 li[data-uid="parcours"]').css('background-color');
 			if (path.length>1) {
 				drawRoute( arrayOfLatLngs, color );
 			} else {
