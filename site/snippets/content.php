@@ -1,7 +1,7 @@
 <ul class="rubrique cf">
 <?php $first = true; 
 	foreach($pages->children() as $entry): ?>
-		<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
+		<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
 			<?php if($images = $entry->images()->sortBy('sort', 'asc')): ?>
 				<?php if($images->count() > 1): ?>
 					<section class="gallery " data-slide-uid="<?php echo $entry->uid() ?>" style="color:<?php echo $entry->parent()->color() ?>">

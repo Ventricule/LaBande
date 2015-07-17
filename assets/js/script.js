@@ -14,6 +14,7 @@ $(document).ready(function(){
 	
 	var slideShouldUpdateView = { menu:true, submenu:true, content:true };
 	
+
 	$('main .item').first().addClass('active');
 	
 	//----------------------------------------------
@@ -28,6 +29,8 @@ $(document).ready(function(){
 				itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 				slideSubMenuTo(itemUid, direction);
 				slideColumnTo(itemUid);
+								console.log("bang");
+
 				slideMapTo(itemUid);
 		break;
 	case 'submenu':
@@ -37,13 +40,13 @@ $(document).ready(function(){
 				slideColumnTo(uid);
 				slideMapTo(uid);
 		break;
-		case 'content':
+	case 'content':
 		slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
 				slideMapTo(uid);
 		break;
-		case 'map':
+	case 'map':
 		slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
@@ -78,10 +81,16 @@ $(document).ready(function(){
 	}
 	function slideColumnTo(uid) {
 		var item = $("main li.item[data-uid='"+uid+"']");
+		console.log(slideShouldUpdateView["content"]);
 		if(item.length && slideShouldUpdateView["content"]){
 			slideShouldUpdateView["content"]=false;
-			$('html,body').animate({scrollTop: item.offset().top + 1},750, function() { 
-				setTimeout(function() { slideShouldUpdateView["content"]=true;  },1000);
+			$('html,body').animate({scrollTop: item.offset().top + 1},1200, function() { 
+				slideShouldUpdateView["content"]=true;
+			});
+		} else if (item.length && slideShouldUpdateView["content"] == false){
+			slideShouldUpdateView["content"]=false;
+			$('html,body').stop().animate({scrollTop: item.offset().top + 1},1200, function() { 
+				slideShouldUpdateView["content"]=true;
 			});
 		};
 	}
@@ -158,7 +167,7 @@ $(document).ready(function(){
 				var activeSlide = swiper.container.find('.active');
 				swiper.slideTo( parseInt(activeSlide.attr('data-swiper-slide-index'))+listLength, 0, false);
 				swiper.update();
-			} 
+			}
 		});
 		
 	};
