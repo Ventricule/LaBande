@@ -28,4 +28,5 @@
 		<div id="splashCross" class="icon-cancel-circled"></div>
 	</div>
 
+	<div id="fwButton" class="circle icon-left-open-big"></div>
 <div id='errors'></div>

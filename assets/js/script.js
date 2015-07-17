@@ -471,8 +471,10 @@ $(document).ready(function(){
 	
 	/* Shortcuts
 	---------------------------------------------- */
-	$('#prev').click(function() {
-		submenu.swiper.slidePrev(true, 600);
+
+	$('.circle').click(function() {
+		$('#column, #map, nav').toggleClass('fullWidth');
+		$('#fwButton').toggleClass('shown');
 	});
 	
 	

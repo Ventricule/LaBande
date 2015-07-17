@@ -180,6 +180,17 @@ nav{
 	z-index: 9999;
 	-webkit-backface-visibility: hidden;
 }
+nav{
+	-webkit-transition: left 0.4s ease-in-out;
+	-moz-transition: left 0.4s ease-in-out;
+	-ms-transition: left 0.4s ease-in-out;
+	-o-transition: left 0.4s ease-in-out;
+	transition: left 0.4s ease-in-out;
+}
+nav.fullWidth{
+	left: -28%;
+}
+
 #bande1, #bande2{
 	height: 35px;
 	width: 35px;
@@ -323,8 +334,8 @@ li.swiper-slide:not(.active) {
 }
 
 @media screen and (max-width: 500px) {
-	main{
-		left: 35px !important;
+	main.fullWidth,	nav.fullWidth {
+  		left: -285px !important;
 	}
 	#bande2{
 		opacity: 0;
@@ -353,6 +364,14 @@ main {
 	left: 35px;
 	z-index: 999;
 	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
+	-webkit-transition: left 0.4s ease-in-out;
+	-moz-transition: left 0.4s ease-in-out;
+	-ms-transition: left 0.4s ease-in-out;
+	-o-transition: left 0.4s ease-in-out;
+	transition: left 0.4s ease-in-out;
+}
+main.fullWidth{
+	left: -28%;
 }
 main hr {
 	margin-bottom: 3rem;
@@ -504,7 +523,7 @@ ul, ol, li {
 }
 
 /* pictogrammes */
-main .circle {
+.circle {
 	width: 35px;
 	height: 35px;
 	border-radius: 35px;
@@ -514,7 +533,7 @@ main .circle {
 	display: inline-block;
 	overflow: hidden;
 }
-main .small-circle {
+.small-circle {
 	width: 24px;
 	height: 24px;
 	border-radius: 24px;
@@ -524,7 +543,7 @@ main .small-circle {
 	display: inline-block;
 	overflow: hidden;
 }
-main .circle::before {
+.circle::before {
 	margin: 0;
 	line-height: 33px;
 }
@@ -663,7 +682,21 @@ ul.avenir li.item-avenir{
 	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 }
-#splash.shown{
+#fwButton{
+	z-index: 9999999999999;
+	visibility: hidden;
+	opacity:0;
+	position: fixed;
+	background-color: #422222;
+	color: white;
+	top: 20px;
+	left: 20px;
+	-webkit-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-moz-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	-o-transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
+}
+#splash.shown, #fwButton.shown{
 	visibility:visible;
 	opacity:1;
 	-webkit-transition-delay:0s;
@@ -709,7 +742,25 @@ ul.avenir li.item-avenir{
 
 /* Map
 -------------------------------------------------- */
-#map { position:fixed; top:0; left:28%; right: 0; height: 100%; -webkit-backface-visibility: hidden; }
+#map { 
+	position:fixed; 
+	top:0; 
+	left: 15%; 
+	right: -15%; 
+	height: 100%; 
+	-webkit-backface-visibility: hidden; 
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+#map.fullWidth {
+	left: 0px;
+	right: 0px;
+}
+
+
 .mapbox-logo {	display: none !important; }
 
 .leaflet-label.map-etiquette {
