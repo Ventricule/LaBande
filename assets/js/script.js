@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
 
-	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId;
+	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId, autoUpdateMap=false, scrollTimer;
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	
 
 	$('main .item').first().addClass('active');
-	
+  
 	//----------------------------------------------
 	//                GRAND ORDONATEUR
 	//----------------------------------------------
@@ -44,7 +44,7 @@ $(document).ready(function(){
 		slideSubMenuTo(uid, direction);
 				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 				slideMenuTo(rubriqueUid, direction);
-				slideMapTo(uid);
+				slideMapTo(uid, autoUpdateMap);
 		break;
 	case 'map':
 		slideSubMenuTo(uid, direction);
@@ -54,6 +54,10 @@ $(document).ready(function(){
 		break;
 		} 
 	}
+  
+  function waitForPeace() {
+    
+  }
 	
 	function slideMenuTo(uid, direction) {
 		var activeRubrique = menu.container.find('.swiper-slide.active').attr('data-uid');
@@ -95,7 +99,7 @@ $(document).ready(function(){
 		};
 	}
 	function slideMapTo(uid, zoom){
-		zoom = typeof zoom !== 'undefined' ?  zoom : true;
+		zoom = typeof zoom !== 'undefined' ?  zoom : false;
 		var rubrique = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
 		selectMarkers(rubrique, uid, zoom);
 	}
@@ -219,8 +223,8 @@ $(document).ready(function(){
 	---------------------------------------------- */
 	L.mapbox.accessToken = 'pk.eyJ1Ijoic2FtdWVscm0iLCJhIjoicVJuNV9YMCJ9.7Bol-cHVhp6d_l-lVhPpew';
 	var map = L.mapbox.map('map', 'samuelrm.3e35d3f6', { zoomControl: false, attributionControl: false });
-	new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
-	map.setView([48.87,2.4], 12);
+	new L.Control.Zoom({ position: 'topright' }).addTo(map);
+	map.setView([48.87,2.4], 13);
 	
 	// Ver de terre
 	var labande = [[2.356138229370117,48.89832705920586],[2.37030029296875,48.89866560720992],[2.3703861236572266,48.89762174349946],[2.374334335327148,48.89756531781301],[2.375063896179199,48.89863739496384],[2.381715774536133,48.898750243852646],[2.3833465576171875,48.89615465495109],[2.384033203125,48.89612644128778],[2.3854494094848633,48.89745246624902],[2.3894834518432617,48.897424253318206],[2.3909854888916016,48.897283188425355],[2.3924875259399414,48.89691641784082],[2.3932600021362305,48.89731140143576],[2.3957920074462886,48.89748067916391],[2.397465705871582,48.894602879823296],[2.3986244201660156,48.89053982224059],[2.395534515380859,48.88969331034916],[2.396392822265625,48.88749231235858],[2.3967790603637695,48.88512189848095],[2.3969936370849605,48.8838237670766],[2.3977231979370113,48.883033583636895],[2.3993539810180664,48.88275137223991],[2.4005126953125,48.882553823314474],[2.4007701873779297,48.881735398025],[2.4002981185913086,48.8812838473048],[2.4001264572143555,48.880775847871554],[2.4018430709838867,48.87874379854197],[2.402658462524414,48.87840511562753],[2.405233383178711,48.87792531090653],[2.4060916900634766,48.877755966965],[2.4065637588500977,48.87741727736203],[2.4079370498657227,48.874792355184326],[2.4085378646850586,48.87312701056584],[2.4090957641601562,48.8678201189718],[2.40875244140625,48.86448891012796],[2.4102115631103516,48.855849318434906],[2.4114561080932617,48.84918508531922],[2.411069869995117,48.847067028875536],[2.409052848815918,48.847236476688]] ;
@@ -283,7 +287,7 @@ $(document).ready(function(){
 				slideMapTo(marker.feature.properties.uid, false);
 			});
 			marker.setIcon(L.divIcon(marker.feature.properties.divIcon));
-			marker.bindLabel('<span class="map-etiquette-date">'+marker.feature.properties.date+'</span> '+marker.feature.properties.title, {className:'map-etiquette'})
+			marker.bindLabel('<span class="map-etiquette-date">'+marker.feature.properties.date+'</span> '+marker.feature.properties.title, {className:'map-etiquette', clickable:1});
 			marker.addTo(markers);
 		});
 	}
@@ -351,10 +355,11 @@ $(document).ready(function(){
 			var bounds = new L.LatLngBounds(arrayOfLatLngs);
 			map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
 		} else if (zoom) {
-			map.setView([48.87,2.4], 12);
+			map.setView([48.87,2.4], 13);
 		}
 		if(property=='parcours'){
 			path = uniqBy(arrayOfLatLngs, JSON.stringify);
+      color = '#ff6a45';
 			if (path.length>1) {
 				drawRoute( arrayOfLatLngs, color );
 			} else {
@@ -370,11 +375,13 @@ $(document).ready(function(){
 		icon = marker.feature.properties.divIcon;
 		icon.className = "div-icon selected";
 		marker.setIcon(L.divIcon(icon));
+    marker.showLabel();
 	}
 	function deselectMarker(marker) {
 		icon = marker.feature.properties.divIcon;
 		icon.className = "div-icon";
 		marker.setIcon(L.divIcon(icon));
+    marker.hideLabel();
 	}
 	
 	// Spiderfy a markerCluster
@@ -387,19 +394,19 @@ $(document).ready(function(){
 	
 	/* Locate
 	----------------------------------------------- */
-	var lc = L.control.locate({
-		position: 'bottomright',
-		follow: true,
-		setView: false,
-		keepCurrentZoomLevel: true,
-		onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
-			//var bounds = markers;
-			//bounds.push(lc);
-	  //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
-	},
-		icon: 'locate-button icon-target',
-		iconLoading: 'locate-button animate-spin icon-target',
-	}).addTo(map);
+  var lc = L.control.locate({
+    position: 'topright',
+    follow: true,
+    setView: false,
+    keepCurrentZoomLevel: true,
+    onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
+    //var bounds = markers;
+    //bounds.push(lc);
+    //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+  },
+    icon: 'locate-button icon-target',
+    iconLoading: 'locate-button animate-spin icon-target',
+  }).addTo(map);
 	
 	/*map.on('startfollowing', function(e) { 
 		var bounds = labande;
@@ -601,7 +608,7 @@ $(document).ready(function(){
 		var type = $(this).attr('data-type');
 		var uid = $(this).attr('data-uid');
 		if(type && uid){
-			selectMarkers(type, uid);
+			selectMarkers(type, uid, true);
 		}
 	});
 	

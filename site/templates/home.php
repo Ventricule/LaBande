@@ -10,7 +10,11 @@
 		<div class="timeline"></div>
 	</main>
 
-	<div id='map'></div>
+	<div id='map'>
+    <nav class='menu-ui'>
+      <a href='#' id='autoFit' class='active'>Auto Fit</a>
+    </nav>
+  </div>
 
 	<div id='splash'>
 		<div id="splashContainer">
