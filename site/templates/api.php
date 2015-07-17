@@ -18,7 +18,7 @@ foreach($data as $article) {
 		$parcoursA = $parcoursList[0];
 		$parcoursA = page('parcours')->children()->find($parcoursA);
 		if($parcoursA) {
-			$color = str_replace('#','',(string)$parcoursA->color());
+			//$color = str_replace('#','',(string)$parcoursA->color());
 		}
 	}
   if ( $lieuUid ) {

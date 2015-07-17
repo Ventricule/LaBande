@@ -1,6 +1,6 @@
 <h3 class="entry-title" ><a href="<?php echo $entry->url() ?>"><?php echo $entry->title()->html() ?></a></h3>
 
-<div class="circle icon-right-open-big top-right-button mapLink mapFit mapController" style="background-color:<?php echo $entry->color() ?>" data-type="parcourd" data-uid="<?php echo $entry->uid() ?>"></div>
+<div class="circle icon-right-open-big top-right-button mapLink mapFit mapController" style="background-color:<?php echo $entry->color() ?>;color:<?php echo $entry->parent()->color() ?>" data-type="parcourd" data-uid="<?php echo $entry->uid() ?>"></div>
 
 <h5>
 <?php 

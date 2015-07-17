@@ -524,7 +524,7 @@ main .top-right-button {
 	top: 1.5rem;
 	margin-top: -5px;
 	right: 0;
-	background-color: #222;
+	background-color: #fff;
 	border: 0;
 }
 main .mapFit::before {
