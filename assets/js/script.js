@@ -647,8 +647,8 @@ $(document).ready(function(){
   
   /* Search
   ---------------------------------------------- */
-	$('#search-slide').click(function(){
-		if ($(this).hasClass('active') && !searching){
+	$('#search-slide>.icon-search').click(function(){
+		if ($(this).parent().hasClass('active') && !searching){
 			console.log('yo');
 			$('#searchbox').addClass('shown').find('input').focus();
 			$('#content').addClass('searching');
