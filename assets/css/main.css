@@ -206,7 +206,10 @@ nav.fullWidth, main.fullWidth, .shadow.fullWidth{
 	position: fixed;
 	z-index: 9999999;
 }
-
+svg.leaflet-zoom-animated{
+	-webkit-filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 1px);
+	-filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 1px);
+}
 #bande1, #bande2{
 	height: 35px;
 	width: 35px;
@@ -705,21 +708,32 @@ ul.avenir li.item-avenir{
 	transition: visibility 0s linear 0.4s, opacity 0.4s ease-in-out;
 }
 #fwButton{
-	z-index: 9999999999999;
-	visibility: hidden;
-	opacity:0;
+	z-index: 99;
 	position: fixed;
-	background-color: #422222;
-	color: white;
-	top: 20px;
-	left: 20px;
-	-webkit-transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out;
-	-moz-transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out;
-	-ms-transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out;
-	-o-transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out;
-	transition: visibility 0s linear 0.5s, opacity 0.5s ease-in-out;
+	background-color: white;
+	color: #422222;
+	cursor: pointer;
+	width: 35px;
+	text-align: center;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	height: 100%;
+	cursor: pointer;
+	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
+	font-size: 1.2rem;
+	padding-left: 5px;
 }
-#splash.shown, #fwButton.shown{
+#fwButton:before{
+  position: relative;
+  top: 48%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#splash.shown{
 	visibility:visible;
 	opacity:1;
 	-webkit-transition-delay:0s;

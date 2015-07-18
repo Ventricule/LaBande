@@ -33,7 +33,7 @@
 		<div id="splashCross" class="icon-cancel-circled"></div>
 	</div>
 
-	<div id="fwButton" class="circle icon-left-open-big"></div>
+	<div id="fwButton" class="icon-left-open-big"></div>
 	<div id="shade1" class="shadow"></div>
 	<div id="shade2" class="shadow"></div>
 

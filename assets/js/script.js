@@ -476,12 +476,17 @@ $(document).ready(function(){
 
 	function fullWidth() {
 		$('#map, nav, main, .shadow').toggleClass('fullWidth');
-		setTimeout(function() { $('#fwButton').toggleClass('shown'); }, 500);
 	}
-	$('.circle').click(function() {
+	$('.circle, #fwButton').click(function() {
 		fullWidth();
 	});
 	
+	$('span.scroll-button').click(function(){
+		uid = $(this).attr('data-uid');
+		slideColumnTo(uid);
+		updateView("content", uid, 'next');
+
+	})
 	/* Image and slideshow
 	---------------------------------------------- */
 	var gallery = [];
