@@ -27,5 +27,4 @@
 			<?php endforeach ?>
 		</ul>
 	</div>
-	<div id="prev"></div>
 </nav> 

@@ -473,8 +473,8 @@ $(document).ready(function(){
 	---------------------------------------------- */
 
 	$('.circle').click(function() {
-		$('#column, #map, nav').toggleClass('fullWidth');
-		$('#fwButton').toggleClass('shown');
+		$('#map, nav, main, .shadow').toggleClass('fullWidth');
+		setTimeout(function() { $('#fwButton').toggleClass('shown'); }, 500);
 	});
 	
 	

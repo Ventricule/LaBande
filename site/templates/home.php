@@ -6,8 +6,6 @@
 		<div class="content">
 			<?php snippet('content') ?>
 		</div>
-		<?php snippet('footer') ?>
-		<div class="timeline"></div>
 	</main>
 
 	<div id='map'></div>
@@ -25,4 +23,7 @@
 	</div>
 
 	<div id="fwButton" class="circle icon-left-open-big"></div>
+	<div id="shade1" class="shadow"></div>
+	<div id="shade2" class="shadow"></div>
+
 <div id='errors'></div>
