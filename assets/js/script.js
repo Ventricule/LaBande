@@ -24,34 +24,33 @@ $(document).ready(function(){
 		direction = typeof direction !== 'undefined' ?  direction : 'next';
 		stateChange = typeof stateChange !== 'undefined' ?  stateChange : false;
 		switch(part) {
-	case 'menu':
-		//slideMenuTo(uid, direction);
-				itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
-				slideSubMenuTo(itemUid, direction);
-				slideColumnTo(itemUid);
-								console.log("bang");
-
-				slideMapTo(itemUid);
-		break;
-	case 'submenu':
-		//slideSubMenuTo(uid, direction);
-				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
-				slideMenuTo(rubriqueUid, direction);
-				slideColumnTo(uid);
-				slideMapTo(uid);
-		break;
-	case 'content':
-		slideSubMenuTo(uid, direction);
-				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
-				slideMenuTo(rubriqueUid, direction);
-				slideMapTo(uid, autoUpdateMap);
-		break;
-	case 'map':
-		slideSubMenuTo(uid, direction);
-				rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
-				slideMenuTo(rubriqueUid, direction);
-				slideColumnTo(uid);
-		break;
+			case 'menu':
+				//slideMenuTo(uid, direction);
+					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
+					console.log(itemUid);
+					slideSubMenuTo(itemUid, direction);
+					slideColumnTo(itemUid);
+					slideMapTo(itemUid);
+				break;
+			case 'submenu':
+				//slideSubMenuTo(uid, direction);
+					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					slideMenuTo(rubriqueUid, direction);
+					slideColumnTo(uid);
+					slideMapTo(uid);
+				break;
+			case 'content':
+					slideSubMenuTo(uid, direction);
+					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					slideMenuTo(rubriqueUid, direction);
+					slideMapTo(uid, autoUpdateMap);
+				break;
+			case 'map':
+					slideSubMenuTo(uid, direction);
+					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					slideMenuTo(rubriqueUid, direction);
+					slideColumnTo(uid);
+				break;
 		} 
 	}
   
@@ -85,7 +84,6 @@ $(document).ready(function(){
 	}
 	function slideColumnTo(uid) {
 		var item = $("main li.item[data-uid='"+uid+"']");
-		console.log(slideShouldUpdateView["content"]);
 		if(item.length && slideShouldUpdateView["content"]){
 			slideShouldUpdateView["content"]=false;
 			$('html,body').animate({scrollTop: item.offset().top + 1},1200, function() { 
@@ -283,7 +281,12 @@ $(document).ready(function(){
 		featureLayer.eachLayer(function(marker) {
 			marker.off('click');
 			marker.on('click', function() {
-				updateView('map', marker.feature.properties.uid, 'next');
+				if ( $('main').hasClass('fullWidth') ) {
+					fullWidth();
+					setTimeout(function() { updateView('map', marker.feature.properties.uid, 'next'); }, 400);
+				} else {
+					updateView('map', marker.feature.properties.uid, 'next');
+				}
 				slideMapTo(marker.feature.properties.uid, false);
 			});
 			marker.setIcon(L.divIcon(marker.feature.properties.divIcon));
@@ -472,11 +475,13 @@ $(document).ready(function(){
 	/* Shortcuts
 	---------------------------------------------- */
 
-	$('.circle').click(function() {
+	function fullWidth() {
 		$('#map, nav, main, .shadow').toggleClass('fullWidth');
 		setTimeout(function() { $('#fwButton').toggleClass('shown'); }, 500);
+	}
+	$('.circle').click(function() {
+		fullWidth();
 	});
-	
 	
 	/* Image and slideshow
 	---------------------------------------------- */

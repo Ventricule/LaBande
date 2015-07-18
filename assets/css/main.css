@@ -133,13 +133,13 @@ a:hover {
 /* Headings
 -------------------------------------------------- */
 h1 {
-	font-size: 2rem;
+	font-size: 4rem;
 	line-height: 1.5rem;
 	font-weight: 400;
 	margin-bottom: .5rem;
 }
 h2 {
-	font-size: 2rem;
+	font-size: 3.5rem;
 	line-height: 1.5rem;
 	font-weight: 300;
 	margin-bottom: .5rem;
@@ -517,6 +517,11 @@ main .nav.fullscreen{
 	right: 8px;
 	text-align: right;
 }/* Texte */
+.section-title{
+	padding: 110px 20px;
+	color: #422222;
+	text-align: center;
+}
 .entry-content {
 	margin: 0 1rem;
 	padding: 1.5rem 0;
