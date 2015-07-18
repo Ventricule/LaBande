@@ -19,7 +19,7 @@ Email:  support@getkirby.com
 		src: url(../fonts/dauphine-webfont.eot?#iefix) format('embedded-opentype'),
 				 url(../fonts/dauphine-webfont.woff) format('woff'),
 				 url(../fonts/dauphine-webfont.ttf) format('truetype'),
-				 url(../fonts/dauphine-webfont.svg#whoismono) format('svg');
+				 url(../fonts/dauphine-webfont.svg#dauphine) format('svg');
 		font-weight: normal;
 		font-style: normal;
 }
@@ -180,14 +180,14 @@ nav{
 	z-index: 9999;
 	-webkit-backface-visibility: hidden;
 }
-nav, main, .shadow{
+nav, main, .shadow, #searchbox{
 	-webkit-transition: left 0.5s ease-in-out;
 	-moz-transition: left 0.5s ease-in-out;
 	-ms-transition: left 0.5s ease-in-out;
 	-o-transition: left 0.5s ease-in-out;
 	transition: left 0.5s ease-in-out;
 }
-nav.fullWidth, main.fullWidth, .shadow.fullWidth{
+nav.fullWidth, main.fullWidth, .shadow.fullWidth, #searchbox{
 	left: -28%;
 }
 
@@ -300,18 +300,18 @@ li.swiper-slide:not(.active) {
   right: 0;
   border-color: transparent;
 }
-#menu li:not(.duplicate):after {
+#menu li:not(.duplicate):not(.search-slide):after {
   top: calc(50% - 15px);
   border-width: 15px 0 15px 15px;
   border-left-color: inherit;
 }
-#menu li:not(.duplicate):before {
+#menu li:not(.duplicate):not(.search-slide):before {
   top: calc(50% - 16px);
   border-width: 16px 0px 16px 16px;
   border-left-color: rgba(0,0,0,.18);
   right: -1px;
 }
-#menu li:not(.duplicate).active:before, #menu li:not(.duplicate).active:after {
+#menu li:not(.duplicate):not(.search-slide).active:before, #menu li:not(.duplicate):not(.search-slide).active:after {
   -webkit-transform: translateX(15px);
   -moz-transform: translateX(15px);
   -ms-transform: translateX(15px);
@@ -767,39 +767,57 @@ ul.avenir li.item-avenir{
 
 /* Search
 -------------------------------------------------- */
-#searchbox {
-  position: fixed;
-  top: .5rem;
-  left: calc(36px + 1rem);
-  z-index: 99999;
-  opacity: .3;
+#search-slide>span.icon-search {
+	background-color: white;
+	width: 35px;
+	height: 37px;
+	display: block;
+	color: #422222;
+	text-align: center;
+	padding: 3px 9px;
+	font-size: 1rem;
 }
-#searchbox:hover {
-  opacity: 1;
+#searchbox {
+	position: fixed;
+	top: 0px;
+	z-index: 999;
+	opacity: 1;
+	width: 28%;
+}
+#searchbox.shown {
+	left: 35px;
 }
 #searchbox input {
-  border: 1px solid;
-  background: white;
-  height: 1.5rem;
-  width: 23rem;
-  padding: 0 .4rem;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+	background: white;
+	height: 36px;
+	padding: 0 15px;
+	width: 100%;
+	vertical-align: middle;
+	line-height: 36px;
+	font-size: 1rem;
+	font-family: "whoismono",sans-serif;
 }
 #searchbox .search-nav {
-  position: absolute;
-  top: 0px;
-  right: 0.4rem;
-  font-size: 20px;
-  line-height: 1.45rem;
+	position: absolute;
+	top: 0px;
+	right: 9px;
+	font-size: 18px;
+	line-height: 34px;
 }
 #searchbox .search-compteur, #searchbox .search-infos {
-  position: absolute;
-  right: 3rem;
-  top: 0px;
-  font-size: 11px;
-  color: rgba(1,1,1,0.5);
-  line-height: 1.5rem;
+	position: absolute;
+	right: 3rem;
+	top: 0px;
+	color: rgba(1,1,1,0.5);
+	line-height: 36px;
 }
-
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
 .highlight {
     background-color: #FFFF88;
 }
@@ -913,7 +931,7 @@ ul.avenir li.item-avenir{
 	color: #F9FF9B;
 	text-align: center;
 	line-height: 25px;
-	font-family: "whoismono";
+	font-family: "whoismono", sans-serif;
 	font-weight: 200;
 	box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
 }

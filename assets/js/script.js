@@ -3,7 +3,7 @@ var siteFolder = "/LaBande";
 
 $(document).ready(function(){
 
-	var winH = $(window).height(), menuL = $("#menu>li").length, oldH = 0;
+	var winH = $(window).height(), menuL = $("#menu>li:not(#search-slide)").length, oldH = 0;
 
 	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId, autoUpdateMap=false, scrollTimer;
 	var menu = new Bande($('#bande1'));
@@ -120,12 +120,12 @@ $(document).ready(function(){
 			onInit: function(swiper){
 
 				// set #menu elements heights (padding) if elements.height is less than windows.height
-				$('#menu').find('li:not(.duplicate)').each( function(){
+				$('#menu').find('li:not(.duplicate):not(#search-slide)').each( function(){
 					oldH += $(this).height();
 				});
-				var pad = Math.ceil((winH - oldH)/(menuL*2));
+				var pad = Math.ceil((winH - 45 - oldH)/(menuL*2));
 				if (pad > 0){
-					$("#menu>li").css('padding-top', pad+1).css('padding-bottom', pad+1)
+					$("#menu>li:not(#search-slide)").css('padding-top', pad+1).css('padding-bottom', pad+1)
 				};
 
 				if (listLength <= 5){
@@ -134,6 +134,7 @@ $(document).ready(function(){
 				direction = 'next';
 				setTimeout(function(){ swiper.update(true);}, 300);
 			},
+			initialSlide: 1,
 			slidesPerView: 'auto',
 			slideToClickedSlide: true,
 			mousewheelControl: true,
@@ -167,6 +168,9 @@ $(document).ready(function(){
 			onTransitionEnd: function(swiper){
 				var activeSlide = swiper.container.find('.active');
 				swiper.slideTo( parseInt(activeSlide.attr('data-swiper-slide-index'))+listLength, 0, false);
+				if (activeSlide.hasClass('search')){
+					$('#searchbox').addClass('shown');
+				};
 				swiper.update();
 			}
 		});

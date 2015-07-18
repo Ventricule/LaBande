@@ -3,17 +3,15 @@
 <body>
 	<?php snippet('menu') ?>
 	<main id="column" class="main" role="main">
-    <div id="searchbox">
-      <span class="icon-search"></span>
-      <input class="navbar-search"></input>
-      <span class="search-compteur hidden"><span class="current"></span> sur <span class="total"></span></span>
-      <span class="search-infos hidden"></span>
-      <span class="search-nav">
-        <a href="#" class="search-prev hidden"><</a>
-        <a href="#" class="search-next hidden">></a>
-      </span>
-    </div>
-    
+		<div id="searchbox">
+			<input class="navbar-search"></input>
+			<span class="search-compteur hidden"><span class="current"></span> sur <span class="total"></span></span>
+			<span class="search-infos hidden"></span>
+			<span class="search-nav">
+				<a href="#" class="search-prev hidden"><</a>
+				<a href="#" class="search-next hidden">></a>
+			</span>
+		</div>
 		<div class="content">
 			<?php snippet('content') ?>
 		</div>
