@@ -8,8 +8,8 @@ language: fr
 role: admin
 token: 21b881731ece8b6fea6c5cdfb1286e2b70ebe76e
 history:
+  - manifestations
   - parcours
   - lieux
   - manifestations/manifestation-1
   - manifestations/manifestation-3
-  - manifestations/project-a

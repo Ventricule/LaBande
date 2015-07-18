@@ -751,6 +751,36 @@ ul.avenir li.item-avenir{
 
 }
 
+/* Search
+-------------------------------------------------- */
+#searchbox {
+  position: absolute;
+  top: .5rem;
+  left: 1rem;
+  z-index: 99999;
+  opacity: .3;
+}
+#searchbox input {
+  border: 1px solid;
+  background: none;
+  height: 1.5rem;
+  width: 23rem;
+  padding: 0 .4rem;
+}
+#searchbox .search-compteur {
+  position: absolute;
+  right: .4rem;
+  top: 0;
+}
+
+.highlight {
+    background-color: #FFFF88;
+}
+.highlight-more {
+    background-color: #FFFF22;
+}
+
+
 /* Utils
 -------------------------------------------------- */
 .collapse {

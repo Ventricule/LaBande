@@ -35,6 +35,7 @@
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js',
 		'//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js',
 		'assets/js/leaflet-routing-machine.min.js',
+		'assets/js/jquery.highlight.js',
 		'assets/js/lrm-graphhopper-1.1.0.min.js',
 	)) ?>
 
