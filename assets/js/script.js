@@ -41,8 +41,6 @@ $(document).ready(function(){
 			case 'content':
 					slideSubMenuTo(uid, direction);
 					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
-					console.log(uid);
-					console.log(rubriqueUid);
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
 				break;
@@ -623,38 +621,63 @@ $(document).ready(function(){
   /* Search
   ---------------------------------------------- */
   
-  var count = 0;
+  var count = -1;
   $(".navbar-search").on('keyup change', function(ev) {
+    
     // pull in the new value
     var searchTerm = $(this).val();
-    count = 0;
-    $('.content').unhighlight();
+    
+    if (ev.keyCode == 13 && searchTerm) {
+      $('.search-nav a.search-next').click();
+    } else {
+      count = -1;
+      $('.content').unhighlight();
       // disable highlighting if empty
       if ( searchTerm ) {
         // highlight the new term
         $('.content p:visible, .content h1:visible, .content h2:visible, .content h3:visible, .content h4:visible').highlight( searchTerm );
         var total = $('.highlight').length;
-        $('.search-compteur').show();
-        $('.search-compteur .current').html(count);
-        $('.search-compteur .total').html(total);
+        if(total == 0) {
+          $('.search-compteur').hide();
+          $('#searchbox .search-next').hide();
+          $('#searchbox .search-prev').hide();
+          $('#searchbox .search-infos').html('Pas de résultats').show();
+        }
+        if(total>0) {
+          $('.search-nav a.search-next').click();
+          $('#searchbox .search-infos').hide();
+        }
+        if(total>1) {
+          $('.search-compteur').show();
+          $('#searchbox .search-next').show();
+          $('#searchbox .search-prev').show();
+        }
       } else {
         $('.search-compteur').hide();
       }
+    }
   });
 
   $('.search-nav a').click(function(e) {
     e.preventDefault();
+    
     var total = $('.highlight').length;
-    if ($(this).hasClass('.search-prev')) {
-      count = ( count + 1 ) % total;
+    
+    if ($(this).hasClass('search-prev')) {    
+      count = count - 1;
+      if(count<0) { count = total-1 }
     } else {
       count = ( count + 1 ) % total;
     }
-    $('.search-compteur .current').html(count);
+    
+    $('.search-compteur .current').html(count + 1);
     $('.search-compteur .total').html(total);
     $('.highlight').removeClass('highlight-more');
     $('.highlight').eq(count).addClass('highlight-more');
-    scrollToElement( $('.highlight').eq(count), 200, -150);
+    if( total>0 ) {
+      scrollToElement( $('.highlight').eq(count), 200, -150);
+    }
+    
   });
   
   function scrollToElement(selector, time, verticalOffset) {

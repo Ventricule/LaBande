@@ -6,10 +6,11 @@
     <div id="searchbox">
       <span class="icon-search"></span>
       <input class="navbar-search"></input>
-      <span class="search-compteur hidden"><span class="current"></span> / <span class="total"></span></span>
+      <span class="search-compteur hidden"><span class="current"></span> sur <span class="total"></span></span>
+      <span class="search-infos hidden"></span>
       <span class="search-nav">
-        <a href="#" class="search-prev hidden">Prev</a>
-        <a href="#" class="search-next hidden">Next</a>
+        <a href="#" class="search-prev hidden"><</a>
+        <a href="#" class="search-next hidden">></a>
       </span>
     </div>
     
