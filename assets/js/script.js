@@ -5,7 +5,8 @@ $(document).ready(function(){
 
 	var winH = $(window).height(), menuL = $("#menu>li:not(#search-slide)").length, oldH = 0;
 
-	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId, autoUpdateMap=false, scrollTimer;
+	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId, autoUpdateMap=false, scrollTimer, searching = false, fullscreen	 = false;
+
 	var menu = new Bande($('#bande1'));
 	var submenu = new Bande($('#bande2'));
 
@@ -33,20 +34,20 @@ $(document).ready(function(){
 				break;
 			case 'submenu':
 				//slideSubMenuTo(uid, direction);
-					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
 					slideMapTo(uid);
 				break;
 			case 'content':
 					slideSubMenuTo(uid, direction);
-					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
 				break;
 			case 'map':
 					slideSubMenuTo(uid, direction);
-					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
 				break;
@@ -54,7 +55,7 @@ $(document).ready(function(){
 	}
   
   function waitForPeace() {
-    
+	
   }
 	
 	function slideMenuTo(uid, direction) {
@@ -154,6 +155,12 @@ $(document).ready(function(){
 				swiper.update();
 				nextSlide = $(swiper.wrapper).find('.active');
 				nextSlideUid = nextSlide.attr('data-uid');
+
+				if (nextSlide.hasClass('search')){
+					$('#searchbox').addClass('shown').find('input').focus();
+					$('#content').addClass('searching');
+					searching = true;
+				};
 				
 				var direction = prevSlide.index() > nextSlide.index() ? 'prev' : 'next' ;
 				
@@ -168,9 +175,6 @@ $(document).ready(function(){
 			onTransitionEnd: function(swiper){
 				var activeSlide = swiper.container.find('.active');
 				swiper.slideTo( parseInt(activeSlide.attr('data-swiper-slide-index'))+listLength, 0, false);
-				if (activeSlide.hasClass('search')){
-					$('#searchbox').addClass('shown');
-				};
 				swiper.update();
 			}
 		});
@@ -365,7 +369,7 @@ $(document).ready(function(){
 		}
 		if(property=='parcours'){
 			path = uniqBy(arrayOfLatLngs, JSON.stringify);
-      color = $('#bande1 li[data-uid="parcours"]').css('background-color');
+	  color = $('#bande1 li[data-uid="parcours"]').css('background-color');
 			if (path.length>1) {
 				drawRoute( arrayOfLatLngs, color );
 			} else {
@@ -381,13 +385,13 @@ $(document).ready(function(){
 		icon = marker.feature.properties.divIcon;
 		icon.className = "div-icon selected";
 		marker.setIcon(L.divIcon(icon));
-    marker.showLabel();
+	marker.showLabel();
 	}
 	function deselectMarker(marker) {
 		icon = marker.feature.properties.divIcon;
 		icon.className = "div-icon";
 		marker.setIcon(L.divIcon(icon));
-    marker.hideLabel();
+	marker.hideLabel();
 	}
 	
 	// Spiderfy a markerCluster
@@ -401,17 +405,17 @@ $(document).ready(function(){
 	/* Locate
 	----------------------------------------------- */
   var lc = L.control.locate({
-    position: 'topright',
-    follow: true,
-    setView: false,
-    keepCurrentZoomLevel: true,
-    onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
-    //var bounds = markers;
-    //bounds.push(lc);
-    //map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
+	position: 'topright',
+	follow: true,
+	setView: false,
+	keepCurrentZoomLevel: true,
+	onLocationOutsideMapBounds:  function(context) { // called when outside map boundaries
+	//var bounds = markers;
+	//bounds.push(lc);
+	//map.fitBounds(bounds, {padding:[50,50], maxZoom:15});
   },
-    icon: 'locate-button icon-target',
-    iconLoading: 'locate-button animate-spin icon-target',
+	icon: 'locate-button icon-target',
+	iconLoading: 'locate-button animate-spin icon-target',
   }).addTo(map);
 	
 	/*map.on('startfollowing', function(e) { 
@@ -522,6 +526,7 @@ $(document).ready(function(){
 	});
 	
 	$('.nav.fullscreen').on("click", function(e){
+		fullscreen = true;
 		e.preventDefault();
 		var s_total = $(this).parent().find('.pagination .total').text(), count = 0;
 		$('#splashWrapper').html('');
@@ -572,10 +577,23 @@ $(document).ready(function(){
 			splash.destroy(true, true);
 			splash=null;			
 		}, 500);
+		fullscreen = false;
 	});
+
+
+	/* keyboard
+	---------------------------------------------- */
 	$(document).keydown(function(e) {
 		if (e.keyCode == 27) { // escape key maps to keycode `27`
-			$('#splashCross').click();
+			if (fullscreen){
+				$('#splashCross').click();
+				fullscreen = true;
+			}
+			if (searching){
+				$('#searchbox').removeClass('shown').find('input').blur();
+				$('#content').removeClass('searching');
+				searching = false;
+			}
 		}
 	});
 
@@ -629,77 +647,93 @@ $(document).ready(function(){
   
   /* Search
   ---------------------------------------------- */
-  
+	$('#search-slide').click(function(){
+		if ($(this).hasClass('active') && !searching){
+			console.log('yo');
+			$('#searchbox').addClass('shown').find('input').focus();
+			$('#content').addClass('searching');
+			searching = true;
+		};
+	});
+
   var count = -1;
   $(".navbar-search").on('keyup change', function(ev) {
-    
-    // pull in the new value
-    var searchTerm = $(this).val();
-    
-    if (ev.keyCode == 13 && searchTerm) {
-      $('.search-nav a.search-next').click();
-    } else {
-      count = -1;
-      $('.content').unhighlight();
-      // disable highlighting if empty
-      if ( searchTerm ) {
-        // highlight the new term
-        $('.content p:visible, .content h1:visible, .content h2:visible, .content h3:visible, .content h4:visible').highlight( searchTerm );
-        var total = $('.highlight').length;
-        if(total == 0) {
-          $('.search-compteur').hide();
-          $('#searchbox .search-next').hide();
-          $('#searchbox .search-prev').hide();
-          $('#searchbox .search-infos').html('Pas de résultats').show();
-        }
-        if(total>0) {
-          $('.search-nav a.search-next').click();
-          $('#searchbox .search-infos').hide();
-        }
-        if(total>1) {
-          $('.search-compteur').show();
-          $('#searchbox .search-next').show();
-          $('#searchbox .search-prev').show();
-        }
-      } else {
-        $('.search-compteur').hide();
-      }
-    }
+	
+	// pull in the new value
+	var searchTerm = $(this).val();
+	
+	if (ev.keyCode == 13 && searchTerm) {
+	  $('.search-nav a.search-next').click();
+	} else {
+	  count = -1;
+	  $('#content').unhighlight();
+	  // disable highlighting if empty
+	  if ( searchTerm ) {
+		// highlight the new term
+		$('#content p:visible, #content h1:visible, #content h2:visible, #content h3:visible, #content h4:visible').highlight( searchTerm );
+		var total = $('.highlight').length;
+		if(total == 0) {
+		  $('.search-compteur').hide();
+		  $('#searchbox .search-next').hide();
+		  $('#searchbox .search-prev').hide();
+		  $('#searchbox .search-infos').html('Pas de résultats').show();
+		}
+		if(total>0) {
+		  $('.search-nav a.search-next').click();
+		  $('#searchbox .search-infos').hide();
+		}
+		if(total>1) {
+		  $('.search-compteur').show();
+		  $('#searchbox .search-next').show();
+		  $('#searchbox .search-prev').show();
+		}
+	  } else {
+		$('.search-compteur').hide();
+	  }
+	}
   });
 
   $('.search-nav a').click(function(e) {
-    e.preventDefault();
-    
-    var total = $('.highlight').length;
-    
-    if ($(this).hasClass('search-prev')) {    
-      count = count - 1;
-      if(count<0) { count = total-1 }
-    } else {
-      count = ( count + 1 ) % total;
-    }
-    
-    $('.search-compteur .current').html(count + 1);
-    $('.search-compteur .total').html(total);
-    $('.highlight').removeClass('highlight-more');
-    $('.highlight').eq(count).addClass('highlight-more');
-    if( total>0 ) {
-      scrollToElement( $('.highlight').eq(count), 200, -150);
-    }
-    
-  });
-  
-  function scrollToElement(selector, time, verticalOffset) {
-    time = typeof (time) != 'undefined' ? time : 500;
-    verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
-    element = $(selector);
-    offset = element.offset();
-    offsetTop = offset.top + verticalOffset;
-    $('html, body').animate({
-      scrollTop: offsetTop
-    }, time);
+	e.preventDefault();
+	
+	var total = $('.highlight').length;
+	
+	if ($(this).hasClass('search-prev')) {    
+	  count = count - 1;
+	  if(count<0) { count = total-1 }
+	} else {
+	  count = ( count + 1 ) % total;
 	}
 	
+	$('.search-compteur .current').html(count + 1);
+	$('.search-compteur .total').html(total);
+	$('.highlight').removeClass('highlight-more');
+	$('.highlight').eq(count).addClass('highlight-more');
+	if( total>0 ) {
+	  scrollToElement( $('.highlight').eq(count), 200, -150);
+	}
+	
+  });
+  
+	function scrollToElement(selector, time, verticalOffset) {
+		time = typeof (time) != 'undefined' ? time : 500;
+		verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+		element = $(selector);
+		offset = element.offset();
+		offsetTop = offset.top + verticalOffset;
+		$('html, body').animate({
+			scrollTop: offsetTop
+		}, time);
+	}
+	$(document).click(function(event) { 
+		if(!$(event.target).closest('#searchbox, #search-slide').length) {
+			if(searching) {
+				$('#searchbox').removeClass('shown').find('input').blur();
+				$('#content').removeClass('searching');
+				searching = false;
+			}
+		}
+	})
 }); // END OF JQUERY
 
 
@@ -778,9 +812,9 @@ $.fn.scrollEnd = function(callback, timeout) {
 /* Uniq
 ---------------------------------------------- */
 function uniqBy(a, key) {
-    var seen = {};
-    return a.filter(function(item) {
-        var k = key(item);
-        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
-    })
+	var seen = {};
+	return a.filter(function(item) {
+		var k = key(item);
+		return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+	})
 }

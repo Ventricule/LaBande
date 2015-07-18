@@ -4,7 +4,7 @@
 	<?php snippet('menu') ?>
 	<main id="column" class="main" role="main">
 		<div id="searchbox">
-			<input class="navbar-search"></input>
+			<input class="navbar-search" placeholder="Rechercher"></input>
 			<span class="search-compteur hidden"><span class="current"></span> sur <span class="total"></span></span>
 			<span class="search-infos hidden"></span>
 			<span class="search-nav">
@@ -12,7 +12,7 @@
 				<a href="#" class="search-next hidden">></a>
 			</span>
 		</div>
-		<div class="content">
+		<div id="content">
 			<?php snippet('content') ?>
 		</div>
 	</main>
