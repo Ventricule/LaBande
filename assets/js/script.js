@@ -27,9 +27,8 @@ $(document).ready(function(){
 			case 'menu':
 				//slideMenuTo(uid, direction);
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
-					console.log(itemUid);
 					slideSubMenuTo(itemUid, direction);
-					slideColumnTo(itemUid);
+					slideColumnTo(uid);
 					slideMapTo(itemUid);
 				break;
 			case 'submenu':
@@ -154,6 +153,7 @@ $(document).ready(function(){
 				swiper.update();
 				nextSlide = $(swiper.wrapper).find('.active');
 				nextSlideUid = nextSlide.attr('data-uid');
+				console.log(nextSlideUid);
 				
 				var direction = prevSlide.index() > nextSlide.index() ? 'prev' : 'next' ;
 				
