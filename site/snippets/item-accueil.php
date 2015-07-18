@@ -1,6 +1,4 @@
-<header class="header cf" role="banner">
-	<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
-</header>
+
 <p><?php echo kirbytext($entry->text())  ?></p>
 
 
