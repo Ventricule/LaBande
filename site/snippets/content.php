@@ -1,15 +1,11 @@
 <ul class="rubrique cf">
 <?php $first = true; 
-	foreach($pages->visible() as $p):
-		if (!$first): ?>
-			<li class="item section-title" style="background:<?php echo $p->color() ?>" data-uid="<?php echo $p->uid() ?>"><h2><?php echo $p->title(); ?></h2></li>
+	foreach($pages->visible() as $p): 
+		if(!$first):?>
+			<li class="item section-title" style="background:<?php echo $p->color() ?>" data-uid="titre-<?php echo $p->uid() ?>" data-parent-uid="<?php echo $p->uid() ?>"><h2><?php echo $p->title(); ?></h2></li>
 		<?php endif;
-		foreach($p->children() as $entry):
-			if ($first): ?>
-				<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->parent()->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
-			<?php else: ?>
-				<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
-			<?php endif; ?>
+		foreach($p->children() as $entry): ?>
+			<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
 				<?php if($images = $entry->images()->sortBy('sort', 'asc')): ?>
 					<?php if($images->count() > 1): ?>
 						<section class="gallery " data-slide-uid="<?php echo $entry->uid() ?>" style="color:<?php echo $entry->parent()->color() ?>">

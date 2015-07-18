@@ -134,13 +134,13 @@ a:hover {
 -------------------------------------------------- */
 h1 {
 	font-size: 4rem;
-	line-height: 1.5rem;
+	line-height: 1em;
 	font-weight: 400;
 	margin-bottom: .5rem;
 }
 h2 {
 	font-size: 3.5rem;
-	line-height: 1.5rem;
+	line-height: 1em;
 	font-weight: 300;
 	margin-bottom: .5rem;
 }
@@ -521,6 +521,15 @@ main .nav.fullscreen{
 	padding: 110px 20px;
 	color: #422222;
 	text-align: center;
+ -ms-word-break: break-all;
+     word-break: break-all;
+
+     // Non standard for webkit
+     word-break: break-word;
+
+-webkit-hyphens: auto;
+   -moz-hyphens: auto;
+        hyphens: auto;
 }
 .entry-content {
 	margin: 0 1rem;

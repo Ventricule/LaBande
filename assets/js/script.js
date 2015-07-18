@@ -28,25 +28,27 @@ $(document).ready(function(){
 				//slideMenuTo(uid, direction);
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 					slideSubMenuTo(itemUid, direction);
-					slideColumnTo(uid);
+					slideColumnTo("titre-"+uid);
 					slideMapTo(itemUid);
 				break;
 			case 'submenu':
 				//slideSubMenuTo(uid, direction);
-					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
 					slideMapTo(uid);
 				break;
 			case 'content':
 					slideSubMenuTo(uid, direction);
-					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
+					console.log(uid);
+					console.log(rubriqueUid);
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
 				break;
 			case 'map':
 					slideSubMenuTo(uid, direction);
-					rubriqueUid = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+					rubriqueUid = $('.content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
 				break;
@@ -153,7 +155,6 @@ $(document).ready(function(){
 				swiper.update();
 				nextSlide = $(swiper.wrapper).find('.active');
 				nextSlideUid = nextSlide.attr('data-uid');
-				console.log(nextSlideUid);
 				
 				var direction = prevSlide.index() > nextSlide.index() ? 'prev' : 'next' ;
 				
