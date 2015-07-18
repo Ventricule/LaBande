@@ -9,7 +9,7 @@
 				</header>
 			</li>
 		<?php else :?>
-			<li class="item section-title" style="background:<?php echo $p->color() ?>" data-uid="titre-<?php echo $p->uid() ?>" data-parent-uid="<?php echo $p->uid() ?>"><h2><?php echo $p->title(); ?></h2></li>
+			<?php snippet('header-section', array('section' => $p)) ?>
 		<?php endif;
 
 		foreach($p->children() as $entry): ?>
@@ -66,6 +66,11 @@
 			</li>
 		<?php $first = false;
 		endforeach;
+		?>
+	
+		<?php snippet('footer-section', array('section' => $p)) ?>
+	
+	<?php
 	endforeach;
 	?>
 </ul>

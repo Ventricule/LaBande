@@ -528,7 +528,9 @@ main .nav.fullscreen{
 .nav.next-slide{
 	right: 8px;
 	text-align: right;
-}/* Texte */
+}
+
+/* Texte */
 .section-title{
 	padding: 110px 20px;
 	color: #422222;
@@ -542,6 +544,10 @@ main .nav.fullscreen{
 -webkit-hyphens: auto;
    -moz-hyphens: auto;
         hyphens: auto;
+}
+main .content > ul > li.section-footer {
+    text-align: center;
+    padding: 1.5rem;
 }
 .entry-content {
 	margin: 0 1rem;
