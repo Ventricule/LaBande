@@ -1,12 +1,11 @@
+<!--
 <h4 class="collapse" >
 	<span class="entry-date icon-calendar icon-medium"><?php echo $entry->date('d.m.y') ?></span> 
 	<span class="entry-time icon-clock icon-medium"><?php echo str_replace(":","h",$entry->time()) ?></span><br>
 </h4>
 <h3 class="collapse">
 	<a href="<?php echo $entry->url() ?>"><?php echo $entry->title()->html() ?></a>
-</h3>
-
-<p><?php echo kirbytext($entry->text()) ?></p>
+</h3> -->
 
 <?php 
 $lieu = $entry->lieu();
@@ -33,6 +32,9 @@ if ( $entry->parcours() != '' ) {
 }
 //
 ?>
+
+<?php echo kirbytext($entry->text()) ?>
+
 <!--
 <?php if($parcours){ 
 	$parc = $entry->parcours()->split(':'); ?>
@@ -41,7 +43,6 @@ if ( $entry->parcours() != '' ) {
 		<span class="parcours-name">Dans le cadre de <?php echo $parc[1]; ?></span>
 	</div>
 <?php } ?> -->
-<div class="circle icon-right-open-big top-right-button mapLink mapFit mapController" style="color:<?php echo $entry->parent()->color() ?>" data-type="manifestations" data-uid="<?php echo $entry->uid() ?>"></div>
 
 <h5 class="collapse">
 	<?php if($lieuName){ ?><span class="icon-home"><?php echo $lieuName ?></span><br><?php } ?>
@@ -49,10 +50,3 @@ if ( $entry->parcours() != '' ) {
 	<?php if($transport){ ?><span class="icon-bus"><?php echo $transport ?></span><br><?php } ?>
 	<?php if($price){ ?><span class="icon-ticket"><?php echo $price ?></span><?php } ?>
 </h5>
-
-<div class="bottom-buttons-bar">
-	<?php if($coordinates){ ?>
-		<div class="circle mapLink mapGPS mapController" data-coordinates="<?php echo $coordinates ?>" data-manifestation="<?php echo $entry->uid() ?>">GPS</div>
-	<?php } ?>
-	<div class="circle icon-share"></div>
-</div>

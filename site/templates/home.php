@@ -17,7 +17,9 @@
 		</div>
 	</main>
 
-	<div id='map'></div>
+	<div id='map'>
+		<div class="circle mapLink mapGPS mapController" data-coordinates="" data-manifestation="">GPS</div>
+	</div>
 
 	<div id='splash'>
 		<div id="splashContainer">

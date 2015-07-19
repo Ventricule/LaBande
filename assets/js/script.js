@@ -485,7 +485,7 @@ $(document).ready(function(){
 	function fullWidth() {
 		$('#map, nav, main, .shadow').toggleClass('fullWidth');
 	}
-	$('.circle, #fwButton').click(function() {
+	$('.mapLink, #fwButton').click(function() {
 		fullWidth();
 	});
 	
