@@ -1,4 +1,4 @@
-Title: Projection de films méxicains
+Title: Projection de films mexicains
 
 ----
 
@@ -14,7 +14,7 @@ Location: 48.8601599,2.4028654999999617
 
 ----
 
-Date: 2015-06-19
+Date: 2015-09-10
 
 ----
 

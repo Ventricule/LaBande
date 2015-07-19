@@ -10,6 +10,6 @@ token: 21b881731ece8b6fea6c5cdfb1286e2b70ebe76e
 history:
   - parcours
   - manifestations
-  - lieux
-  - manifestations/manifestation-1
-  - manifestations/manifestation-3
+  - parcours/parcours-juin
+  - manifestations/project-b
+  - manifestations/project-a

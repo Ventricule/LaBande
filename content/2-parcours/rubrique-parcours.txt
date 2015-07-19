@@ -7,3 +7,7 @@ Color: #ff6a45
 ----
 
 Description: Parcours choisis entre évènements à venir
+
+----
+
+Archivable: 1

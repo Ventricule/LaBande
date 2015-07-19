@@ -1,4 +1,12 @@
-<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item" style="background-color:<?php echo $entry->parent()->color() ?>">
+<?php
+$past = '';
+$last = max((int)$entry->date('Ymd'),(int)$entry->date('Ymd', 'end_date'), (int)$entry->date('Ymd', 'begin_date'));
+if( $last < date('Ymd') ) {
+	$past = 'past';
+}
+
+	?>
+<li id="<?php echo $entry->hash() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" class="item <?php echo $past; ?>" style="background-color:<?php echo $entry->parent()->color() ?>">
 
 	<?php snippet('part-slider', array('entry'=>$entry)) ?>
 

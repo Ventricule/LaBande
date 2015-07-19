@@ -7,20 +7,30 @@
 				<header class="header cf" role="banner">
 					<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
 				</header>
+				<?php $first = false; ?>
 			</li>
 		<?php else :?>
 			<?php snippet('header-section', array('section' => $p)) ?>
 		<?php endif;
+		
+		if ( $p->archivable()->bool() ) :
+			$items = $p->children()->visible()->filter(function($entry) {
+				$last = max((int)$entry->date('Ymd'),(int)$entry->date('Ymd', 'end_date'), (int)$entry->date('Ymd', 'begin_date'));
+				return $last > date('Ymd');
+			});
+		else:
+			$items = $p->children()->visible();
+		endif;
 
-		foreach($p->children() as $entry):
+		foreach($items as $entry):
 			snippet('item', array('entry' => $entry));
-			$first = false;
 		endforeach;
-		?>
-	
-		<?php snippet('footer-section', array('section' => $p)) ?>
-	
-	<?php
+
+
+		if ( $p->archivable()->bool() ) :
+			snippet('footer-section', array('section' => $p)) ;
+		endif;
+
 	endforeach;
 	?>
 </ul>

@@ -471,14 +471,18 @@ $(document).ready(function(){
 	/* Image and slideshow
 	---------------------------------------------- */
 	var gallery = [];
-	$('main').find('section.gallery').each(function(index){
-		var $el = $(this), imgIndex = 0, total = $el.find('img').length;
+	$('main section.gallery').each(function(){
+		initSwiper($(this));
+	});
+	
+	function initSwiper(gallery) {
+		var $el = gallery, imgIndex = 0, total = $el.find('img').length;
 		$el.find('.pagination .total').text(total)
 		$el.find('figure').each(function(){
 			imgIndex += 1;
 			$(this).attr('data-index', imgIndex);
 		});
-		gallery[index] = $el.swiper({
+		var thisSwiper = $el.swiper({
 			mode:'horizontal',
 			loop: true,
 			speed: 500,
@@ -486,18 +490,18 @@ $(document).ready(function(){
 			slideDuplicateClass: 'duplicateImg',
 			nextButton: '.gallery img'
 		});
-		gallery[index].on('slideChangeStart', function(){
-			gallery[index].update();
+		thisSwiper.on('slideChangeStart', function(){
+			thisSwiper.update();
 			var imgNumber = $el.find('figure.activeImg').attr('data-index')
 			$el.find('.pagination .number').text(imgNumber);
 		});
 		$el.find('.prev-slide').on('click', function(){
-			gallery[index].slidePrev();
+			thisSwiper.slidePrev();
 		});
 		$el.find('.next-slide').on('click', function(){
-			gallery[index].slideNext();
+			thisSwiper.slideNext();
 		});
-	});
+	}
 	
 	$('.nav.fullscreen').on("click", function(e){
 		fullscreen = true;
@@ -575,32 +579,37 @@ $(document).ready(function(){
 
 	/* Manifestations
 	---------------------------------------------- */
-	$('.manifestations-summary .full-text').slideUp(0);
-	$('.manifestations-summary .synth').click(function() {
-		var $this = $(this);
-		if ($(this).hasClass('open')){
-			$(this).removeClass('open').siblings('.full-text').slideUp('fast');
-			setTimeout(function () {
-				$('html,body').stop(false, false).animate({
-					'scrollTop': $this.closest('ul').offset().top - 20
-				}, {
-					duration: 310,
-					queue: false
-				});
-			}, 240);
-		} else {
-			$('.manifestations-summary .synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
-			$this.addClass('open').siblings('.full-text').slideDown('fast');
-			setTimeout(function () {
-				$('html,body').stop(false, false).animate({
-					'scrollTop': $this.offset().top - 20
-				}, {
-					duration: 310,
-					queue: false
-				});
-			}, 240);
-		}
+	$('.manifestations-summary').each(function() {
+		initManifestationsSummary( $(this) );
 	});
+	function initManifestationsSummary(summary) {
+		summary.find('.full-text').slideUp(0);
+		summary.find('.synth').click(function() {
+			var $this = $(this);
+			if ($(this).hasClass('open')){
+				$(this).removeClass('open').siblings('.full-text').slideUp('fast');
+				setTimeout(function () {
+					$('html,body').stop(false, false).animate({
+						'scrollTop': $this.closest('ul').offset().top - 20
+					}, {
+						duration: 310,
+						queue: false
+					});
+				}, 240);
+			} else {
+				summary.find('.synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
+				$this.addClass('open').siblings('.full-text').slideDown('fast');
+				setTimeout(function () {
+					$('html,body').stop(false, false).animate({
+						'scrollTop': $this.offset().top - 20
+					}, {
+						duration: 310,
+						queue: false
+					});
+				}, 240);
+			}
+		});
+	}
 
 	/* Lieux
 	---------------------------------------------- */
@@ -621,6 +630,7 @@ $(document).ready(function(){
   
   /* Search
   ---------------------------------------------- */
+	
 	$('#search-slide>.icon-search').click(function(){
 		if ($(this).parent().hasClass('active') && !searching){
 			$('#searchbox').addClass('shown').find('input').focus();
@@ -707,6 +717,45 @@ $(document).ready(function(){
 			}
 		}
 	})
+	
+	/* Archives
+  ---------------------------------------------- */
+	$('.load-archives').click(function() {
+		var section = $(this).attr('data-parent-uid');
+		if ($(this).hasClass('open')) {
+			$(this).removeClass('open');
+			$('li.archive-title[data-parent-uid="'+section+'"]').hide();
+			$('li.item.past[data-parent-uid="'+section+'"]').remove();
+			$(this).siblings('.text').slideUp(300);
+		} else {
+			$(this).addClass('open');
+			$('li.archive-title[data-parent-uid="'+section+'"]').show();
+			$('li.item.past[data-parent-uid="'+section+'"]').remove();
+			$(this).siblings('.text').slideDown(300);
+		}
+		
+	});
+
+	$(document).on('click', '#content .archive-title', function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var uri = $(this).attr('data-uri');
+		var section = $(this).attr('data-parent-uid');
+		$.ajax({
+			url: 'ajax/' + uri ,
+			success : function(response) { 
+				$('.past').slideUp(300, function() { $(this).remove() });
+				$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(300);
+				$this.slideUp(300);
+				var newItem = $(response).hide().insertAfter($this).slideDown(300);
+				initSwiper( newItem.find('section.gallery') );
+				initManifestationsSummary( newItem.find('.manifestations-summary') )
+			}
+		});
+	});
+	
+	
+	
 }); // END OF JQUERY
 
 

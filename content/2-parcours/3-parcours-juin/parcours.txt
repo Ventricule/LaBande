@@ -1,4 +1,4 @@
-Title: Parcours Juin
+Title: Parcours Septembre
 
 ----
 
@@ -6,33 +6,12 @@ Text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo l
 
 ----
 
-Begin-date: 
+Begin-date: 2015-09-18
 
 ----
 
-End-date: 
+End-date: 2015-07-24
 
 ----
 
 Color: #408cff
-
-----
-
-Manifestations: 
-
-- 
-  manifestation: project-c
-- 
-  manifestation: project-a
-- 
-  manifestation: project-b
-- 
-  manifestation: exposition-de-frondes
-- 
-  manifestation: manifestation-2
-- 
-  manifestation: manifestation-3
-- 
-  manifestation: manifestation-4
-- 
-  manifestation: manifestation-1

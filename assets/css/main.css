@@ -397,15 +397,16 @@ main a:hover {
 main #content > ul {
 	margin: 0;
 }
-main #content > ul > li:not(.section-title) {
+main #content > ul > li {
 	margin: 0px;
-	padding: 1.5rem 0px 1.5rem;
-	border-bottom: 1px solid rgba(0,0,0,0.1);
+	padding: 5rem 0px;
 }
 main #content > ul > li:first-child {
 	padding-top: 1.5rem;
 }
-
+main #content > ul > li.archive-title {
+	padding: 0;
+}
 /* Images */
 main section.gallery {
 	overflow: hidden;
@@ -513,7 +514,6 @@ main .nav.fullscreen{
 
 /* Texte */
 .section-title{
-	padding: 110px 20px;
 	color: #422222;
 	text-align: center;
  -ms-word-break: break-all;
@@ -527,8 +527,12 @@ main .nav.fullscreen{
         hyphens: auto;
 }
 main #content > ul > li.section-footer {
-    text-align: center;
-    padding: 1.5rem;
+    padding: 1.5rem 0;
+	text-align: center;
+}
+main #content .load-archives {
+	text-align: center;
+	cursor: pointer;
 }
 .entry-content {
 	margin: 0 1rem;
@@ -764,6 +768,16 @@ ul.avenir li.item-avenir{
     right: 0;
     top: 0;
 
+}
+
+/* Archives
+-------------------------------------------------- */
+.archive-title .entry-title h3 {
+	cursor: pointer;
+}
+.entry-title .alert-past {
+	transform: rotateZ(-14deg);
+	display: inline-block;
 }
 
 /* Search
