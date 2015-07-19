@@ -115,17 +115,24 @@ p {
 /* Header
 -------------------------------------------------- */
 .header {
-  margin: -.5rem -1.5rem 2em -2rem;
+	position: absolute;
+	width: 100%;
+	margin: 26px auto;
 }
+#scrollMe {
+	width: 85%;
+	margin: 30px auto;
+}
+
 
 /* Links
 -------------------------------------------------- */
 a {
 	text-decoration: none;
-	-webkit-transition: color ..5s, background ..5s, border ..5s;
-	-ms-transition: color ..5s, background ..5s, border ..5s;
-	-o-transition: color ..5s, background ..5s, border ..5s;
-	transition: color ..5s, background ..5s, border ..5s;
+	-webkit-transition: color .5s, background .5s, border .5s;
+	-ms-transition: color .5s, background .5s, border .5s;
+	-o-transition: color .5s, background .5s, border .5s;
+	transition: color .5s, background .5s, border .5s;
 }
 a:hover {
 }
@@ -186,7 +193,7 @@ nav{
 	z-index: 9999;
 	-webkit-backface-visibility: hidden;
 }
-nav, main, .shadow{
+nav, main, .shadow, .cache{
 	-webkit-transition: left 0.5s ease-in-out;
 	-moz-transition: left 0.5s ease-in-out;
 	-ms-transition: left 0.5s ease-in-out;
@@ -200,7 +207,7 @@ nav, main, .shadow{
 	-o-transition: top 0.5s ease-in-out;
 	transition: top 0.5s ease-in-out;
 }
-nav.fullWidth, main.fullWidth, .shadow.fullWidth{
+nav.fullWidth, main.fullWidth, .shadow.fullWidth, .cache.fullWidth{
 	left: -28%;
 }
 #searchbox{
@@ -344,17 +351,21 @@ li.swiper-slide:not(.active) {
 	padding-right: 32px;
 	/*border-right: 1px solid black;*/
 }
-
-@media screen and (max-width: 500px) {
-	main.fullWidth,	nav.fullWidth, .shadow.fullWidth {
-  		left: -285px !important;
+@media screen and (max-width: 800px) {
+	nav.fullWidth {
+		left: -320px !important;
 	}
+	main.fullWidth, .shadow.fullWidth, .cache.fullWidth{
+		left: -285px!important;
+	}
+}
+@media screen and (max-width: 500px) {
 	.mobile{
 		visibility: visible !important;
 		opacity: 1 !important;
 	}
 	.nomobile{
-		visibility: hidden; !important;
+		visibility: hidden !important;
 		opacity: 0 !important;
 	}
 }
@@ -373,6 +384,22 @@ main {
 	left: 35px;
 	z-index: 999;
 	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.cache{
+	width: 28%;
+	min-width: 285px;
+	position: fixed;	
+	background: blue;
+	height: 50%;
+	left: 35px;
+	z-index: -1;
+	box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.cacheTop {
+	top: 0;
+}
+.cacheBottom {
+	bottom: 0;
 }
 main hr {
 	margin-bottom: 3rem;
@@ -425,7 +452,7 @@ main figure img {
 }
 #splash figcaption {
 	position: absolute;
-	bottom: 10%;;
+	bottom: 10%;
 	width: 100%;
 	text-align: center;
 	padding: 0px 55px;
@@ -519,7 +546,7 @@ main .nav.fullscreen{
  -ms-word-break: break-all;
      word-break: break-all;
 
-     // Non standard for webkit
+     /* Non standard for webkit */
      word-break: break-word;
 
 -webkit-hyphens: auto;

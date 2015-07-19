@@ -7,7 +7,13 @@
 				<header class="header cf" role="banner">
 					<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
 				</header>
+<<<<<<< HEAD
 				<?php $first = false; ?>
+=======
+				<div id="scrollMe">
+					<img id="ver" src="<?php echo url('assets/images/ver2.png') ?>" alt="scroll me" />
+				</div>
+>>>>>>> origin/master
 			</li>
 		<?php else :?>
 			<?php snippet('header-section', array('section' => $p)) ?>

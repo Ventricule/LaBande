@@ -15,6 +15,8 @@
 		<div id="content">
 			<?php snippet('content') ?>
 		</div>
+		<div class="cache cacheTop"></div>
+		<div class="cache cacheBottom"></div>
 	</main>
 
 	<div id='map'>
