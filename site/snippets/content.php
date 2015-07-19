@@ -17,15 +17,24 @@
 			<?php snippet('header-section', array('section' => $p)) ?>
 		<?php endif;
 
-		foreach($p->children() as $entry):
+		if ( $p->archivable()->bool() ) :
+			$items = $p->children()->visible()->filter(function($entry) {
+				$last = max((int)$entry->date('Ymd'),(int)$entry->date('Ymd', 'end_date'), (int)$entry->date('Ymd', 'begin_date'));
+				return $last > date('Ymd');
+			});
+		else:
+			$items = $p->children()->visible();
+		endif;
+
+		foreach($items as $entry):
 			snippet('item', array('entry' => $entry));
 			$first = false;
 		endforeach;
-		?>
-	
-		<?php snippet('footer-section', array('section' => $p)) ?>
-	
-	<?php
+
+		if ( $p->archivable()->bool() ) :
+			snippet('footer-section', array('section' => $p)) ;
+		endif;
+
 	endforeach;
 	?>
 </ul>
