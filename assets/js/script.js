@@ -511,6 +511,7 @@ $(document).ready(function(){
 			speed: 500,
 			slideActiveClass: 'activeImg',
 			slideDuplicateClass: 'duplicateImg',
+			nextButton: '.gallery img'
 		});
 		gallery[index].on('slideChangeStart', function(){
 			gallery[index].update();
@@ -560,7 +561,7 @@ $(document).ready(function(){
 				keyboardControl: true,
 				lazyLoading: true,
 				initialSlide: parseInt(s_number, 10)-1,
-				nextButton: '#splash .next-slide',
+				nextButton: '#splash .next-slide, #splash img',
 				prevButton: '#splash .prev-slide',
 			});
 			splash.update();		
@@ -587,7 +588,7 @@ $(document).ready(function(){
 		if (e.keyCode == 27) { // escape key maps to keycode `27`
 			if (fullscreen){
 				$('#splashCross').click();
-				fullscreen = true;
+				fullscreen = false;
 			}
 			if (searching){
 				$('#searchbox').removeClass('shown').find('input').blur();
@@ -649,7 +650,6 @@ $(document).ready(function(){
   ---------------------------------------------- */
 	$('#search-slide>.icon-search').click(function(){
 		if ($(this).parent().hasClass('active') && !searching){
-			console.log('yo');
 			$('#searchbox').addClass('shown').find('input').focus();
 			$('#content').addClass('searching');
 			searching = true;

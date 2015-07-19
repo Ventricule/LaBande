@@ -816,13 +816,27 @@ ul.avenir li.item-avenir{
 #searchbox .search-nav {
 	position: absolute;
 	top: 0px;
-	right: 9px;
+	right: 0px;
 	font-size: 18px;
 	line-height: 34px;
 }
+#searchbox .search-nav a{
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	text-align: center;
+	margin-right: 0;
+	position: absolute;
+	right: 0;
+}
+#searchbox .search-nav a.search-prev{
+	right: 35px;
+	text-align: right;
+	padding-right: 3px;
+}
 #searchbox .search-compteur, #searchbox .search-infos {
 	position: absolute;
-	right: 3rem;
+	right: 4rem;
 	top: 0px;
 	color: rgba(1,1,1,0.5);
 	line-height: 36px;
