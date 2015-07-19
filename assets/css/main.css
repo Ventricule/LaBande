@@ -225,7 +225,7 @@ svg.leaflet-zoom-animated{
 	-webkit-filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 1px);
 	-filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 1px);
 }
-#bande1, #bande2{
+#bande1{
 	height: 35px;
 	width: 35px;
 	overflow: visible;
@@ -237,7 +237,7 @@ svg.leaflet-zoom-animated{
 	white-space: nowrap;
 	top: -1px;
 }
-#bande1, #bande2, main section.gallery, .swipable{
+#bande1, main section.gallery, .swipable{
 	cursor: move;
 	cursor: ns-resize;
 	cursor: grab;
@@ -254,28 +254,15 @@ svg.leaflet-zoom-animated{
 }
 #bande1 {
 }
-#bande2 {
-	display: none;
-	left: 35px;
-}
-#bande1:active, #bande2:active { 
+#bande1:active { 
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
 
-#menu, #submenu{
+#menu{
 	height: auto;
 	border-right: 1px solid rgba(0, 0, 0, 0.1);
-}
-#submenu li {
-	background-color: #3C1E1E;
-	color: #fff;
-}
-#submenu li.active {
-	background-color: white;
-	color: #000;
-	border: 0;
 }
 li.swiper-slide:not(.active) {
   color: rgba(0,0,0,.65);
@@ -334,15 +321,6 @@ li.swiper-slide:not(.active) {
   transform: translateX(15px);
 }
 
-#submenu li {
-	list-style: none;
-	position: relative;
-	border: 0;
-	margin-bottom:	-1px;
-	height: auto; /* safari */
-}
-
-
 .box{
 	position: relative;
 	width: auto;
@@ -370,9 +348,6 @@ li.swiper-slide:not(.active) {
 @media screen and (max-width: 500px) {
 	main.fullWidth,	nav.fullWidth, .shadow.fullWidth {
   		left: -285px !important;
-	}
-	#bande2{
-		opacity: 0;
 	}
 	.mobile{
 		visibility: visible !important;

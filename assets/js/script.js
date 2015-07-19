@@ -4,19 +4,14 @@ var siteFolder = "/LaBande";
 $(document).ready(function(){
 
 	var winH = $(window).height(), menuL = $("#menu>li:not(#search-slide)").length, oldH = 0;
-
 	var swiping = false, splash, scrolling = false, lastScrollTop = 0, topId = $('main .item').first().attr('data-uid'), oldId = topId, autoUpdateMap=false, scrollTimer, searching = false, fullscreen	 = false;
 
 	var menu = new Bande($('#bande1'));
-	var submenu = new Bande($('#bande2'));
 
-	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('#submenu>li:first-child').attr('data-uid');
+	var activeRubrique = $('#menu>li:first-child').attr('data-uid'), activeItem = $('main#column #content').find('li.item.active').attr('data-uid');
 	var nextRubrique = activeRubrique, nextItem = activeItem, oldItem, direction = 'next';
-	
-	var slideShouldUpdateView = { menu:true, submenu:true, content:true };
-	
+	var slideShouldUpdateView = { menu:true, content:true };
 
-	$('main .item').first().addClass('active');
   
 	//----------------------------------------------
 	//                GRAND ORDONATEUR
@@ -26,27 +21,16 @@ $(document).ready(function(){
 		stateChange = typeof stateChange !== 'undefined' ?  stateChange : false;
 		switch(part) {
 			case 'menu':
-				//slideMenuTo(uid, direction);
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
-					slideSubMenuTo(itemUid, direction);
 					slideColumnTo("titre-"+uid);
 					slideMapTo(itemUid);
 				break;
-			case 'submenu':
-				//slideSubMenuTo(uid, direction);
-					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
-					slideMenuTo(rubriqueUid, direction);
-					slideColumnTo(uid);
-					slideMapTo(uid);
-				break;
 			case 'content':
-					slideSubMenuTo(uid, direction);
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
 				break;
 			case 'map':
-					slideSubMenuTo(uid, direction);
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
@@ -70,18 +54,6 @@ $(document).ready(function(){
 			menu.swiper.slideTo( slide.index(), 1000 );
 		}
 	}
-	function slideSubMenuTo(uid, direction) {
-		var activeTitle = submenu.container.find('.swiper-slide.active').attr('data-uid');
-		if ( uid != activeTitle ) {
-			if(direction=='prev') {
-				var slide = submenu.container.find('.swiper-slide.active').prevAll('li[data-uid="'+uid+'"]').first();
-			} else {
-				var slide = submenu.container.find('.swiper-slide.active').nextAll('li[data-uid="'+uid+'"]').first();
-			}
-			slideShouldUpdateView["submenu"]=false;
-			submenu.swiper.slideTo( slide.index(), 1000 );
-		}
-	}
 	function slideColumnTo(uid) {
 		var item = $("main li.item[data-uid='"+uid+"']");
 		if(item.length && slideShouldUpdateView["content"]){
@@ -98,7 +70,7 @@ $(document).ready(function(){
 	}
 	function slideMapTo(uid, zoom){
 		zoom = typeof zoom !== 'undefined' ?  zoom : false;
-		var rubrique = submenu.container.find('.swiper-slide[data-uid="'+uid+'"]').attr('data-parent-uid');
+		var rubrique = $('main#column #content').find('li.item.active').attr('data-parent-uid');
 		selectMarkers(rubrique, uid, zoom);
 	}
 	
@@ -212,7 +184,8 @@ $(document).ready(function(){
 		});
 		return itemAtTop;
 	}
-	
+	getItemAtTop();
+		
 	
 
 	
