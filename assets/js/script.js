@@ -21,16 +21,13 @@ $(document).ready(function(){
 	$('.cacheTop').css('background-color', $('main li.item:first-child').css('background-color'));
 	$('.cacheBottom').css('background-color', $('main li.item:last-child').css('background-color'));
 
-
-	if (location.hash) {
-		setTimeout(function() {
-			//window.scrollTo(0, 0);
-		}, 0);
-		uid = location.hash.substr(1)
+	
+	if (location.search) {
+		uid = location.search.substr(1);
 		setTimeout(function() {
 			slideColumnTo(uid);
 			updateView("content", uid, 'next');
-			History.pushState({}, "", "#"+uid);
+			History.pushState({}, "", "?"+uid);
 			console.log(uid);
 		}, 500);
 	}
@@ -49,19 +46,19 @@ $(document).ready(function(){
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 					slideColumnTo("titre-"+uid);
 					slideMapTo(itemUid);
-					History.pushState({}, "", "#titre-"+uid);
+					History.pushState({}, "", "?titre-"+uid);
 				break;
 			case 'content':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
-					History.pushState({}, "", "#"+uid);
+					History.pushState({}, "", "?"+uid);
 				break;
 			case 'map':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
-					History.pushState({}, "", "#"+uid);
+					History.pushState({}, "", "?"+uid);
 				break;
 		} 
 	}
