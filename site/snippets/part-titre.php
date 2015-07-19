@@ -1,5 +1,4 @@
 <?php $isArchivable = $entry->parent()->archivable()->bool() ?>
-<?php if ($entry->uid() != 'a-propos') : ?>
 <div class="entry-title" >
 	
 	<h3 class="collapse">
@@ -38,4 +37,3 @@
 	<div class="circle icon-right-open-big top-right-button mapLink mapFit mapController" style="color:<?php echo $entry->parent()->color() ?>" data-type="manifestations" data-uid="<?php echo $entry->uid() ?>"></div>
 	<?php endif ?>
 </div>
-<?php endif; ?>
