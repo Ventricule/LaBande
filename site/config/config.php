@@ -31,3 +31,21 @@ make Kirby work. For more fine-grained configuration
 of the system, please check out http://getkirby.com/docs/advanced/options
 
 */
+
+/*
+
+---------------------------------------
+AJAX
+---------------------------------------
+
+*/
+
+c::set('routes', array(
+	array(
+		'pattern' => 'ajax/(:all)',
+		'action'  => function($uri) {
+			header('X-Robots-Tag: noindex, follow');
+			snippet('item', array('entry' => page($uri)));
+		}
+	)
+));
