@@ -28,7 +28,9 @@
 			<?php endif ?>
 			<div class="nav icon-search mobile fullscreen" style="color:<?php echo $entry->parent()->color() ?>"></div>
 		</figure>
+	<?php else : ?>
+		<hr>
 	<?php endif ?>
 <?php else: ?>
-		<hr>
+		
 <?php endif ?>

@@ -1,6 +1,6 @@
 <?php
 $past = '';
-$last = max((int)$entry->date('Ymd'),(int)$entry->date('Ymd', 'end_date'), (int)$entry->date('Ymd', 'begin_date'));
+	$last = max((int)$entry->date('Ymd'),(int)$entry->date('Ymd', 'end_date'), (int)$entry->date('Ymd', 'begin_date'));
 if( $last < date('Ymd') ) {
 	$past = 'past';
 }

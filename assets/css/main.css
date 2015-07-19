@@ -541,6 +541,7 @@ main .nav.fullscreen{
 
 /* Texte */
 .section-title{
+	padding: 7rem 0px 2rem !important;
 	color: #422222;
 	text-align: center;
  -ms-word-break: break-all;
