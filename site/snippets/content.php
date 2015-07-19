@@ -11,7 +11,7 @@
 				<div id="scrollMe">
 					<img id="ver" src="<?php echo url('assets/images/ver2.png') ?>" alt="scroll me" />
 				</div>
-
+				<?php $first = false; ?>
 			</li>
 		<?php else :?>
 			<?php snippet('header-section', array('section' => $p)) ?>
