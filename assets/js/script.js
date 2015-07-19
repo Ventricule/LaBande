@@ -21,6 +21,19 @@ $(document).ready(function(){
 	$('.cacheTop').css('background-color', $('main li.item:first-child').css('background-color'));
 	$('.cacheBottom').css('background-color', $('main li.item:last-child').css('background-color'));
 
+
+	if (location.hash) {
+		setTimeout(function() {
+			//window.scrollTo(0, 0);
+		}, 0);
+		uid = location.hash.substr(1)
+		setTimeout(function() {
+			slideColumnTo(uid);
+			updateView("content", uid, 'next');
+			History.pushState({}, "", "#"+uid);
+			console.log(uid);
+		}, 500);
+	}
   
 	//----------------------------------------------
 	//                GRAND ORDONATEUR
@@ -28,21 +41,27 @@ $(document).ready(function(){
 	function updateView(part, uid, direction, stateChange) {
 		direction = typeof direction !== 'undefined' ?  direction : 'next';
 		stateChange = typeof stateChange !== 'undefined' ?  stateChange : false;
+
+		
+
 		switch(part) {
 			case 'menu':
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 					slideColumnTo("titre-"+uid);
 					slideMapTo(itemUid);
+					History.pushState({}, "", "#titre-"+uid);
 				break;
 			case 'content':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
+					History.pushState({}, "", "#"+uid);
 				break;
 			case 'map':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
+					History.pushState({}, "", "#"+uid);
 				break;
 		} 
 	}
@@ -83,9 +102,10 @@ $(document).ready(function(){
 		selectMarkers(rubrique, uid, zoom);
 	}
 	
+
 	// Catch url changement
 	History.Adapter.bind(window,'statechange',function(){
-		var State = History.getState();
+
 	});
 	
 	
@@ -480,7 +500,6 @@ $(document).ready(function(){
 		uid = $(this).attr('data-uid');
 		slideColumnTo(uid);
 		updateView("content", uid, 'next');
-
 	})
 	/* Image and slideshow
 	---------------------------------------------- */
