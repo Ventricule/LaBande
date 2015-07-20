@@ -121,7 +121,8 @@ p {
 }
 #scrollMe {
 	width: 85%;
-	margin: 30px auto;
+	margin: auto;
+	margin-top: 30px;
 }
 
 
@@ -429,6 +430,9 @@ main #content > ul > li {
 	margin: 0px;
 	padding: 5rem 0px;
 }
+main #content > ul > li.past {
+	padding: 0;
+}
 main #content > ul > li:first-child {
 	padding-top: 1.5rem;
 }
@@ -439,6 +443,8 @@ main #content > ul > li.archive-title {
 main section.gallery {
 	overflow: hidden;
 	position: relative;
+	width: 100%;
+	height: auto;
 }
 main figure{
 	margin: 0;
