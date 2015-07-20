@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 Kirby Starterkit yoyoyo
 
@@ -448,6 +448,9 @@ main #content > ul > li {
 	padding: 4rem 0px;
 	position: relative;
 }
+main #content > ul > li.past {
+	padding: 0;
+}
 main #content > ul > li:first-child {
 	padding-top: 1.5rem;
 }
@@ -458,6 +461,8 @@ main #content > ul > li.archive-title {
 main section.gallery {
 	overflow: hidden;
 	position: relative;
+	width: 100%;
+	height: auto;
 }
 main figure{
 	margin: 0;
