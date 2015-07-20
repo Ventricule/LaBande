@@ -403,6 +403,7 @@ main {
 }
 main hr {
 	margin-bottom: 3rem;
+	margin-top: -1px ;
 	height: 1px;
 	background-color: rgba(0,0,0,0.2);
 }
@@ -899,6 +900,9 @@ button:focus {
 -------------------------------------------------- */
 .collapse {
 	margin: 0 !important;
+}
+hr.collapse {
+	margin-top: -1px !important;
 }
 .foldable {
 	cursor: ew-resize;

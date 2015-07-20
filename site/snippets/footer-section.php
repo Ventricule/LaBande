@@ -14,10 +14,11 @@ $items = $section->children()->visible()->filter(function($entry) {
 foreach( $items as $entry ) :
 ?>
 	<li class='archive-title hidden' style="background-color:<?php echo $entry->parent()->color() ?>" data-uid="<?php echo $entry->uid() ?>" data-parent-uid="<?php echo $entry->parent()->uid() ?>" data-uri='<?php echo $entry->uri() ?>'>
-
+<hr class="collapse">
 			<?php snippet('part-titre', array('entry'=>$entry, 'noMapLink'=>true)); ?>
-
+			<hr class="collapse">
 	</li>
+
 
 <?php
 endforeach;

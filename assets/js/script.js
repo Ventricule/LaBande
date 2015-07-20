@@ -46,26 +46,22 @@ $(document).ready(function(){
 					itemUid = $('.swiper-slide:not(".duplicate")[data-parent-uid="'+uid+'"]').attr('data-uid'); 
 					slideColumnTo("titre-"+uid);
 					slideMapTo(itemUid);
-					History.pushState({}, "", "?titre-"+uid);
+					History.pushState({}, "La Bande", "?titre-"+uid);
 				break;
 			case 'content':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideMapTo(uid, autoUpdateMap);
-					History.pushState({}, "", "?"+uid);
+					History.pushState({}, "La Bande", "?"+uid);
 				break;
 			case 'map':
 					rubriqueUid = $('#content .item[data-uid="'+uid+'"]').attr('data-parent-uid');
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
-					History.pushState({}, "", "?"+uid);
+					History.pushState({}, "La Bande", "?"+uid);
 				break;
 		} 
 	}
-  
-  function waitForPeace() {
-	
-  }
 	
 	function slideMenuTo(uid, direction) {
 		var activeRubrique = menu.container.find('.swiper-slide.active').attr('data-uid');
@@ -752,16 +748,24 @@ $(document).ready(function(){
   ---------------------------------------------- */
 	$('.load-archives').click(function() {
 		var section = $(this).attr('data-parent-uid');
-		if ($(this).hasClass('open')) {
-			$(this).removeClass('open');
+		var $this = $(this);
+		if ($this.hasClass('open')) {
+			$this.removeClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').hide();
 			$('li.item.past[data-parent-uid="'+section+'"]').remove();
-			$(this).siblings('.text').slideUp(300);
+			$this.siblings('.text').slideUp(300);
 		} else {
-			$(this).addClass('open');
+			$this.addClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').show();
 			$('li.item.past[data-parent-uid="'+section+'"]').remove();
-			$(this).siblings('.text').slideDown(300);
+			$this.siblings('.text').slideDown(300, function() {
+				$('html,body').stop(false, false).animate({
+					'scrollTop': $this.offset().top - 20
+				}, {
+					duration: 310,
+					queue: false
+				});
+			});
 		}
 		
 	});
@@ -774,10 +778,18 @@ $(document).ready(function(){
 		$.ajax({
 			url: 'ajax/' + uri ,
 			success : function(response) { 
-				$('.past').slideUp(300, function() { $(this).remove() });
-				$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(300);
-				$this.slideUp(300);
-				var newItem = $(response).hide().insertAfter($this).slideDown(300);
+				$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300, function() { $(this).remove() });
+				$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(0);
+				$this.hide(0);
+				var newItem = $(response).hide().insertAfter($this).slideDown(300, function() {
+					$('html,body').stop(false, false).animate({
+						'scrollTop': newItem.offset().top
+					}, {
+						duration: 500,
+						queue: false
+					});
+				});
+				
 				initSwiper( newItem.find('section.gallery') );
 				initManifestationsSummary( newItem.find('.manifestations-summary') )
 			}
