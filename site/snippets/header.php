@@ -14,6 +14,7 @@
 		'assets/css/main.css',
 		'assets/css/entypo.css',
 		'assets/css/leaflet-routing-machine.css',
+		//'assets/css/hover-min.css',
 		'assets/swiper/css/swiper.min.css',
     'https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css',
 		'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',

@@ -115,13 +115,31 @@ p {
 /* Header
 -------------------------------------------------- */
 .header {
-	position: absolute;
+	/*position: absolute;
 	width: 100%;
-	margin: 26px auto;
+	margin: 26px auto;*/
+}
+.header img {
+	margin: auto;
 }
 #scrollMe {
-	width: 85%;
-	margin: 30px auto;
+	/*width: 85%;
+	margin: 30px auto;*/
+	position: absolute;
+	top: 3rem;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+}
+#scrollMe .circle {
+	border: 0px none;
+	width: 45px;
+	height: 45px;
+	background: #fff;
+}
+#scrollMe .icon-down-open-big::before {
+  font-size: 28px;
+	line-height: 47px !important;
 }
 
 
@@ -427,7 +445,8 @@ main #content > ul {
 }
 main #content > ul > li {
 	margin: 0px;
-	padding: 5rem 0px;
+	padding: 4rem 0px;
+	position: relative;
 }
 main #content > ul > li:first-child {
 	padding-top: 1.5rem;
@@ -1047,4 +1066,84 @@ hr.collapse {
 }
 .leaflet-routing-container {
 	display: none;
+}
+
+
+/* -----------------------------
+Hover.js
+----------------------------- */
+/* Hang */
+@-webkit-keyframes hvr-hang {
+  0% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+}
+
+@keyframes hvr-hang {
+  0% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+}
+
+@-webkit-keyframes hvr-hang-sink {
+  100% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+}
+
+@keyframes hvr-hang-sink {
+  100% {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+  }
+}
+
+.hvr-hang {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hvr-hang:hover, .hvr-hang:focus, .hvr-hang:active, header:hover .hvr-hang {
+  -webkit-animation-name: hvr-hang-sink, hvr-hang;
+  animation-name: hvr-hang-sink, hvr-hang;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
 }

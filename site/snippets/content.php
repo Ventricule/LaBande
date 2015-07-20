@@ -5,12 +5,14 @@
 		if($first):?>
 			<li class="item" style="background:<?php echo $p->color() ?>" data-uid="titre-<?php echo $p->uid() ?>" data-parent-uid="<?php echo $p->uid() ?>">
 				<header class="header cf" role="banner">
-					<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />
+					<!--<img id="logo" src="<?php echo url('assets/images/labande-logo.svg') ?>" alt="<?php echo $site->title()->html() ?>" />-->
+					<img id="logo" src="<?php echo url('assets/images/territoire-reve.png') ?>" alt="<?php echo $site->title()->html() ?>" />
+					<div id="scrollMe"><span class="circle icon-down-open-big hvr-hang"></span></div>
 				</header>
 
-				<div id="scrollMe">
+				<!--<div id="scrollMe">
 					<img id="ver" src="<?php echo url('assets/images/ver2.png') ?>" alt="scroll me" />
-				</div>
+				</div>-->
 				<?php $first = false; ?>
 			</li>
 		<?php else :?>
