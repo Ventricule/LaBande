@@ -804,7 +804,12 @@ $(document).ready(function(){
 					$this.hide();
 					newItem.find('.entry-title').show(0)
 					newItem.find('.entry-content').slideDown(300);
-					console.log($this);
+					$('html,body').stop(false, false).animate({
+						'scrollTop': newItem.offset().top
+					}, {
+						duration: 500,
+						queue: false
+					});
 				} );
 
 /*

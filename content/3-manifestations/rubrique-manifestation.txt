@@ -1,9 +1,0 @@
-Title: Évènements
-
-----
-
-Color: #8abbff
-
-----
-
-Archivable: 1
