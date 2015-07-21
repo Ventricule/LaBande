@@ -2,7 +2,7 @@
 <nav role="navigation">
 	<div id="bande1" class="swiper-container">
 		<ul id="menu" class="swiper-wrapper">
-			<li id="search-slide" class="swiper-slide search">
+			<li id="search-slide" class="swiper-slide search" data-uid="search-slide">
 				<span class="icon-search"></span>
 			</li>
 			<?php foreach($pages->visible() as $p): ?>

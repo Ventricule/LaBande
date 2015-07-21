@@ -59,6 +59,7 @@ $(document).ready(function(){
 					slideMenuTo(rubriqueUid, direction);
 					slideColumnTo(uid);
 					History.pushState({}, "La Bande", "?"+uid);
+					console.log(uid);
 				break;
 		} 
 	}
@@ -81,6 +82,7 @@ $(document).ready(function(){
 		}
 	}
 	function slideColumnTo(uid) {
+		var item = $("main li.item[data-uid='"+uid+"']");
 		var item = $("main li.item[data-uid='"+uid+"']");
 		if(item.length && slideShouldUpdateView["content"]){
 			slideShouldUpdateView["content"]=false;
@@ -811,56 +813,12 @@ $(document).ready(function(){
 						queue: false
 					});
 				} );
-
-/*
-				newItem.slideDown(5000, function() {
-					$('html,body').stop(false, false).animate({
-						//'scrollTop': newItem.offset().top
-					}, {
-						duration: 500,
-						queue: false
-					});
-				});
-*/				
+			
 				//initSwiper( newItem.find('section.gallery') );
 				initManifestationsSummary( newItem.find('.manifestations-summary') )
 			}
 		});
 	});
-/*	
-
-	$('').each(function() {
-		initManifestationsSummary( $(this) );
-	});
-	function initManifestationsSummary(summary) {
-		summary.find('.full-text').slideUp(0);
-		summary.find('.synth').click(function() {
-			var $this = $(this);
-			if ($(this).hasClass('open')){
-				$(this).removeClass('open').siblings('.full-text').slideUp('fast');
-				setTimeout(function () {
-					$('html,body').stop(false, false).animate({
-						'scrollTop': $this.closest('ul').offset().top - 20
-					}, {
-						duration: 310,
-						queue: false
-					});
-				}, 240);
-			} else {
-				summary.find('.synth.open').removeClass('open').siblings('.full-text').slideUp('fast');
-				$this.addClass('open').siblings('.full-text').slideDown('fast');
-				setTimeout(function () {
-					$('html,body').stop(false, false).animate({
-						'scrollTop': $this.offset().top - 20
-					}, {
-						duration: 310,
-						queue: false
-					});
-				}, 240);
-			}
-		});
-	}
-*/
 	
 }); // END OF JQUERY
 
