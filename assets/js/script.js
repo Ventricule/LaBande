@@ -509,8 +509,8 @@ $(document).ready(function(){
 	});
 	
 	function initSwiper(gallery, reduit, callback) {
-		reduit = typeof reduit !== 'undefined' ? reduit : false;
-		callback = typeof callback !== 'undefined' ? callback : false;
+//		reduit = typeof reduit !== 'undefined' ? reduit : false;
+//		callback = typeof callback !== 'undefined' ? callback : false;
 		var $el = gallery, imgIndex = 0, total = $el.find('img').length;
 		$el.find('.pagination .total').text(total)
 		$el.find('figure').each(function(){
@@ -523,16 +523,17 @@ $(document).ready(function(){
 			speed: 500,
 			slideActiveClass: 'activeImg',
 			slideDuplicateClass: 'duplicateImg',
-			nextButton: '.gallery img',
+			nextButton: '.gallery img'/*,
 			onInit: function(swiper) {
 				if(reduit) {
 					$el.show();
 					$el.slideUp();
 					$el.slideDown(300, function(){
 						callback();
+
 					});
 				}
-			}
+			}*/
 		});
 		thisSwiper.on('slideChangeStart', function(){
 			thisSwiper.update();
@@ -547,7 +548,7 @@ $(document).ready(function(){
 		});
 	}
 	
-	$('.nav.fullscreen').on("click", function(e){
+	$(document).on('click', '.nav.fullscreen', function(e) {
 		fullscreen = true;
 		e.preventDefault();
 		var s_total = $(this).parent().find('.pagination .total').text(), count = 0;
@@ -721,24 +722,24 @@ $(document).ready(function(){
 	});
 
 	$('.search-nav a').click(function(e) {
-	e.preventDefault();
-	
-	var total = $('.highlight').length;
-	
-	if ($(this).hasClass('search-prev')) {	
-		count = count - 1;
-		if(count<0) { count = total-1 }
-	} else {
-		count = ( count + 1 ) % total;
-	}
-	
-	$('.search-compteur .current').html(count + 1);
-	$('.search-compteur .total').html(total);
-	$('.highlight').removeClass('highlight-more');
-	$('.highlight').eq(count).addClass('highlight-more');
-	if( total>0 ) {
-		scrollToElement( $('.highlight').eq(count), 200, -150);
-	}
+		e.preventDefault();
+		
+		var total = $('.highlight').length;
+		
+		if ($(this).hasClass('search-prev')) {	
+			count = count - 1;
+			if(count<0) { count = total-1 }
+		} else {
+			count = ( count + 1 ) % total;
+		}
+		
+		$('.search-compteur .current').html(count + 1);
+		$('.search-compteur .total').html(total);
+		$('.highlight').removeClass('highlight-more');
+		$('.highlight').eq(count).addClass('highlight-more');
+		if( total>0 ) {
+			scrollToElement( $('.highlight').eq(count), 200, -150);
+		}
 	
 	});
 	
@@ -760,7 +761,7 @@ $(document).ready(function(){
 				searching = false;
 			}
 		}
-	})
+	});
 	
 	/* Archives
 	---------------------------------------------- */
@@ -770,12 +771,12 @@ $(document).ready(function(){
 		if ($this.hasClass('open')) {
 			$this.removeClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').slideUp(300);
-			$('li.item.past[data-parent-uid="'+section+'"]').remove();
+			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300).remove();
 			$this.siblings('.text').slideUp(300);
 		} else {
 			$this.addClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(300);
-			$('li.item.past[data-parent-uid="'+section+'"]').remove();
+			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300).remove();
 			$this.siblings('.text').slideDown(300, function() {
 				$('html,body').stop(false, false).animate({
 					'scrollTop': $this.offset().top - 20
@@ -792,34 +793,77 @@ $(document).ready(function(){
 		e.preventDefault();
 		var $this = $(this);
 		var uri = $(this).attr('data-uri');
-		var section = $(this).attr('data-parent-uid');
-		$.ajax({
-			url: 'ajax/' + uri ,
-			success : function(response) { 
-				$('li.item.past[data-parent-uid="'+section+'"]').slideUp(500, function() { $(this).remove() });
-				$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(0);
+		var newItem;
+		var past = $this.parent().find('li.item.past.shown');
 
-				var newItem = $(response).hide().insertBefore($this);
-				newItem.children().hide();
-				newItem.show();
-				initSwiper( newItem.find('section.gallery'), true, function(){
-					$this.hide();
-					newItem.find('.entry-title').show(0)
-					newItem.find('.entry-content').slideDown(300);
-					$('html,body').stop(false, false).animate({
-						'scrollTop': newItem.offset().top
-					}, {
-						duration: 500,
-						queue: false
-					});
-				} );
-			
-				//initSwiper( newItem.find('section.gallery') );
-				initManifestationsSummary( newItem.find('.manifestations-summary') )
+		if (!$this.hasClass('loaded')){
+			$.ajax({
+				url: 'ajax/' + uri ,
+				success : function(response) { 
+					newItem = $(response).hide(0).insertBefore($this).addClass('shown');
+					gallery = newItem.find('section.gallery');
+					newItem.children().slideUp(0);
+					newItem.show(0);
+					if (gallery.length > 0){
+						initSwiper( newItem.find('section.gallery') );
+					}
+					//initManifestationsSummary( newItem.find('.manifestations-summary') )
+					$this.addClass('loaded');
+					hidePast(newItem);
+					displayContent($this, newItem);
+				}
+			});
+		} else {
+			newItem = $this.prev().addClass('shown')
+			hidePast(newItem);
+			displayContent($this, newItem);
+		}
+
+		function hidePast(newItem){
+			if (past.length > 0){
+				past.find('.entry-content').slideUp(400);
+				past.children().first().slideUp(400, function(){
+					past.find('.entry-title').hide(0);
+					past.next('li.archive-title').show(0);
+					past.removeClass('shown');
+				});
+				setTimeout(function() { scrollArchive(newItem) }, 400);
+			} else {
+				scrollArchive(newItem);
 			}
-		});
+		}
+		function displayContent(elem, newItem){
+			if (newItem.find('section.gallery').length > 0){
+				gallery = newItem.find('section.gallery');
+			} else if (newItem.find('figure').length > 0){
+				gallery = newItem.find('figure');
+			}
+			if (gallery.parent().hasClass('loaded')){
+				var myGallery = gallery
+			} else {
+				var myGallery = gallery.show().slideUp()
+			}
+
+			myGallery.slideDown(400);
+			newItem.find('.entry-title').show(0, function(){
+				elem.hide();
+				newItem.find('.entry-content').slideDown(400);
+			});
+
+			newItem.addClass('loaded');
+		}
+		function scrollArchive(newItem){
+			$('html,body').animate({
+				'scrollTop': newItem.offset().top
+			}, {
+				duration: 400,
+				queue: true
+			});
+		}
 	});
-	
+
+
+
 }); // END OF JQUERY
 
 
