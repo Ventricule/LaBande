@@ -771,12 +771,12 @@ $(document).ready(function(){
 		if ($this.hasClass('open')) {
 			$this.removeClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').slideUp(300);
-			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300).remove();
+			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300);
 			$this.siblings('.text').slideUp(300);
 		} else {
 			$this.addClass('open');
 			$('li.archive-title[data-parent-uid="'+section+'"]').slideDown(300);
-			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300).remove();
+			$('li.item.past[data-parent-uid="'+section+'"]').slideUp(300);
 			$this.siblings('.text').slideDown(300, function() {
 				$('html,body').stop(false, false).animate({
 					'scrollTop': $this.offset().top - 20
